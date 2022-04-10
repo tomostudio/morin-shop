@@ -1,0 +1,74 @@
+// style
+$size-switch-width: 214px;
+$size-switch-height: 44px;
+$size-switch-padding: 7px;
+$size-switch-radius: 46px;
+
+// animation
+$size-switch-animation-duration: 0.3s;
+
+// color
+$color-white: #ffffff;
+$color-primary: #175ba7;
+
+// shadow
+$shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+.size-switch {
+  position: relative;
+  padding: $size-switch-padding;
+  border-radius: $size-switch-radius;
+  background-color: $color-white;
+  box-shadow: $shadow;
+}
+
+.size-switch__item {
+  @apply font-medium;
+  position: relative;
+  display: inline-block; // flexbox fallback
+  height: calc($size-switch-height - 2 * $size-switch-padding);
+  width: calc($size-switch-width * 0.5 - $size-switch-padding);
+}
+
+.size-switch__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  line-height: normal;
+  border-radius: $size-switch-radius;
+  transition: all $size-switch-animation-duration;
+  user-select: none;
+  z-index: 2;
+  cursor: pointer;
+
+  .size-switch__input:checked ~ & {
+    color: $color-white;
+  }
+
+  .size-switch__input:focus ~ & {
+    // focus effect in browsers not supporting :focus-within
+    background-color: $color-primary;
+  }
+
+  :not(*):focus-within,
+  .size-switch__input:focus ~ & {
+    // reset focus style for browsers supporting :focus-within
+    background-color: transparent;
+  }
+}
+
+.size-switch__marker {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 1px;
+  border-radius: $size-switch-radius;
+  background-color: $color-primary;
+  height: calc($size-switch-height - 2 * $size-switch-padding);
+  width: calc($size-switch-width * 0.5 - $size-switch-padding);
+  box-shadow: $shadow;
+  transition: transform $size-switch-animation-duration;
+  transform: translateY(-50%);
+}
