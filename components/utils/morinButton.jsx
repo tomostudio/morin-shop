@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import { Arrow, ArrowLeft } from './svg'
+import { Arrow, ArrowLeft, Cart } from './svg'
 
 const MorinButton = ({
   children,
   color = '#fff',
   border = false,
   arrow = false,
+  cart = false,
   className,
   destination,
   targetBlank,
@@ -18,10 +19,12 @@ const MorinButton = ({
     return (
       <div
         className={`w-5 ${
-          arrow === 'left' ? 'mr-2' : arrow === 'right' ? 'ml-2' : ''
+          arrow === 'left' ? 'mr-2' : arrow === 'right' || cart ? 'ml-2' : ''
         }`}
       >
-        {arrow === 'left' ? (
+        {cart ? (
+          <Cart color={color} />
+        ) : arrow === 'left' ? (
           <ArrowLeft color={color} />
         ) : arrow === 'right' ? (
           <Arrow color={color} />
@@ -33,7 +36,7 @@ const MorinButton = ({
   }
 
   const defaultClass = `flex flex-wrap items-center w-fit min-h-[25px] font-semibold leading-none rounded-full border-2 border-solid md:min-h-[30px] ${
-    border ? 'px-5' : ''
+    border || cart ? 'px-5' : ''
   }`
 
   return !destination ? (
@@ -44,18 +47,27 @@ const MorinButton = ({
       style={{ borderColor: border ? color : 'transparent' }}
       {...others}
     >
-      {arrow === 'left' ? (
-        <>
-          {renderArrow()}
-          <span className="pt-px md:pt-0.5">{children}</span>
-        </>
-      ) : arrow === 'right' ? (
+      {cart ? (
         <>
           <span className="pt-px md:pt-0.5">{children}</span>
           {renderArrow()}
         </>
       ) : (
-        <span className="pt-px md:pt-0.5">{children}</span>
+        <>
+          {arrow === 'left' ? (
+            <>
+              {renderArrow()}
+              <span className="pt-px md:pt-0.5">{children}</span>
+            </>
+          ) : arrow === 'right' ? (
+            <>
+              <span className="pt-px md:pt-0.5">{children}</span>
+              {renderArrow()}
+            </>
+          ) : (
+            <span className="pt-px md:pt-0.5">{children}</span>
+          )}
+        </>
       )}
     </button>
   ) : !targetBlank ? (

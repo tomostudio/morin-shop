@@ -52,7 +52,7 @@ export default function ProductSlug() {
 
   const measureEl = (id) => {
     const parent = document
-      .querySelector('.header-switch')
+      .querySelector('.size-switch')
       .getBoundingClientRect()
     const current = document
       .querySelector(`input#${id}`)

@@ -31,6 +31,7 @@ export default function Header({ home = true }) {
             <MorinButton
               color={colors.white}
               border
+              cart
               className="text-white h-[30px]"
             >
               My Cart
@@ -97,11 +98,20 @@ export default function Header({ home = true }) {
               <MorinLogo className="w-full h-full" />
             </FancyLink>
             <MorinButton
-              color={colors.morinBlue}
+              color={colors.white}
+              cart
               className="h-[30px] text-white bg-morin-blue"
             >
               My Cart
             </MorinButton>
+            {/* <MorinButton
+              color={colors.morinBlue}
+              border
+              cart
+              className="text-white h-[30px]"
+            >
+              My Cart
+            </MorinButton> */}
           </div>
         </Container>
       </header>

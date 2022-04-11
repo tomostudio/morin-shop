@@ -17,7 +17,7 @@ export default function Home() {
         <HeaderGap />
         <Container className=" grid grid-cols-4 gap-6 pt-24 mb-24">
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -40,7 +40,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -63,7 +63,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -86,7 +86,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -109,7 +109,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -132,7 +132,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
@@ -178,7 +178,7 @@ export default function Home() {
             </div>
           </FancyLink>
           <FancyLink
-            destination="/"
+            destination="/products/apricot"
             className="w-full h-full bg-white rounded-3xl overflow-hidden"
           >
             <div className="relative w-full bg-white">
