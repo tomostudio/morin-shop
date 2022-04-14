@@ -7,9 +7,9 @@ import colors from '@/helpers/preset/colors'
 const Footer = ({ className }) => {
   const footerLink = `block w-fit text-white text-defaultSmall leading-none lg:text-default`
   return (
-    <footer className="lg:px-8">
+    <footer className="px-4 lg:px-8">
       <Container
-        className={`relative w-full h-auto flex flex-col lg:flex-row bg-morin-blue text-white rounded-t-3xl justify-between px-10 py-7 lg:py-[60px] ${className}`}
+        className={`relative w-full h-auto flex flex-col lg:flex-row bg-morin-blue text-white rounded-t-3xl justify-between px-5 lg:px-10 py-7 lg:py-[60px] ${className}`}
       >
         {/* LEFT */}
         <MorinButton
@@ -23,7 +23,7 @@ const Footer = ({ className }) => {
 
         {/* RIGHT */}
         <div className="flex flex-row-reverse lg:flex-col space-y-6">
-          <div className="flex justify-end space-x-3">
+          <div className="flex justify-end w-[60%] lg:w-auto items-end lg:items-start space-x-3">
             <FancyLink blank={true} className="flex">
               <Image
                 src={`/ig-white.svg`}
@@ -49,7 +49,7 @@ const Footer = ({ className }) => {
               />
             </FancyLink>
           </div>
-          <div className="flex flex-wrap lg:space-x-2">
+          <div className="flex flex-wrap w-full lg:w-auto text-[10px] lg:space-x-2">
             <span className='w-full lg:w-auto'>© Morin Food 2021</span>
             <span className='hidden lg:block'>|</span>
             <FancyLink destination="/terms-conditions">

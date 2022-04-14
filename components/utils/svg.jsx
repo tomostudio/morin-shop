@@ -573,7 +573,7 @@ const Plus = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
-const Arrow = ({ color = '#fff', ...options }) => (
+const Arrow = ({ color = '#fff', stroke=2, ...options }) => (
   <svg
     viewBox="0 0 27 14"
     fill="none"
@@ -583,7 +583,7 @@ const Arrow = ({ color = '#fff', ...options }) => (
     <path
       d="M26 7H1M20.4444 1.5L26 7L20.4444 1.5ZM26 7L20.4444 12.5L26 7Z"
       stroke={color}
-      strokeWidth="2"
+      strokeWidth={stroke}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
