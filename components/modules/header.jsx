@@ -3,8 +3,41 @@ import Container from '@/components/modules/container'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo } from '../utils/svg'
+import MorinTabs from '../utils/morinTabs'
 
 export default function Header({ home = true }) {
+  const tabData = [
+    {
+      id: 'tab-1',
+      title: 'All',
+      value: 'all',
+      ariaText: 'All',
+    },
+    {
+      id: 'tab-2',
+      title: 'Spreads',
+      value: 'spreads',
+      ariaText: 'Spreads',
+    },
+    {
+      id: 'tab-3',
+      title: 'Jams',
+      value: 'jams',
+      ariaText: 'Jams',
+    },
+    {
+      id: 'tab-4',
+      title: 'Toppings',
+      value: 'toppings',
+      ariaText: 'Toppings',
+    },
+    {
+      id: 'tab-5',
+      title: 'Fillings',
+      value: 'fillings',
+      ariaText: 'Fillings',
+    },
+  ]
   return home ? (
     <nav
       className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}
@@ -18,7 +51,7 @@ export default function Header({ home = true }) {
               border
               className="text-white h-[30px]"
             >
-              See All Products
+              Morinfood
             </MorinButton>
             {/* Morin Logo */}
             <FancyLink
@@ -38,38 +71,7 @@ export default function Header({ home = true }) {
             </MorinButton>
           </div>
           <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-            <div className="h-full font-semibold setflex-center-row bg-white rounded-full px-2 space-x-2 shadow-[2px_2px_4px_0px_rgba(0,0,0,0.1)]">
-              <FancyLink
-                className="bg-morin-blue text-white rounded-full pt-2 pb-0.5 px-4"
-                destination="/"
-              >
-                All
-              </FancyLink>
-              <FancyLink
-                className="text-black rounded-full pt-2 pb-0.5 px-4"
-                destination="/spreads"
-              >
-                Spreads
-              </FancyLink>
-              <FancyLink
-                className="text-black rounded-full pt-2 pb-0.5 px-4"
-                destination="/jams"
-              >
-                Jams
-              </FancyLink>
-              <FancyLink
-                className="text-black rounded-full pt-2 pb-0.5 px-4"
-                destination="/toppings"
-              >
-                Toppings
-              </FancyLink>
-              <FancyLink
-                className="text-black rounded-full pt-2 pb-0.5 px-4"
-                destination="/fillings"
-              >
-                Fillings
-              </FancyLink>
-            </div>
+            <MorinTabs tabData={tabData} />
           </div>
         </Container>
       </header>

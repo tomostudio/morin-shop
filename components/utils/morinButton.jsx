@@ -8,6 +8,7 @@ const MorinButton = ({
   border = false,
   arrow = false,
   cart = false,
+  showText = false,
   className,
   destination,
   targetBlank,
@@ -49,7 +50,11 @@ const MorinButton = ({
     >
       {cart ? (
         <>
-          <span className="pt-px md:pt-0.5">{children}</span>
+          <span
+            className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
+          >
+            {children}
+          </span>
           {renderArrow()}
         </>
       ) : (
@@ -57,15 +62,33 @@ const MorinButton = ({
           {arrow === 'left' ? (
             <>
               {renderArrow()}
-              <span className="pt-px md:pt-0.5">{children}</span>
+              <span
+                className={`pt-px md:pt-0.5 ${
+                  !showText ? 'hidden lg:block' : ''
+                }`}
+              >
+                {children}
+              </span>
             </>
           ) : arrow === 'right' ? (
             <>
-              <span className="pt-px md:pt-0.5">{children}</span>
+              <span
+                className={`pt-px md:pt-0.5 ${
+                  !showText ? 'hidden lg:block' : ''
+                }`}
+              >
+                {children}
+              </span>
               {renderArrow()}
             </>
           ) : (
-            <span className="pt-px md:pt-0.5">{children}</span>
+            <span
+              className={`pt-px md:pt-0.5 ${
+                !showText ? 'hidden lg:block' : ''
+              }`}
+            >
+              {children}
+            </span>
           )}
         </>
       )}
@@ -82,15 +105,31 @@ const MorinButton = ({
         {arrow === 'left' ? (
           <>
             {renderArrow()}
-            <span className="pt-px md:pt-0.5">{children}</span>
+            <span
+              className={`pt-px md:pt-0.5 ${
+                !showText ? 'hidden lg:block' : ''
+              }`}
+            >
+              {children}
+            </span>
           </>
         ) : arrow === 'right' ? (
           <>
-            <span className="pt-px md:pt-0.5">{children}</span>
+            <span
+              className={`pt-px md:pt-0.5 ${
+                !showText ? 'hidden lg:block' : ''
+              }`}
+            >
+              {children}
+            </span>
             {renderArrow()}
           </>
         ) : (
-          <span className="pt-px md:pt-0.5">{children}</span>
+          <span
+            className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
+          >
+            {children}
+          </span>
         )}
       </a>
     </Link>
@@ -106,15 +145,27 @@ const MorinButton = ({
       {arrow === 'left' ? (
         <>
           {renderArrow()}
-          <span className="pt-px md:pt-0.5">{children}</span>
+          <span
+            className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
+          >
+            {children}
+          </span>
         </>
       ) : arrow === 'right' ? (
         <>
-          <span className="pt-px md:pt-0.5">{children}</span>
+          <span
+            className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
+          >
+            {children}
+          </span>
           {renderArrow()}
         </>
       ) : (
-        <span className="pt-px md:pt-0.5">{children}</span>
+        <span
+          className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
+        >
+          {children}
+        </span>
       )}
     </a>
   )

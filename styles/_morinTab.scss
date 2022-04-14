@@ -1,0 +1,19 @@
+// style
+$radio-switch-width: 100%;
+$radio-switch-height: 35px;
+$radio-switch-height-desktop: 42px;
+$radio-switch-padding: 5px;
+$radio-switch-radius: 25px;
+
+
+.radio-switch__label {
+  .radio-switch__input:checked ~ & {
+    color: #fff;
+  }
+
+  :not(*):focus-within,
+  .radio-switch__input:focus ~ & {
+    // reset focus style for browsers supporting :focus-within
+    background-color: transparent;
+  }
+}
