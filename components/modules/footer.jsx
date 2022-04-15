@@ -5,7 +5,6 @@ import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 
 const Footer = ({ className }) => {
-  const footerLink = `block w-fit text-white text-defaultSmall leading-none lg:text-default`
   return (
     <footer className="px-4 lg:px-8">
       <Container
@@ -49,7 +48,7 @@ const Footer = ({ className }) => {
               />
             </FancyLink>
           </div>
-          <div className="flex flex-wrap w-full lg:w-auto text-[10px] lg:space-x-2">
+          <div className="flex flex-wrap w-full lg:w-auto text-[12px] lg:space-x-2">
             <span className='w-full lg:w-auto'>© Morin Food 2021</span>
             <span className='hidden lg:block'>|</span>
             <FancyLink destination="/terms-conditions">

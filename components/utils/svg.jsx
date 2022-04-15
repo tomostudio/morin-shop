@@ -493,10 +493,10 @@ const SunRay = ({ ...options }) => {
   )
 }
 
-const Minus = ({ color = '#fff', ...options }) => (
+const Minus = ({ color = '#fff', width = 18, height = 2, ...options }) => (
   <svg
-    width="18"
-    height="2"
+    width={width}
+    height={height}
     viewBox="0 0 18 2"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -511,13 +511,14 @@ const Minus = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
-const Plus = ({ color = '#fff', ...options }) => (
+const Plus = ({ color = '#fff', width = 26, height = 26, ...options }) => (
   <svg
-    width="26"
-    height="26"
+    width={width}
+    height={height}
     viewBox="0 0 26 26"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...options}
   >
     <g filter="url(#filter0_d_2442_1060)">
       <path
@@ -573,7 +574,7 @@ const Plus = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
-const Arrow = ({ color = '#fff', stroke=2, ...options }) => (
+const Arrow = ({ color = '#fff', stroke = 2, ...options }) => (
   <svg
     viewBox="0 0 27 14"
     fill="none"
@@ -804,6 +805,25 @@ const Check = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
+const Trash = ({ color = '#fff', ...options }) => (
+  <svg
+    width="16"
+    height="18"
+    viewBox="0 0 16 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...options}
+  >
+    <path
+      d="M1 4.46667H14.8667M14 4.46667L13.2486 14.9897C13.2175 15.427 13.0218 15.8363 12.701 16.1351C12.3801 16.4339 11.958 16.6 11.5196 16.6H4.34707C3.90865 16.6 3.48652 16.4339 3.1657 16.1351C2.84488 15.8363 2.64919 15.427 2.61807 14.9897L1.86667 4.46667H14ZM6.2 7.93333V13.1333V7.93333ZM9.66667 7.93333V13.1333V7.93333ZM10.5333 4.46667V1.86667C10.5333 1.63681 10.442 1.41637 10.2795 1.25384C10.117 1.09131 9.89652 1 9.66667 1H6.2C5.97015 1 5.74971 1.09131 5.58717 1.25384C5.42464 1.41637 5.33333 1.63681 5.33333 1.86667V4.46667H10.5333Z"
+      stroke="#175BA7"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+)
+
 export {
   MorinLogo,
   SunRay,
@@ -821,4 +841,5 @@ export {
   FAQDesktop,
   Filter,
   Check,
+  Trash,
 }

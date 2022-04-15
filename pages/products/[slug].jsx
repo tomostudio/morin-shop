@@ -76,9 +76,9 @@ export default function ProductSlug() {
       <Header home={false} />
       <div className="bg-white w-full">
         <HeaderGap />
-        <Container className="flex w-full gap-16 h-full mb-24">
-          <div className="w-1/2">
-            <div className="w-full h-screen">
+        <Container className="flex flex-col lg:flex-row w-full gap-16 h-full mb-24">
+          <div className="w-full lg:w-1/2">
+            <div className="w-full h-96 lg:h-screen">
               <ProductCard
                 title="Blueberry Jam"
                 bgColor="#ECE3FF"
@@ -90,7 +90,7 @@ export default function ProductSlug() {
               />
             </div>
           </div>
-          <div className="w-1/2 flex flex-col space-y-8 text-morin-blue">
+          <div className="w-full lg:w-1/2 flex flex-col space-y-8 text-morin-blue">
             <div className="w-full flex flex-col">
               <h2 className="text-h2 font-nutmeg font-normal m-0">
                 Blueberry Jam
