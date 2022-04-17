@@ -6,6 +6,8 @@ import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
 import ProductCard from '@/components/modules/productCard'
 import MoreButton from '@/components/utils/moreButton'
+import MorinTabs from '@/components/utils/morinTabs'
+import { useMediaQuery } from '@/helpers/functional/checkMedia'
 
 export default function Home() {
   const productData = [
@@ -59,14 +61,52 @@ export default function Home() {
     },
   ]
 
+  const tabData = [
+    {
+      id: 'tab-1',
+      title: 'All',
+      value: 'all',
+      ariaText: 'All',
+    },
+    {
+      id: 'tab-2',
+      title: 'Spreads',
+      value: 'spreads',
+      ariaText: 'Spreads',
+    },
+    {
+      id: 'tab-3',
+      title: 'Jams',
+      value: 'jams',
+      ariaText: 'Jams',
+    },
+    {
+      id: 'tab-4',
+      title: 'Toppings',
+      value: 'toppings',
+      ariaText: 'Toppings',
+    },
+    {
+      id: 'tab-5',
+      title: 'Fillings',
+      value: 'fillings',
+      ariaText: 'Fillings',
+    },
+  ]
+
   return (
     <Layout>
       <NextSeo title="Home" />
       <Header />
       <div className="bg-morin-skyBlue w-full">
         <HeaderGap />
-        <Container className="relative my-14 lg:mt-20 lg:mb-28">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <Container className="relative mb-14 lg:mt-20 lg:mb-28">
+          {useMediaQuery('(max-width: 1023px)') && (
+            <div className="absolute z-50 w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
+              <MorinTabs tabData={tabData} />
+            </div>
+          )}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0">
             {productData.map((data, index) => (
               <ProductCard
                 key={index}

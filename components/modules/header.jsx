@@ -4,6 +4,7 @@ import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo } from '../utils/svg'
 import MorinTabs from '../utils/morinTabs'
+import { useMediaQuery } from '@/helpers/functional/checkMedia'
 
 export default function Header({ home = true }) {
   const tabData = [
@@ -43,7 +44,9 @@ export default function Header({ home = true }) {
       className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}
     >
       <header className={`sticky top-0 left-0 right-0 w-full z-2`}>
-        <Container className={`h-header relative pointer-events-auto`}>
+        <Container
+          className={`h-[105px] lg:h-header relative pointer-events-auto`}
+        >
           <div className="w-full flex justify-between items-center pt-10">
             <MorinButton
               color={colors.white}
@@ -70,9 +73,11 @@ export default function Header({ home = true }) {
               My Cart
             </MorinButton>
           </div>
-          <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-            <MorinTabs tabData={tabData} />
-          </div>
+          {useMediaQuery('(min-width: 1024px)') && (
+            <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
+              <MorinTabs tabData={tabData} />
+            </div>
+          )}
         </Container>
       </header>
     </nav>

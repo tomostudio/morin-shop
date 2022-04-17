@@ -44,7 +44,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
         {tabData?.map((item) => (
           <div
             key={item.id}
-            className="radio-switch__item relative block w-16 lg:w-20 h-8 "
+            className="radio-switch__item relative block w-[4.1rem] lg:w-20 h-8 "
           >
             <input
               type="radio"
@@ -67,7 +67,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
           <div
             aria-hidden="true"
             style={{ transform: `translate(${thisEl}px, 0%)` }}
-            className="radio-switch__marker absolute z-1 top-[6px] left-[1px] shadow-softer rounded-full w-16 lg:w-20 h-8 bg-morin-blue duration-300"
+            className="radio-switch__marker absolute z-1 top-[6px] left-[1px] shadow-softer rounded-full w-[4.1rem] lg:w-20 h-8 bg-morin-blue duration-300"
           />
         ) : (
           ''

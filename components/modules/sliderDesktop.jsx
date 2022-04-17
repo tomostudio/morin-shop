@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
-import 'swiper/css/navigation'
 import Image from 'next/image'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
