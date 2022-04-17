@@ -10,12 +10,13 @@ import { Minus, Plus } from '@/components/utils/svg'
 import colors from '@/helpers/preset/colors'
 import MorinButton from '@/components/utils/morinButton'
 import Header from '@/components/modules/header'
-import ProductCard from '@/components/modules/productCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
 import 'swiper/css/pagination'
 import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
+import SliderDesktop from '@/components/modules/sliderDesktop'
+import SliderMobile from '@/components/modules/sliderMobile'
 
 export default function ProductSlug() {
   const sizeData = [
@@ -45,6 +46,33 @@ export default function ProductSlug() {
     },
   ]
 
+  const sliderData = [
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+    {
+      imgSrc: '/product/blueberry.png',
+      imgAlt: 'Blueberry Jam',
+    },
+  ]
+
   return (
     <Layout>
       <NextSeo title="Products" />
@@ -53,7 +81,7 @@ export default function ProductSlug() {
         <HeaderGap />
         <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
           <div className="w-full md:w-1/2 flex flex-col">
-            <div className="relative w-full md:h-[640px] lg:h-[754px] rounded-3xl overflow-hidden">
+            <div className="relative hidden lg:block w-full md:h-[640px] lg:h-[754px] rounded-3xl overflow-hidden">
               <Image
                 src="/product/blueberry.png"
                 layout="fill"
@@ -62,136 +90,9 @@ export default function ProductSlug() {
               />
             </div>
             {useMediaQuery('(min-width: 768px)') ? (
-              <>
-                <div className="relative w-full">
-                  <Swiper
-                    slidesPerView="auto"
-                    spaceBetween={18}
-                    allowTouchMove={false}
-                    modules={[Navigation]}
-                    navigation={{
-                      nextEl: '.swiper-button-next',
-                      prevEl: '.swiper-button-prev',
-                    }}
-                    className="sliderDesktop w-full mt-7"
-                  >
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                        <Image
-                          src="/product/blueberry.png"
-                          layout="fill"
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  </Swiper>
-                  <div className="absolute linearProduct w-32 h-28 top-0 right-0 mt-7 z-2"></div>
-                </div>
-                <div className="mt-5 flex justify-end">
-                  <MorinButton
-                    color={colors.morinBlue}
-                    arrow="left"
-                    border
-                    className="h-[37px] swiper-button-prev"
-                  ></MorinButton>
-                  <MorinButton
-                    color={colors.morinBlue}
-                    arrow="right"
-                    border
-                    className="ml-4 h-[37px] swiper-button-next"
-                  ></MorinButton>
-                </div>
-              </>
+              <SliderDesktop data={sliderData} />
             ) : (
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={10}
-                pagination={true}
-                modules={[Pagination]}
-                className="w-full"
-              >
-                <SwiperSlide>
-                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+              <SliderMobile data={sliderData} />
             )}
           </div>
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
