@@ -20,11 +20,23 @@ const MorinButton = ({
     return (
       <div
         className={`w-5 ${
-          arrow === 'left' ? showText ? 'mr-2' : "lg:mr-2" : arrow === 'right' || cart ? showText ? 'ml-2' : 'lg:ml-2' : ''
+          arrow === 'left'
+            ? showText
+              ? 'mr-2'
+              : children
+              ? 'lg:mr-2'
+              : ''
+            : arrow === 'right' || cart
+            ? showText
+              ? 'ml-2'
+              : children
+              ? 'lg:ml-2'
+              : ''
+            : ''
         }`}
       >
         {cart ? (
-          <Cart color={color} className="mx-auto"/>
+          <Cart color={color} className="mx-auto" />
         ) : arrow === 'left' ? (
           <ArrowLeft color={color} />
         ) : arrow === 'right' ? (
@@ -37,7 +49,7 @@ const MorinButton = ({
   }
 
   const defaultClass = `flex flex-wrap items-center w-fit min-h-[25px] font-semibold leading-none rounded-full border-2 border-solid md:min-h-[30px] ${
-    border || cart ? 'px-3 lg:px-5' : ''
+    border || cart ? 'px-3 lg:px-4' : ''
   }`
 
   return !destination ? (
