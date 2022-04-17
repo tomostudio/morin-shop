@@ -42,6 +42,16 @@ body {
   background: linear-gradient(270deg, #FFFEF9 26.83%, rgba(255, 254, 249, 0) 100%);
 }
 
-.swiper-slide {
-  width: auto !important;
+.sliderDesktop {
+  .swiper-slide {
+    width: auto !important;
+  }
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  @apply bg-transparent w-[10px] h-[10px] opacity-100 border-2 border-white;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  @apply bg-white;
 }

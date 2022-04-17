@@ -12,8 +12,10 @@ import MorinButton from '@/components/utils/morinButton'
 import Header from '@/components/modules/header'
 import ProductCard from '@/components/modules/productCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper'
+import { Pagination, Navigation } from 'swiper'
 import 'swiper/css/pagination'
+import MorinTabs from '@/components/utils/morinTabs'
+import { useMediaQuery } from '@/helpers/functional/checkMedia'
 
 export default function ProductSlug() {
   const sizeData = [
@@ -42,36 +44,6 @@ export default function ProductSlug() {
       ariaText: 'Size 590gr',
     },
   ]
-  const defaultSize = sizeData[1]
-  const [selectSize, setSelectSize] = useState(defaultSize?.value)
-  const [thisEl, setThisEl] = useState(null)
-
-  const handleActiveSize = (val, id) => {
-    // do navigational function here
-
-    measureEl(id)
-    setSelectSize(val)
-  }
-
-  const measureEl = (id) => {
-    const parent = document
-      .querySelector('.size-switch')
-      .getBoundingClientRect()
-    const current = document
-      .querySelector(`input#${id}`)
-      .getBoundingClientRect()
-    const left = current.left - parent.left
-
-    setThisEl(left)
-  }
-
-  useEffect(() => {
-    measureEl(defaultSize?.id)
-    window.addEventListener('LocoCall', (e) => {
-      console.log(' triggered', e.detail)
-    })
-    return () => {}
-  }, [])
 
   return (
     <Layout>
@@ -79,9 +51,9 @@ export default function ProductSlug() {
       <Header home={false} />
       <div className="bg-white w-full">
         <HeaderGap />
-        <Container className="flex flex-col lg:flex-row w-full gap-16 h-full mb-24">
-          <div className="w-full lg:w-1/2 flex flex-col">
-            <div className="relative w-full lg:h-[754px] rounded-3xl overflow-hidden">
+        <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
+          <div className="w-full md:w-1/2 flex flex-col">
+            <div className="relative w-full md:h-[640px] lg:h-[754px] rounded-3xl overflow-hidden">
               <Image
                 src="/product/blueberry.png"
                 layout="fill"
@@ -89,20 +61,108 @@ export default function ProductSlug() {
                 objectPosition="center"
               />
             </div>
-            <div className="relative w-full">
+            {useMediaQuery('(min-width: 768px)') ? (
+              <>
+                <div className="relative w-full">
+                  <Swiper
+                    slidesPerView="auto"
+                    spaceBetween={18}
+                    allowTouchMove={false}
+                    modules={[Navigation]}
+                    navigation={{
+                      nextEl: '.swiper-button-next',
+                      prevEl: '.swiper-button-prev',
+                    }}
+                    className="sliderDesktop w-full mt-7"
+                  >
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                        <Image
+                          src="/product/blueberry.png"
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                  <div className="absolute linearProduct w-32 h-28 top-0 right-0 mt-7 z-2"></div>
+                </div>
+                <div className="mt-5 flex justify-end">
+                  <MorinButton
+                    color={colors.morinBlue}
+                    arrow="left"
+                    border
+                    className="h-[37px] swiper-button-prev"
+                  ></MorinButton>
+                  <MorinButton
+                    color={colors.morinBlue}
+                    arrow="right"
+                    border
+                    className="ml-4 h-[37px] swiper-button-next"
+                  ></MorinButton>
+                </div>
+              </>
+            ) : (
               <Swiper
-                slidesPerView="auto"
-                spaceBetween={18}
-                allowTouchMove={false}
-                modules={[Navigation]}
-                navigation={{
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                }}
-                className="w-full mt-7"
+                slidesPerView={1}
+                spaceBetween={10}
+                pagination={true}
+                modules={[Pagination]}
+                className="w-full"
               >
                 <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
                     <Image
                       src="/product/blueberry.png"
                       layout="fill"
@@ -112,7 +172,7 @@ export default function ProductSlug() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
                     <Image
                       src="/product/blueberry.png"
                       layout="fill"
@@ -122,37 +182,7 @@ export default function ProductSlug() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
-                    <Image
-                      src="/product/blueberry.png"
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="center"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+                  <div className="relative w-full h-96 rounded-3xl overflow-hidden">
                     <Image
                       src="/product/blueberry.png"
                       layout="fill"
@@ -162,81 +192,39 @@ export default function ProductSlug() {
                   </div>
                 </SwiperSlide>
               </Swiper>
-              <div className="absolute linearProduct w-32 h-28 top-0 right-0 mt-7 z-2"></div>
-            </div>
-            <div className="mt-5 flex justify-end">
-              <MorinButton
-                color={colors.morinBlue}
-                arrow="left"
-                border
-                className="h-[37px] swiper-button-prev"
-              ></MorinButton>
-              <MorinButton
-                color={colors.morinBlue}
-                arrow="right"
-                border
-                className="ml-4 h-[37px] swiper-button-next"
-              ></MorinButton>
-            </div>
+            )}
           </div>
-          <div className="w-full lg:w-1/2 flex flex-col space-y-8 text-morin-blue">
+          <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
             <div className="w-full flex flex-col">
-              <h2 className="text-h2 font-nutmeg font-normal m-0">
+              <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
                 Blueberry Jam
               </h2>
-              <h3 className="text-ctitle font-normal m-0">IDR 39.000,-</h3>
+              <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
+                IDR 39.000,-
+              </h3>
             </div>
             <div>
-              <span className="font-medium">select size</span>
-              <div
-                className="size-switch mt-3 hidden lg:flex w-fit"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                {sizeData?.map((item) => (
-                  <div key={item.id} className="size-switch__item">
-                    <input
-                      type="radio"
-                      name="slectSize"
-                      className="size-switch__input sr-only"
-                      id={item.id}
-                      value={item.value}
-                      checked={item.value === selectSize}
-                      onChange={(e) =>
-                        handleActiveSize(e.target.value, item.id)
-                      }
-                    />
-                    <label className="size-switch__label" htmlFor={item.id}>
-                      {item.title}
-                    </label>
-                  </div>
-                ))}
-                {thisEl ? (
-                  <div
-                    aria-hidden="true"
-                    style={{ transform: `translate(${thisEl}px, -50%)` }}
-                    className="size-switch__marker"
-                  />
-                ) : (
-                  ''
-                )}
-              </div>
+              <span className="font-medium hidden md:block">select size</span>
+              <MorinTabs tabData={sizeData} className="md:mt-3" />
             </div>
-            <div className="flex w-full">
-              <div className="flex justify-between items-center mr-6 px-5 pt-3 pb-2 rounded-full border-2 border-morin-blue w-40">
-                <FancyLink className="pb-2">
+            <div className="flex w-full h-12 md:h-auto">
+              <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
+                <FancyLink className="pb-1.5 md:pb-2">
                   <Minus />
                 </FancyLink>
-                <span className="font-medium text-ctitleSmall">1</span>
-                <FancyLink>
+                <span className="font-medium text-default md:text-ctitleSmall">
+                  1
+                </span>
+                <FancyLink className="pb-0.5">
                   <Plus />
                 </FancyLink>
               </div>
-              <FancyLink className="w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-[26px] text-white">
+              <FancyLink className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white">
                 Add to Cart
               </FancyLink>
             </div>
-            <div className="flex flex-col max-w-md">
-              <p className="font-medium">
+            <div className="flex flex-col md:max-w-md">
+              <p className="font-medium text-[12px] md:text-default">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit
                 enim nulla scelerisque viverra scelerisque eu. Dolor sit amet,
                 consectetur adipiscing elit. Sit enim nulla scelerisque viverra
@@ -248,8 +236,9 @@ export default function ProductSlug() {
               <MorinButton
                 color={colors.morinBlue}
                 border
+                showText
                 arrow="right"
-                className="mt-8 h-[30px]"
+                className="mt-5 md:mt-8 h-[30px]"
               >
                 View Products Details
               </MorinButton>
