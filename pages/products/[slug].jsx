@@ -81,7 +81,7 @@ export default function ProductSlug() {
         <HeaderGap />
         <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
           <div className="w-full md:w-1/2 flex flex-col">
-            <div className="relative hidden lg:block w-full md:h-[640px] lg:h-[754px] rounded-3xl overflow-hidden">
+            <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
               <Image
                 src="/product/blueberry.png"
                 layout="fill"
