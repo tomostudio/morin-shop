@@ -32,10 +32,6 @@ const FancyLink = forwardRef(
           aria-label={a11yText}
           className={`${className} pointer-events-auto`}
           ref={ref}
-          onClick={() => {
-            onClick()
-            appContext.setMobileMenu(false)
-          }}
           {...others}
         >
           {children}

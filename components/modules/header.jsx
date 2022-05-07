@@ -3,17 +3,11 @@ import Container from '@/components/modules/container'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo } from '../utils/svg'
-import MorinTabs from '../utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
+import MorinTabs from '../utils/morinTabs'
 
 export default function Header({ home = true }) {
   const tabData = [
-    {
-      id: 'tab-1',
-      title: 'All',
-      value: 'all',
-      ariaText: 'All',
-    },
     {
       id: 'tab-2',
       title: 'Spreads',
@@ -39,6 +33,7 @@ export default function Header({ home = true }) {
       ariaText: 'Fillings',
     },
   ]
+
   return home ? (
     <nav
       className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}

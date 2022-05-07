@@ -1,79 +1,137 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import FancyLink from './fancyLink'
 
-const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
-  const defaultTab = tabData[tabData.length - 1]
+const MorinTabs = ({ tabData }) => {
+  // Market Variable
+  const [markerW, setMarkerW] = useState(58) // width of marker
+  const [markerPos, setMarkerPos] = useState(0) // position of marker
+  let widthData = [] // always collect width data.
 
-  const [currentTab, setCurrentTab] = useState(defaultTab?.value)
-  const [thisEl, setThisEl] = useState(null)
+  const defaultNavRef = useRef()
+  const navRef = useRef()
 
-  const handleTabChange = (val, id) => {
-    // do callback function here
-    onChange()
+  // function when navigation on click
+  const navMouseClick = (e) => {
+    // set marker width according to button yang di click
+    setMarkerW(e.target.clientWidth)
+    defaultNavRef.current = e.target
 
-    measureEl(id)
-    setCurrentTab(val)
+    // reset and set color of navigation
+    navRef.current.querySelectorAll('button').forEach((item) => {
+      item.classList.remove('focus')
+    })
+
+    // set target nav color to white (with class)
+    e.target.classList.add('focus')
+
+    // set position variable
+    let moveX = 0
+
+    // get width of all nav
+    navRef.current.childNodes.forEach((item, id) => {
+      widthData[id] = item.clientWidth
+    })
+
+    // iterate nav to get position.
+    widthData.forEach((w, id) => {
+      if (id < e.target.dataset.id) {
+        moveX = moveX + w
+      }
+    })
+
+    // set marker position.
+    setMarkerPos(moveX)
   }
 
-  const measureEl = (id) => {
-    const parent = document
-      .querySelector('.radio-switch')
-      .getBoundingClientRect()
-    const current = document
-      .querySelector(`input#${id}`)
-      .getBoundingClientRect()
-    const left = current.left - parent.left
+  const navMouseEnter = (e) => {
+    // set marker width according to button yang di hover
+    document.getElementById('marker').style.width = `${e.target.clientWidth}px`
 
-    setThisEl(left)
-  }
-  const resize = () => {
-    measureEl(currentTab.id)
-    setCurrentTab(currentTab)
+    // reset and set color of navigation
+    navRef.current.querySelectorAll('button').forEach((item) => {
+      item.classList.remove('focus')
+    })
+
+    // set target nav color to white (with class)
+    e.target.classList.add('focus')
+
+    // set position variable
+    let moveX = 0
+
+    // get width of all nav
+    navRef.current.childNodes.forEach((item, id) => {
+      widthData[id] = item.clientWidth
+    })
+
+    // iterate nav to get position.
+    widthData.forEach((w, id) => {
+      if (id < e.target.dataset.id) {
+        moveX = moveX + w
+      }
+    })
+
+    // set marker position according to button yang di hover
+    document.getElementById('marker').style.transform = `translateX(${moveX}px)`
   }
 
-  useEffect(() => {
-    measureEl(defaultTab?.id)
-    document.querySelector('resize', resize)
-  }, [])
+  const navMouseLeave = (e) => {
+    // set marker width according to button yang di leave
+    document.getElementById('marker').style.width = `${markerW}px`
+
+    // set marker position according to button yang di leave
+    document.getElementById(
+      'marker',
+    ).style.transform = `translateX(${markerPos}px)`
+
+    // reset and set color of navigation
+    navRef.current.querySelectorAll('button').forEach((item) => {
+      item.classList.remove('focus')
+    })
+
+    // set target nav color to white (with class)
+    defaultNavRef.current.classList.add('focus')
+  }
 
   return (
-    <div className={`flex items-center ${className}`}>
-      <form
-        className="radio-switch flex px-2 py-1.5 bg-white relative shadow-softer rounded-full w-auto grow-0"
-        onSubmit={(e) => e.preventDefault()}
+    <nav
+      className="header-nav w-full lg:w-auto pointer-events-auto relative rounded-full font-medium bg-white py-1.5 px-2 shadow-softer flex justify-around lg:justify-start"
+      onSubmit={(e) => e.preventDefault()}
+      ref={navRef}
+    >
+      <FancyLink
+        className="focus"
+        onClick={navMouseClick}
+        onMouseEnter={navMouseEnter}
+        onMouseLeave={navMouseLeave}
+        a11yText={'Navigate to the Get Morin shop page'}
+        data-id={0}
+        ref={defaultNavRef}
       >
-        {tabData?.map((item) => (
-          <div
-            key={item.id}
-            className="radio-switch__item relative block w-[4.1rem] lg:w-20 h-8 "
-          >
-            <input
-              type="radio"
-              name="desktop-nav"
-              className="radio-switch__input sr-only"
-              id={item.id}
-              value={item.value}
-              checked={item.value === currentTab}
-              onChange={(e) => handleTabChange(e.target.value, item.id)}
-            />
-            <label
-              className="radio-switch__label font-semibold relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 cursor-pointer transition-all duration-300 pt-[2px]"
-              htmlFor={item.id}
-            >
-              {item.title}
-            </label>
-          </div>
-        ))}
-        {thisEl ? (
-          <div
-            aria-hidden="true"
-            style={{ transform: `translate(${thisEl}px, 0%)` }}
-            className="radio-switch__marker absolute z-1 top-[6px] left-[1px] shadow-softer rounded-full w-[4.1rem] lg:w-20 h-8 bg-morin-blue duration-300"
-          />
-        ) : (
-          ''
-        )}
-      </form>
-    </div>
+        All
+      </FancyLink>
+      {tabData?.map((item, id) => (
+        <FancyLink
+          a11yText={item.ariaText}
+          key={item.id}
+          className=""
+          onClick={navMouseClick}
+          onMouseEnter={navMouseEnter}
+          onMouseLeave={navMouseLeave}
+          data-id={id + 1}
+        >
+          {item.title}
+        </FancyLink>
+      ))}
+      <div
+        id="marker"
+        aria-hidden="true"
+        style={{
+          width: markerW,
+          transform: `translateX(${markerPos}px)`,
+        }}
+        className="absolute left-[6px] z-1 h-8 rounded-full bg-morin-blue shadow-softer transition-all duration-300 ease-in-out-expo"
+      />
+    </nav>
   )
 }
 

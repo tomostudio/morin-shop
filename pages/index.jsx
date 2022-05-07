@@ -6,8 +6,8 @@ import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
 import ProductCard from '@/components/modules/productCard'
 import MoreButton from '@/components/utils/moreButton'
-import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
+import MorinTabsMobile from '@/components/utils/morinTabsMobile'
 
 export default function Home() {
   const productData = [
@@ -59,9 +59,33 @@ export default function Home() {
       imgAlt: 'Apricot',
       link: '/products/apricot',
     },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
   ]
 
-  const tabData = [
+  const mobileTabData = [
     {
       id: 'tab-1',
       title: 'All',
@@ -102,8 +126,8 @@ export default function Home() {
         <HeaderGap />
         <Container className="relative mb-14 lg:mt-20 lg:mb-28">
           {useMediaQuery('(max-width: 1023px)') && (
-            <div className="absolute z-50 w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
-              <MorinTabs tabData={tabData} />
+            <div className="absolute w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
+              <MorinTabsMobile tabData={mobileTabData} />
             </div>
           )}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0">
