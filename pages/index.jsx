@@ -8,9 +8,131 @@ import ProductCard from '@/components/modules/productCard'
 import MoreButton from '@/components/utils/moreButton'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsMobile from '@/components/utils/morinTabsMobile'
+import FancyLink from '@/components/utils/fancyLink'
+import Image from 'next/image'
 
 export default function Home() {
   const productData = [
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
+    {
+      title: 'Hazelnut Spread with Cocoa',
+      imgSrc: '/product/apricot.png',
+      imgAlt: 'Apricot',
+      link: '/products/apricot',
+    },
     {
       title: 'Hazelnut Spread with Cocoa',
       imgSrc: '/product/apricot.png',
@@ -124,7 +246,7 @@ export default function Home() {
       <Header />
       <div className="bg-morin-skyBlue w-full">
         <HeaderGap />
-        <Container className="relative mb-14 lg:mt-20 lg:mb-28">
+        <Container className="relative lg:mt-20">
           {useMediaQuery('(max-width: 1023px)') && (
             <div className="absolute w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
               <MorinTabsMobile tabData={mobileTabData} />
@@ -132,20 +254,42 @@ export default function Home() {
           )}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0">
             {productData.map((data, index) => (
-              <ProductCard
+              <FancyLink
+                destination={data.link}
+                className="w-full h-96 bg-white flex flex-col rounded-2xl"
                 key={index}
-                title={data.title}
-                imgSrc={data.imgSrc}
-                imgAlt={data.imgAlt}
-                link={data.link}
-              />
+              >
+                <div className="w-full h-full p-6 lg:p-8">
+                  <div className="w-full h-full relative">
+                    <Image
+                      src={data.imgSrc}
+                      layout="fill"
+                      objectFit="contain"
+                    />
+                  </div>
+                </div>
+                <div className="mx-auto w-full h-1/4 text-center lg:px-20">
+                  <span className="font-nutmeg text-morin-blue text-default leading-none">
+                    {data.title}
+                  </span>
+                </div>
+              </FancyLink>
+              // <ProductCard
+              //   key={index}
+              //   title={data.title}
+              //   imgSrc={data.imgSrc}
+              //   imgAlt={data.imgAlt}
+              //   link={data.link}
+              // />
             ))}
           </div>
-          <div className="absolute bottom-[-2%] left-0 z-10 h-36 w-full flex justify-center items-end linearMore">
-            <MoreButton>See More Products</MoreButton>
+          <div className="absolute left-0 bottom-0 w-full">
+            <div className="h-52 w-full flex justify-center pt-8 linearMore">
+              <MoreButton>See More Products</MoreButton>
+            </div>
+            <Footer className="bg-morin-skyBlue"/>
           </div>
         </Container>
-        <Footer />
       </div>
     </Layout>
   )

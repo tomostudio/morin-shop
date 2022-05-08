@@ -12,7 +12,6 @@ const MorinTabsMobile = ({ tabData, onChange = () => {}, className }) => {
     onChange();
 
     measureEl(id);
-    console.log(id)
     setCurrentTab(id);
   }
 
@@ -49,16 +48,15 @@ const MorinTabsMobile = ({ tabData, onChange = () => {}, className }) => {
   }, [])
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div className={`flex items-center ${className} justify-around w-full px-2`}>
       <form
-        className="radio-switch flex px-2 py-1.5 bg-white relative shadow-softer rounded-full w-auto grow-0"
+        className="radio-switch flex px-2 py-1.5 bg-white relative shadow-softer rounded-full w-full grow-0"
         onSubmit={(e) => e.preventDefault()}
       >
         {tabData?.map((item) => (
           <div
             key={item.id}
-            className='radio-switch__item relative block h-8 '
-            style={{width: `${width}px`}}
+            className='radio-switch__item relative block h-8 w-full'
           >
             <input
               type='radio'

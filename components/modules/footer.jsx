@@ -6,7 +6,7 @@ import colors from '@/helpers/preset/colors'
 
 const Footer = ({ className }) => {
   return (
-    <footer className="px-4 lg:px-8">
+    <footer className={`px-4 lg:px-8 ${className}`}>
       <Container
         className={`relative w-full h-auto flex flex-col lg:flex-row bg-morin-blue text-white rounded-t-3xl justify-between px-5 lg:px-10 py-7 lg:py-[60px] ${className}`}
       >

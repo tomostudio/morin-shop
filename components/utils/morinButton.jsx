@@ -114,18 +114,7 @@ const MorinButton = ({
         onClick={onClick}
         {...others}
       >
-        {arrow === 'left' ? (
-          <>
-            {renderArrow()}
-            <span
-              className={`pt-px md:pt-0.5 ${
-                !showText ? 'hidden lg:block' : ''
-              }`}
-            >
-              {children}
-            </span>
-          </>
-        ) : arrow === 'right' ? (
+        {cart ? (
           <>
             <span
               className={`pt-px md:pt-0.5 ${
@@ -137,11 +126,39 @@ const MorinButton = ({
             {renderArrow()}
           </>
         ) : (
-          <span
-            className={`pt-px md:pt-0.5 ${!showText ? 'hidden lg:block' : ''}`}
-          >
-            {children}
-          </span>
+          <>
+            {arrow === 'left' ? (
+              <>
+                {renderArrow()}
+                <span
+                  className={`pt-px md:pt-0.5 ${
+                    !showText ? 'hidden lg:block' : ''
+                  }`}
+                >
+                  {children}
+                </span>
+              </>
+            ) : arrow === 'right' ? (
+              <>
+                <span
+                  className={`pt-px md:pt-0.5 ${
+                    !showText ? 'hidden lg:block' : ''
+                  }`}
+                >
+                  {children}
+                </span>
+                {renderArrow()}
+              </>
+            ) : (
+              <span
+                className={`pt-px md:pt-0.5 ${
+                  !showText ? 'hidden lg:block' : ''
+                }`}
+              >
+                {children}
+              </span>
+            )}
+          </>
         )}
       </a>
     </Link>

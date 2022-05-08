@@ -826,6 +826,78 @@ const Trash = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
+const WaButton = ({ ...options }) => (
+  <svg
+    viewBox="0 0 66 66"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...options}
+  >
+    <rect
+      x="0.857178"
+      y="0.160156"
+      width="65"
+      height="65"
+      rx="32.5"
+      fill="#38D430"
+    />
+    <rect
+      x="0.857178"
+      y="0.160156"
+      width="65"
+      height="65"
+      rx="32.5"
+      fill="url(#paint0_linear_738_2190)"
+    />
+    <path
+      d="M17.9197 32.2539C17.9197 39.6574 24.8322 45.6601 33.3572 45.6601C35.881 45.6685 38.3747 45.1251 40.6557 44.0698L48.7947 45.6601L46.4019 39.4262C47.9165 37.3516 48.7947 34.8915 48.7947 32.2539C48.7947 24.8503 41.8821 18.8477 33.3572 18.8477C24.8322 18.8477 17.9197 24.8503 17.9197 32.2539Z"
+      fill="#38D430"
+    />
+    <path
+      d="M17.9197 32.2539C17.9197 39.6574 24.8322 45.6601 33.3572 45.6601C35.881 45.6685 38.3747 45.1251 40.6557 44.0698L48.7947 45.6601L46.4019 39.4262C47.9165 37.3516 48.7947 34.8915 48.7947 32.2539C48.7947 24.8503 41.8821 18.8477 33.3572 18.8477C24.8322 18.8477 17.9197 24.8503 17.9197 32.2539Z"
+      fill="url(#paint1_linear_738_2190)"
+    />
+    <path
+      d="M17.9197 32.2539C17.9197 39.6574 24.8322 45.6601 33.3572 45.6601C35.881 45.6685 38.3747 45.1251 40.6557 44.0698L48.7947 45.6601L46.4019 39.4262C47.9165 37.3516 48.7947 34.8915 48.7947 32.2539C48.7947 24.8503 41.8821 18.8477 33.3572 18.8477C24.8322 18.8477 17.9197 24.8503 17.9197 32.2539Z"
+      stroke="white"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M40.2268 32.2539H40.2097M33.3657 32.2539H33.3485M26.5046 32.2539H26.4874"
+      stroke="white"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <defs>
+      <linearGradient
+        id="paint0_linear_738_2190"
+        x1="54.134"
+        y1="108.06"
+        x2="-12.9911"
+        y2="87.9657"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#00AE42" />
+        <stop offset="1" stopColor="#00AE42" stopOpacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_738_2190"
+        x1="23.4882"
+        y1="63.3564"
+        x2="54.5401"
+        y2="52.6523"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#00AE42" />
+        <stop offset="1" stopColor="#00AE42" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
 export {
   MorinLogo,
   SunRay,
@@ -844,4 +916,5 @@ export {
   Filter,
   Check,
   Trash,
+  WaButton,
 }
