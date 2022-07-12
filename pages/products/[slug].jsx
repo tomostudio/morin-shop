@@ -17,8 +17,9 @@ import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import SliderDesktop from '@/components/modules/sliderDesktop'
 import SliderMobile from '@/components/modules/sliderMobile'
+import { parseShopifyResponse, shopifyClient } from '@/helpers/shopify'
 
-export default function ProductSlug() {
+export default function ProductSlug({product}) {
   const sizeData = [
     {
       id: 'size-1',
@@ -75,7 +76,7 @@ export default function ProductSlug() {
 
   return (
     <Layout>
-      <NextSeo title="Products" />
+      <NextSeo title={product.handle} />
       <Header home={false} />
       <div className="bg-white w-full">
         <HeaderGap />
@@ -83,9 +84,9 @@ export default function ProductSlug() {
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
               <Image
-                src="/product/blueberry.png"
+                src={product.images[0].src}
                 layout="fill"
-                objectFit="cover"
+                objectFit="contain"
                 objectPosition="center"
               />
             </div>
@@ -98,10 +99,10 @@ export default function ProductSlug() {
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
             <div className="w-full flex flex-col">
               <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
-                Blueberry Jam
+                {product.title}
               </h2>
               <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
-                IDR 39.000,-
+                IDR {product.variants[0].price}
               </h3>
             </div>
             <div>
@@ -150,4 +151,36 @@ export default function ProductSlug() {
       </div>
     </Layout>
   )
+}
+
+export async function getStaticPaths() {
+  // Fetch all the products
+  const products = await shopifyClient.product.fetchAll()
+  const res = parseShopifyResponse(products)
+
+  const paths = []
+
+  res.map((data) => {
+    return paths.push({
+      params: {
+        slug: data.handle,
+      },
+    })
+  })
+
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  // Fetch all the products
+  const shopify_product = await shopifyClient.product.fetchAll()
+  const product = parseShopifyResponse(shopify_product).find(
+    (data) => data.handle === params.slug,
+  )
+
+  return {
+    props: {
+      product,
+    },
+  }
 }

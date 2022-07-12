@@ -2521,6 +2521,11 @@ shell-quote@1.7.2:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
+shopify-buy@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.16.1.tgz#d5062813df68fe39a6579a8da07bd6a4fdce5a13"
+  integrity sha512-I+4pmFgYpQ8N3yaqNw/5fWu+e7AuiUIrQdDLPtD0SwEzL1EyB4q2Ge+MSHQmrAaZFiDXKHAkfzpkYExztquaDw==
+
 side-channel@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/side-channel/-/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"

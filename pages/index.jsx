@@ -10,8 +10,9 @@ import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsMobile from '@/components/utils/morinTabsMobile'
 import FancyLink from '@/components/utils/fancyLink'
 import Image from 'next/image'
+import { parseShopifyResponse, shopifyClient } from '@/helpers/shopify'
 
-export default function Home() {
+export default function Home({ products }) {
   const productData = [
     {
       title: 'Hazelnut Spread with Cocoa',
@@ -253,23 +254,23 @@ export default function Home() {
             </div>
           )}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0">
-            {productData.map((data, index) => (
+            {products.map((data, index) => (
               <FancyLink
-                destination={data.link}
+                destination={`products/${data.handle}`}
                 className="w-full h-96 bg-white flex flex-col rounded-2xl"
                 key={index}
               >
                 <div className="w-full h-full p-6 lg:p-8">
                   <div className="w-full h-full relative">
                     <Image
-                      src={data.imgSrc}
+                      src={data.images[0].src}
                       layout="fill"
                       objectFit="contain"
                     />
                   </div>
                 </div>
                 <div className="mx-auto w-full h-1/4 text-center lg:px-20">
-                  <span className="font-nutmeg text-morin-blue text-default leading-none">
+                  <span className="font-nutmeg text-morin-blue text-mtitleSmall leading-none">
                     {data.title}
                   </span>
                 </div>
@@ -283,14 +284,34 @@ export default function Home() {
               // />
             ))}
           </div>
-          <div className="absolute left-0 bottom-0 w-full">
-            <div className="h-52 w-full flex justify-center pt-8 linearMore">
-              <MoreButton>See More Products</MoreButton>
-            </div>
-            <Footer className="bg-morin-skyBlue"/>
+          <div
+            className={`${
+              products.length > 1 ? 'absolute' : 'relative mt-24'
+            } left-0 bottom-0 w-full`}
+          >
+            {products.length > 1 && (
+              <div className="h-52 w-full flex justify-center pt-8 linearMore">
+                <MoreButton>See More Products</MoreButton>
+              </div>
+            )}
+            <Footer
+              padding={products.length > 1 ? true : false}
+              className="bg-morin-skyBlue"
+            />
           </div>
         </Container>
       </div>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  // Fetch all the products
+  const products = await shopifyClient.product.fetchAll()
+
+  return {
+    props: {
+      products: parseShopifyResponse(products),
+    },
+  }
 }

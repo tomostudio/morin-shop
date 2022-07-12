@@ -4,9 +4,9 @@ import Image from 'next/image'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 
-const Footer = ({ className }) => {
+const Footer = ({ padding = true, className }) => {
   return (
-    <footer className={`px-4 lg:px-8 ${className}`}>
+    <footer className={`${padding ? 'px-4 lg:px-8' : 'p-0'} ${className}`}>
       <Container
         className={`relative w-full h-auto flex flex-col lg:flex-row bg-morin-blue text-white rounded-t-3xl justify-between px-5 lg:px-10 py-7 lg:py-[60px] ${className}`}
       >
@@ -49,12 +49,12 @@ const Footer = ({ className }) => {
             </FancyLink>
           </div>
           <div className="flex flex-wrap w-full lg:w-auto text-[12px] lg:space-x-2">
-            <span className='w-full lg:w-auto'>© Morin Food 2021</span>
-            <span className='hidden lg:block'>|</span>
+            <span className="w-full lg:w-auto">© Morin Food 2021</span>
+            <span className="hidden lg:block">|</span>
             <FancyLink destination="/terms-conditions">
               Terms & Conditions
             </FancyLink>
-            <span className='mx-1 lg:mx-0'>|</span>
+            <span className="mx-1 lg:mx-0">|</span>
             <FancyLink destination="/privacy-policy">Privacy Policy</FancyLink>
           </div>
         </div>

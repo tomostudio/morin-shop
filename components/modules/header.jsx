@@ -55,7 +55,7 @@ export default function Header({ home = true }) {
                 </MorinButton>
                 {/* Morin Logo */}
                 <FancyLink
-                  destination="/editorial/under-construction"
+                  destination="/"
                   a11yText="Navigate to the home page"
                   className="relative w-[105px] lg:w-[142px]"
                 >
@@ -96,7 +96,7 @@ export default function Header({ home = true }) {
                 </MorinButton>
                 {/* Morin Logo */}
                 <FancyLink
-                  destination="/editorial/under-construction"
+                  destination="/"
                   a11yText="Navigate to the home page"
                   className="relative w-[105px] lg:w-[142px]"
                 >
