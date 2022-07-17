@@ -1,7 +1,7 @@
 import client from "@sanity/client";
 
 // Document type for all incoming synced Shopify products
-const SHOPIFY_PRODUCT_DOCUMENT_TYPE = "shopify.product";
+const SHOPIFY_PRODUCT_DOCUMENT_TYPE = "test_shopify.shopify";
 
 // Prefix added to all Sanity product document ids
 const SHOPIFY_PRODUCT_DOCUMENT_ID_PREFIX = "product-";
@@ -120,13 +120,14 @@ function buildProductDocument(product) {
     priceRange,
     status,
     title,
+    handle,
     variants,
   } = product;
   const productId = extractIdFromGid(id);
   return {
     _id: getDocumentProductId(productId),
-    _type: 'test_shopify',
-    productId: id,
+    _type: SHOPIFY_PRODUCT_DOCUMENT_TYPE,
+    productId: productId,
     image: featuredImage?.src,
     options: options?.map((option, index) => ({
       _key: String(index),
@@ -138,6 +139,7 @@ function buildProductDocument(product) {
     productType,
     status,
     title,
+    handle,
     variants: variants?.map((variant, index) => {
       const variantId = extractIdFromGid(variant.id);
       return {
