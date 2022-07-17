@@ -14,7 +14,7 @@ const sanityClient = client({
   apiVersion: 'v2021-03-25',
   dataset: "production",
   projectId: 'rj23a9ch',
-  token: 'skuBwLlXdv1EHnH5CoNqKHPhvOSZqLVPzqE4qk9mQa4J92f0p4qGsBlAN5x1Az9HTsoAIxYD3EnTKPBFV3HJici7Los9ffx8YLGubI8YCynSxK7HHkNVzROQNGIZswTFyl8iBSXEYRkXZPfnbbMLfUb6tV3QKf45hiwA09c8pzw1RQ8QLeNW',
+  token: 'sk70NvdhWKtxPoFKwUEsqqbynL2ZK115nZgwfnjqbsnlyoVkKjaMV8OvKf51ej0OIGdnvkFB1RCj9TzltYLGeBZI5C3grnhv15yUIKPQU94YKHvpjO8nQ7Kbncfw98H2AnG8Bkn0PiwZorTWBg5057xNfNGbvVa6S2rO6rtTLKpbDOUnrQ98',
   useCdn: false,
 });
 
