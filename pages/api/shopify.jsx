@@ -122,13 +122,18 @@ function buildProductDocument(product) {
     title,
     handle,
     variants,
+    createdAt,
+    updatedAt,
+    vendor,
+    tags,
   } = product;
   const productId = extractIdFromGid(id);
   return {
     _id: getDocumentProductId(productId),
     _type: 'test_shopify',
     shopifyProduct: {
-      productId: productId,
+      id: productId,
+      gid: id,
       image: featuredImage?.src,
       options: options?.map((option, index) => ({
         _key: String(index),
@@ -141,6 +146,10 @@ function buildProductDocument(product) {
       status,
       title,
       handle,
+      createdAt,
+      updatedAt,
+      vendor,
+      tags,
       variants: variants?.map((variant, index) => {
         const variantId = extractIdFromGid(variant.id);
         return {
