@@ -126,41 +126,43 @@ function buildProductDocument(product) {
   const productId = extractIdFromGid(id);
   return {
     _id: getDocumentProductId(productId),
-    _type: 'test_shopify.shopifyProduct',
-    productId: productId,
-    image: featuredImage?.src,
-    options: options?.map((option, index) => ({
-      _key: String(index),
-      name: option.name,
-      position: option.position,
-      values: option.values,
-    })),
-    priceRange,
-    productType,
-    status,
-    title,
-    handle,
-    variants: variants?.map((variant, index) => {
-      const variantId = extractIdFromGid(variant.id);
-      return {
+    _type: 'test_shopify',
+    shopifyProduct: {
+      productId: productId,
+      image: featuredImage?.src,
+      options: options?.map((option, index) => ({
         _key: String(index),
-        compareAtPrice: Number(variant.compareAtPrice || 0),
-        id: variantId,
-        inStock: !!variant.inventoryManagement
-          ? variant.inventoryPolicy === "continue" ||
-            variant.inventoryQuantity > 0
-          : true,
-        inventoryManagement: variant.inventoryManagement,
-        inventoryPolicy: variant.inventoryPolicy,
-        inventoryQuantity: variant.inventoryQuantity || 0,
-        option1: variant?.selectedOptions?.[0]?.value,
-        option2: variant?.selectedOptions?.[1]?.value,
-        option3: variant?.selectedOptions?.[2]?.value,
-        price: Number(variant.price || 0),
-        sku: variant.sku,
-        title: variant.title,
-      };
-    }),
+        name: option.name,
+        position: option.position,
+        values: option.values,
+      })),
+      priceRange,
+      productType,
+      status,
+      title,
+      handle,
+      variants: variants?.map((variant, index) => {
+        const variantId = extractIdFromGid(variant.id);
+        return {
+          _key: String(index),
+          compareAtPrice: Number(variant.compareAtPrice || 0),
+          id: variantId,
+          inStock: !!variant.inventoryManagement
+            ? variant.inventoryPolicy === "continue" ||
+              variant.inventoryQuantity > 0
+            : true,
+          inventoryManagement: variant.inventoryManagement,
+          inventoryPolicy: variant.inventoryPolicy,
+          inventoryQuantity: variant.inventoryQuantity || 0,
+          option1: variant?.selectedOptions?.[0]?.value,
+          option2: variant?.selectedOptions?.[1]?.value,
+          option3: variant?.selectedOptions?.[2]?.value,
+          price: Number(variant.price || 0),
+          sku: variant.sku,
+          title: variant.title,
+        };
+      }),
+    }
   };
 }
 
