@@ -125,7 +125,8 @@ function buildProductDocument(product) {
   const productId = extractIdFromGid(id);
   return {
     _id: getDocumentProductId(productId),
-    _type: SHOPIFY_PRODUCT_DOCUMENT_TYPE,
+    _type: 'test_shopify',
+    productId: id,
     image: featuredImage?.src,
     options: options?.map((option, index) => ({
       _key: String(index),
