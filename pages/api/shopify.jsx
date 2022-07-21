@@ -130,7 +130,7 @@ function buildProductDocument(product) {
   const productId = extractIdFromGid(id);
   return {
     _id: getDocumentProductId(productId),
-    _type: 'test_shopify',
+    _type: 'shopifyData',
     shopifyProduct: {
       id: productId,
       gid: id,
