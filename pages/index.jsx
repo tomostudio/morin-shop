@@ -286,16 +286,16 @@ export default function Home({ products }) {
           </div>
           <div
             className={`${
-              products.length > 1 ? 'absolute' : 'relative mt-24'
+              products.length > 4 ? 'absolute' : 'relative mt-24'
             } left-0 bottom-0 w-full`}
           >
-            {products.length > 1 && (
+            {products.length > 8 && (
               <div className="h-52 w-full flex justify-center pt-8 linearMore">
                 <MoreButton>See More Products</MoreButton>
               </div>
             )}
             <Footer
-              padding={products.length > 1 ? true : false}
+              padding={products.length > 4 ? true : false}
               className="bg-morin-skyBlue"
             />
           </div>
