@@ -43,7 +43,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
   }, [])
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div className={`flex items-center justify-start ${className}`}>
       <form
         className="radio-switch flex px-2 py-1.5 bg-white relative shadow-softer rounded-full w-auto grow-0"
         onSubmit={(e) => e.preventDefault()}

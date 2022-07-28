@@ -61,7 +61,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   return (
     <Layout>
       <SEO
-        title={product.title_en}
+        title={product.shopifyProduct.title}
         pagelink={router.pathname}
         inputSEO={product.seo_en}
         defaultSEO={typeof seo !== 'undefined' && seo.seo_en}
@@ -74,16 +74,16 @@ export default function ProductSlug({ productAPI, seoAPI }) {
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
               <Image
-                src={urlFor(product.thumbnail).url()}
+                src={urlFor(product.slider_image[0].image).url()}
                 layout="fill"
                 objectFit="contain"
                 objectPosition="center"
               />
             </div>
             {useMediaQuery('(min-width: 768px)') ? (
-              <SliderDesktop data={sliderData} />
+              <SliderDesktop data={product.slider_image} />
             ) : (
-              <SliderMobile data={sliderData} />
+              <SliderMobile data={product.slider_image} />
             )}
           </div>
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
@@ -91,17 +91,17 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
                 {product.title}
               </h2>
-              {/* <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
-                IDR {product.variants[0].price}
-              </h3> */}
+              <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
+                IDR {product.shopifyProduct.priceRange.maxVariantPrice}
+              </h3>
             </div>
             <div>
               <span className="font-medium hidden md:block">select size</span>
-              {/* <MorinTabs
+              <MorinTabs
                 tabData={product.listWeight}
                 onChange={(e) => setProductCurrent(e)}
                 className="md:mt-3"
-              /> */}
+              />
             </div>
             <div className="flex w-full h-12 md:h-auto">
               <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
@@ -121,13 +121,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             </div>
             <div className="flex flex-col md:max-w-md">
               <p className="font-medium text-[12px] md:text-default">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit
-                enim nulla scelerisque viverra scelerisque eu. Dolor sit amet,
-                consectetur adipiscing elit. Sit enim nulla scelerisque viverra
-                sc. <br />
-                <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Sit enim nulla scelerisque viverra scelerisque eu. Dolor sit
-                amet.
+                {
+                  product.description_en
+                }
               </p>
               <MorinButton
                 color={colors.morinBlue}
@@ -149,10 +145,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
 
 export async function getStaticPaths() {
   const res = await client.fetch(`
-        *[_type == "productList"] {
-          ...,
-          type->,
-        }
+        *[_type == "shopifyData"]
       `)
 
   const paths = []
@@ -171,22 +164,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const productAPI = await client.fetch(
     `
-      *[_type == "productList" && slug.current == "${params.slug}"] {
+      *[_type == "shopifyData" && slug.current == "${params.slug}"] {
         ...,
-        type->,
-        decor_en {
-          decor1->,
-          decor2->
-        },
-        decor_id {
-          decor1->,
-          decor2->
-        },
-        recipes[]->,
-        similar {
-          ...,
-          manual[]->
-        }
+        type->
       }
     `,
   )

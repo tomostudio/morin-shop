@@ -3,6 +3,7 @@ import { Navigation } from 'swiper'
 import Image from 'next/image'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
+import urlFor from '@/helpers/sanity/urlFor'
 
 const SliderDesktop = ({ data }) => {
   return (
@@ -23,8 +24,8 @@ const SliderDesktop = ({ data }) => {
             <SwiperSlide key={index}>
               <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
                 <Image
-                  src={item.imgSrc}
-                  alt={item.imgAlt}
+                  src={urlFor(item.image).url()}
+                  alt={item.image.alt}
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"

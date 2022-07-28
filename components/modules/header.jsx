@@ -6,7 +6,7 @@ import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsHome from '../utils/morinTabsHome'
 
-export default function Header({ home = true }) {
+export default function Header({ home = true, product = null }) {
   const tabData = [
     {
       id: 'tab-2',
@@ -36,7 +36,7 @@ export default function Header({ home = true }) {
 
   return (
     <>
-      {home ? (
+      {home && product ? (
         <nav
           className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}
         >
@@ -73,7 +73,7 @@ export default function Header({ home = true }) {
               </div>
               {useMediaQuery('(min-width: 1024px)') && (
                 <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-                  <MorinTabsHome tabData={tabData} />
+                  <MorinTabsHome tabData={tabData} product={product} />
                 </div>
               )}
             </Container>

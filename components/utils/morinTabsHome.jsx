@@ -1,17 +1,29 @@
+import { useAppContext } from 'context/state'
 import { useState, useRef, useEffect } from 'react'
 import FancyLink from './fancyLink'
 
-const MorinTabsHome = ({ tabData }) => {
+const MorinTabsHome = ({ tabData, product }) => {
   // Market Variable
   const [markerW, setMarkerW] = useState(58) // width of marker
   const [markerPos, setMarkerPos] = useState(0) // position of marker
   let widthData = [] // always collect width data.
+  const ctx = useAppContext()
 
   const defaultNavRef = useRef()
   const navRef = useRef()
 
   // function when navigation on click
-  const navMouseClick = (e) => {
+  const navMouseClick = (e, category) => {
+    ctx.setCategory(category)
+    if(category === 'all') {
+      ctx.setListProduct(8)
+    }else {
+      ctx.setListProduct(
+        product.filter((data) => data.type.slug.current === category).length < 8
+          ? product.filter((data) => data.type.slug.current === category).length
+          : 9,
+      )
+    }
     // set marker width according to button yang di click
     setMarkerW(e.target.clientWidth)
     defaultNavRef.current = e.target
@@ -100,7 +112,7 @@ const MorinTabsHome = ({ tabData }) => {
     >
       <FancyLink
         className="focus"
-        onClick={navMouseClick}
+        onClick={(e) => navMouseClick(e, 'all')}
         onMouseEnter={navMouseEnter}
         onMouseLeave={navMouseLeave}
         a11yText={'Navigate to the Get Morin shop page'}
@@ -114,7 +126,7 @@ const MorinTabsHome = ({ tabData }) => {
           a11yText={item.ariaText}
           key={item.id}
           className=""
-          onClick={navMouseClick}
+          onClick={(e) => navMouseClick(e, item.value)}
           onMouseEnter={navMouseEnter}
           onMouseLeave={navMouseLeave}
           data-id={id + 1}
