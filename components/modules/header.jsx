@@ -4,7 +4,7 @@ import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import MorinTabs from '../utils/morinTabs'
+import MorinTabsHome from '../utils/morinTabsHome'
 
 export default function Header({ home = true }) {
   const tabData = [
@@ -73,7 +73,7 @@ export default function Header({ home = true }) {
               </div>
               {useMediaQuery('(min-width: 1024px)') && (
                 <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-                  <MorinTabs tabData={tabData} />
+                  <MorinTabsHome tabData={tabData} />
                 </div>
               )}
             </Container>

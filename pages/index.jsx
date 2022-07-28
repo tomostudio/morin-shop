@@ -11,202 +11,14 @@ import MorinTabsMobile from '@/components/utils/morinTabsMobile'
 import FancyLink from '@/components/utils/fancyLink'
 import Image from 'next/image'
 import { parseShopifyResponse, shopifyClient } from '@/helpers/shopify'
+import SEO from '@/components/utils/seo'
+import { useRouter } from 'next/router'
+import client from '@/helpers/sanity/client'
+import urlFor from '@/helpers/sanity/urlFor'
 
-export default function Home({ products }) {
-  const productData = [
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-    {
-      title: 'Hazelnut Spread with Cocoa',
-      imgSrc: '/product/apricot.png',
-      imgAlt: 'Apricot',
-      link: '/products/apricot',
-    },
-  ]
+export default function Home({ productAPI, seoAPI }) {
+  const [seo] = seoAPI
+  const router = useRouter()
 
   const mobileTabData = [
     {
@@ -243,7 +55,13 @@ export default function Home({ products }) {
 
   return (
     <Layout>
-      <NextSeo title="Home" />
+      <SEO
+        title={'Home'}
+        pagelink={router.pathname}
+        inputSEO={seo.seo}
+        defaultSEO={typeof seo !== 'undefined' && seo.seo}
+        webTitle={typeof seo !== 'undefined' && seo.webTitle}
+      />
       <Header />
       <div className="bg-morin-skyBlue w-full">
         <HeaderGap />
@@ -254,16 +72,16 @@ export default function Home({ products }) {
             </div>
           )}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0">
-            {products.map((data, index) => (
+            {productAPI.map((data, index) => (
               <FancyLink
-                destination={`products/${data.handle}`}
+                destination={`products/${data.slug.current}`}
                 className="w-full h-96 bg-white flex flex-col rounded-2xl"
                 key={index}
               >
                 <div className="w-full h-full p-6 lg:p-8">
                   <div className="w-full h-full relative">
                     <Image
-                      src={data.images[0].src}
+                      src={urlFor(data.thumbnail).url()}
                       layout="fill"
                       objectFit="contain"
                     />
@@ -271,7 +89,7 @@ export default function Home({ products }) {
                 </div>
                 <div className="mx-auto w-full h-1/4 text-center lg:px-20">
                   <span className="font-nutmeg text-morin-blue text-mtitleSmall leading-none">
-                    {data.title}
+                    {data.title_en}
                   </span>
                 </div>
               </FancyLink>
@@ -286,16 +104,16 @@ export default function Home({ products }) {
           </div>
           <div
             className={`${
-              products.length > 4 ? 'absolute' : 'relative mt-24'
+              productAPI.length > 4 ? 'absolute' : 'relative mt-24'
             } left-0 bottom-0 w-full`}
           >
-            {products.length > 8 && (
+            {productAPI.length > 8 && (
               <div className="h-52 w-full flex justify-center pt-8 linearMore">
                 <MoreButton>See More Products</MoreButton>
               </div>
             )}
             <Footer
-              padding={products.length > 4 ? true : false}
+              padding={productAPI.length > 4 ? true : false}
               className="bg-morin-skyBlue"
             />
           </div>
@@ -306,12 +124,20 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  // Fetch all the products
-  const products = await shopifyClient.product.fetchAll()
-
+  const productAPI = await client.fetch(`
+  *[_type == "productList"]
+  `);
+  const seoAPI = await client.fetch(`
+    *[_type == "settings"]
+    `)
+  const footerAPI = await client.fetch(`
+      *[_type == "footer"]
+      `)
   return {
     props: {
-      products: parseShopifyResponse(products),
+      productAPI,
+      seoAPI,
+      footerAPI,
     },
   }
 }

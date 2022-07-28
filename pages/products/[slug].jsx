@@ -18,34 +18,18 @@ import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import SliderDesktop from '@/components/modules/sliderDesktop'
 import SliderMobile from '@/components/modules/sliderMobile'
 import { parseShopifyResponse, shopifyClient } from '@/helpers/shopify'
+import client from '@/helpers/sanity/client'
+import urlFor from '@/helpers/sanity/urlFor'
+import { useRouter } from 'next/router'
+import SEO from '@/components/utils/seo'
 
-export default function ProductSlug({product}) {
-  const sizeData = [
-    {
-      id: 'size-1',
-      title: '17gr',
-      value: '17gr',
-      ariaText: 'Size 17gr',
-    },
-    {
-      id: 'size-2',
-      title: '170gr',
-      value: '170gr',
-      ariaText: 'Size 170gr',
-    },
-    {
-      id: 'size-3',
-      title: '330gr',
-      value: '330gr',
-      ariaText: 'Size 330gr',
-    },
-    {
-      id: 'size-4',
-      title: '590gr',
-      value: '590gr',
-      ariaText: 'Size 590gr',
-    },
-  ]
+export default function ProductSlug({ productAPI, seoAPI }) {
+  const router = useRouter()
+  const [product] = productAPI
+  const [seo] = seoAPI
+  const [productCurrent, setProductCurrent] = useState(
+    product.listWeight[0].title,
+  )
 
   const sliderData = [
     {
@@ -76,7 +60,13 @@ export default function ProductSlug({product}) {
 
   return (
     <Layout>
-      <NextSeo title={product.handle} />
+      <SEO
+        title={product.title_en}
+        pagelink={router.pathname}
+        inputSEO={product.seo_en}
+        defaultSEO={typeof seo !== 'undefined' && seo.seo_en}
+        webTitle={typeof seo !== 'undefined' && seo.webTitle}
+      />
       <Header home={false} />
       <div className="bg-white w-full">
         <HeaderGap />
@@ -84,7 +74,7 @@ export default function ProductSlug({product}) {
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
               <Image
-                src={product.images[0].src}
+                src={urlFor(product.thumbnail).url()}
                 layout="fill"
                 objectFit="contain"
                 objectPosition="center"
@@ -101,13 +91,17 @@ export default function ProductSlug({product}) {
               <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
                 {product.title}
               </h2>
-              <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
+              {/* <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
                 IDR {product.variants[0].price}
-              </h3>
+              </h3> */}
             </div>
             <div>
               <span className="font-medium hidden md:block">select size</span>
-              <MorinTabs tabData={sizeData} className="md:mt-3" />
+              {/* <MorinTabs
+                tabData={product.listWeight}
+                onChange={(e) => setProductCurrent(e)}
+                className="md:mt-3"
+              /> */}
             </div>
             <div className="flex w-full h-12 md:h-auto">
               <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
@@ -154,16 +148,19 @@ export default function ProductSlug({product}) {
 }
 
 export async function getStaticPaths() {
-  // Fetch all the products
-  const products = await shopifyClient.product.fetchAll()
-  const res = parseShopifyResponse(products)
+  const res = await client.fetch(`
+        *[_type == "productList"] {
+          ...,
+          type->,
+        }
+      `)
 
   const paths = []
 
   res.map((data) => {
     return paths.push({
       params: {
-        slug: data.handle,
+        slug: data.slug.current,
       },
     })
   })
@@ -172,15 +169,39 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // Fetch all the products
-  const shopify_product = await shopifyClient.product.fetchAll()
-  const product = parseShopifyResponse(shopify_product).find(
-    (data) => data.handle === params.slug,
+  const productAPI = await client.fetch(
+    `
+      *[_type == "productList" && slug.current == "${params.slug}"] {
+        ...,
+        type->,
+        decor_en {
+          decor1->,
+          decor2->
+        },
+        decor_id {
+          decor1->,
+          decor2->
+        },
+        recipes[]->,
+        similar {
+          ...,
+          manual[]->
+        }
+      }
+    `,
   )
+  const seoAPI = await client.fetch(`
+  *[_type == "settings"]
+  `)
+  const footerAPI = await client.fetch(`
+  *[_type == "footer"]
+  `)
 
   return {
     props: {
-      product,
+      productAPI,
+      seoAPI,
+      footerAPI,
     },
   }
 }
