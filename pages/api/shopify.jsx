@@ -153,6 +153,7 @@ function buildProductDocument(product) {
       variants: variants?.map((variant, index) => {
         const variantId = extractIdFromGid(variant.id);
         return {
+          _key: String(index),
           id: variantId,
           inStock: !!variant.inventoryManagement
             ? variant.inventoryPolicy === "continue" ||
