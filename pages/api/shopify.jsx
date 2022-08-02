@@ -155,18 +155,8 @@ function buildProductDocument(product) {
         return {
           _key: String(index),
           id: variantId,
-          inStock: !!variant.inventoryManagement
-            ? variant.inventoryPolicy === "continue" ||
-              variant.inventoryQuantity > 0
-            : true,
-          inventoryManagement: variant.inventoryManagement,
-          inventoryPolicy: variant.inventoryPolicy,
           inventoryQuantity: variant.inventoryQuantity || 0,
-          option1: variant?.selectedOptions?.[0]?.value,
-          option2: variant?.selectedOptions?.[1]?.value,
-          option3: variant?.selectedOptions?.[2]?.value,
           price: Number(variant.price || 0),
-          sku: variant.sku,
           title: variant.title,
         };
       }),
