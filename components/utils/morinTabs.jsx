@@ -5,19 +5,19 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
   tabData.map((item, id) => {
     return data.push({
       ...item,
-      id: `tab-${id + 1}`,
+      idTab: `tab-${id + 1}`,
     })
   })
-  const defaultTab = data.find((dats) => dats.defaultWeight === true)
+  const defaultTab = data[0]
 
   const [currentTab, setCurrentTab] = useState(defaultTab?.title)
   const [thisEl, setThisEl] = useState(null)
 
-  const handleTabChange = (val, id) => {
+  const handleTabChange = (val, index, idTab) => {
     // do callback function here
-    onChange(val)
+    onChange(index)
 
-    measureEl(id)
+    measureEl(idTab)
     setCurrentTab(val)
   }
 
@@ -33,12 +33,12 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
     setThisEl(left)
   }
   const resize = () => {
-    measureEl(currentTab.id)
+    measureEl(currentTab.idTab)
     setCurrentTab(currentTab)
   }
 
   useEffect(() => {
-    measureEl(defaultTab?.id)
+    measureEl(defaultTab?.idTab)
     document.querySelector('resize', resize)
   }, [])
 
@@ -54,14 +54,22 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
               type="radio"
               name="desktop-nav"
               className="radio-switch__input sr-only"
-              id={item.id}
+              id={item.idTab}
               value={item.title}
               checked={item.title === currentTab}
-              onChange={(e) => handleTabChange(e.target.value, item.id)}
+              onChange={(e) =>
+                handleTabChange(
+                  e.target.value,
+                  data.indexOf({
+                    id: item.id,
+                  }),
+                  item.idTab,
+                )
+              }
             />
             <label
               className="radio-switch__label relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 cursor-pointer transition-all duration-300 pt-[2px]"
-              htmlFor={item.id}
+              htmlFor={item.idTab}
             >
               {item.title}
             </label>

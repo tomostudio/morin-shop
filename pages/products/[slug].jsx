@@ -28,11 +28,13 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
   const [product] = productAPI
   const [seo] = seoAPI
-  const [productCurrent, setProductCurrent] = useState(
-    product.listWeight[0].title,
+  const [productCurrent, setProductCurrent] = useState(0
   )
-  const [cart, setCart] = useState(1)
-  const appContext = useAppContext();
+  const [cart, setCart] = useState({
+    index: '',
+    qty: 1,
+  })
+  const appContext = useAppContext()
 
   const onChangeCart = (value) => {
     if (parseInt(value) <= 20) {
@@ -43,42 +45,22 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   }
 
   const onCart = () => {
+    {
+      console.log(cart)
+    }
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
-      shopifyClient.product.fetchByHandle(product.slug.current).then((product) => {
-        const lineItemsToAdd = [
-          {
-            variantId: product.variants[0].id,
-            quantity: cart,
-          },
-        ]
-        shopifyClient.checkout
-          .addLineItems(dataCheckout.id, lineItemsToAdd)
-          .then((checkout) => {
-            let jumlah = 0
-            checkout.lineItems.forEach((data) => {
-              jumlah += data.quantity
-            })
-            appContext.setQuantity(jumlah)
-          })
-      })
-    } else {
-      shopifyClient.checkout.create().then((checkout) => {
-        const data = {
-          id: checkout.id
-        }
-        localStorage.setItem('dataCheckout', JSON.stringify(data))
-
-        shopifyClient.product.fetchByHandle(product.slug.current).then((product) => {
-          // Do something with the product
+      shopifyClient.product
+        .fetchByHandle(product.slug.current)
+        .then((product) => {
           const lineItemsToAdd = [
             {
-              variantId: product.variants[0].id,
-              quantity: cart,
+              variantId: product.variants[cart.index].id,
+              quantity: cart.qty,
             },
           ]
           shopifyClient.checkout
-            .addLineItems(checkout.id, lineItemsToAdd)
+            .addLineItems(dataCheckout.id, lineItemsToAdd)
             .then((checkout) => {
               let jumlah = 0
               checkout.lineItems.forEach((data) => {
@@ -87,6 +69,33 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               appContext.setQuantity(jumlah)
             })
         })
+    } else {
+      shopifyClient.checkout.create().then((checkout) => {
+        const data = {
+          id: checkout.id,
+        }
+        localStorage.setItem('dataCheckout', JSON.stringify(data))
+
+        shopifyClient.product
+          .fetchByHandle(product.slug.current)
+          .then((product) => {
+            // Do something with the product
+            const lineItemsToAdd = [
+              {
+                variantId: product.variants[cart.index].id,
+                quantity: cart.qty,
+              },
+            ]
+            shopifyClient.checkout
+              .addLineItems(checkout.id, lineItemsToAdd)
+              .then((checkout) => {
+                let jumlah = 0
+                checkout.lineItems.forEach((data) => {
+                  jumlah += data.quantity
+                })
+                appContext.setQuantity(jumlah)
+              })
+          })
       })
     }
   }
@@ -131,26 +140,45 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             <div>
               <span className="font-medium hidden md:block">select size</span>
               <MorinTabs
-                tabData={product.listWeight}
+                tabData={product.shopifyProduct.variants}
                 onChange={(e) => setProductCurrent(e)}
                 className="md:mt-3"
               />
             </div>
             <div className="flex w-full h-12 md:h-auto">
               <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
-                <FancyLink onClick={() => setCart(cart - 1 < 1 ? 1 : cart - 1)} className="pb-1.5 md:pb-2">
+                <FancyLink
+                  onClick={() =>
+                    setCart({
+                      index: productCurrent,
+                      qty: cart.qty - 1 < 1 ? 1 : cart.qty - 1,
+                    })
+                  }
+                  className="pb-1.5 md:pb-2"
+                >
                   <Minus />
                 </FancyLink>
                 <input
                   className="w-full text-center font-medium text-default md:text-ctitleSmall pointer-events-none"
-                  value={cart}
-                  onChange={(e) => onChangeCart(e.target.value)}
+                  value={cart.qty}
+                  readOnly
                 />
-                <FancyLink onClick={() => setCart(cart + 1)} className="pb-0.5">
+                <FancyLink
+                  onClick={() =>
+                    setCart({
+                      index: productCurrent,
+                      qty: cart.qty + 1,
+                    })
+                  }
+                  className="pb-0.5"
+                >
                   <Plus />
                 </FancyLink>
               </div>
-              <FancyLink onClick={onCart} className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white">
+              <FancyLink
+                onClick={onCart}
+                className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white"
+              >
                 Add to Cart
               </FancyLink>
             </div>

@@ -89,7 +89,7 @@ export default function Header({ home = true, product = null }) {
                   cart
                   className="text-white h-[33px]"
                 >
-                  {appContext.quantity && (
+                  {appContext.quantity > 0 && (
                     <span className="rounded-full bg-red-500 px-2 mr-2.5">
                       {appContext.quantity}
                     </span>
@@ -134,7 +134,7 @@ export default function Header({ home = true, product = null }) {
                   cart
                   className="h-[33px] text-white bg-morin-blue"
                 >
-                  {appContext.quantity && (
+                  {appContext.quantity > 0 && (
                     <span className="rounded-full bg-red-500 px-2 mr-2.5">
                       {appContext.quantity}
                     </span>
