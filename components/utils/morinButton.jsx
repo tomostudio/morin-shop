@@ -49,7 +49,7 @@ const MorinButton = ({
   }
 
   const defaultClass = `flex flex-wrap items-center w-fit min-h-[25px] font-semibold leading-none rounded-full border-2 border-solid md:min-h-[30px] ${
-    border || cart ? 'px-3 lg:px-4' : ''
+    border || cart ? 'px-2 lg:px-3' : ''
   }`
 
   return !destination ? (
@@ -117,7 +117,7 @@ const MorinButton = ({
         {cart ? (
           <>
             <span
-              className={`pt-px md:pt-0.5 ${
+              className={`${
                 !showText ? 'hidden lg:block' : ''
               }`}
             >

@@ -5,6 +5,9 @@ import colors from '@/helpers/preset/colors'
 import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsHome from '../utils/morinTabsHome'
+import { useEffect } from 'react'
+import { shopifyClient } from '@/helpers/shopify'
+import { useAppContext } from 'context/state'
 
 export default function Header({ home = true, product = null }) {
   const tabData = [
@@ -33,6 +36,24 @@ export default function Header({ home = true, product = null }) {
       ariaText: 'Fillings',
     },
   ]
+  const appContext = useAppContext()
+
+  const fetchCheckout = () => {
+    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
+    if (dataCheckout) {
+      shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
+        let jumlah = 0
+        checkout.lineItems.forEach((data) => {
+          jumlah += data.quantity
+        })
+        appContext.setQuantity(jumlah)
+      })
+    }
+  }
+
+  useEffect(() => {
+    fetchCheckout()
+  }, [])
 
   return (
     <>
@@ -49,7 +70,7 @@ export default function Header({ home = true, product = null }) {
                   color={colors.white}
                   arrow="left"
                   border
-                  className="text-white h-[30px]"
+                  className="text-white h-[33px]"
                 >
                   Morinfood
                 </MorinButton>
@@ -66,8 +87,13 @@ export default function Header({ home = true, product = null }) {
                   color={colors.white}
                   border
                   cart
-                  className="text-white h-[30px]"
+                  className="text-white h-[33px]"
                 >
+                  {appContext.quantity && (
+                    <span className="rounded-full bg-red-500 px-2 mr-2.5">
+                      {appContext.quantity}
+                    </span>
+                  )}
                   My Cart
                 </MorinButton>
               </div>
@@ -90,7 +116,7 @@ export default function Header({ home = true, product = null }) {
                   color={colors.morinBlue}
                   arrow="left"
                   border
-                  className="h-[30px] text-morin-blue"
+                  className="h-[33px] text-morin-blue"
                 >
                   Morinfood
                 </MorinButton>
@@ -106,8 +132,13 @@ export default function Header({ home = true, product = null }) {
                   destination="/cart"
                   color={colors.white}
                   cart
-                  className="h-[30px] text-white bg-morin-blue"
+                  className="h-[33px] text-white bg-morin-blue"
                 >
+                  {appContext.quantity && (
+                    <span className="rounded-full bg-red-500 px-2 mr-2.5">
+                      {appContext.quantity}
+                    </span>
+                  )}
                   My Cart
                 </MorinButton>
               </div>

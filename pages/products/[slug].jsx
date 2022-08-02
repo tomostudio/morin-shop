@@ -22,6 +22,7 @@ import client from '@/helpers/sanity/client'
 import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
+import { useAppContext } from 'context/state'
 
 export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
@@ -30,33 +31,65 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   const [productCurrent, setProductCurrent] = useState(
     product.listWeight[0].title,
   )
+  const [cart, setCart] = useState(1)
+  const appContext = useAppContext();
 
-  const sliderData = [
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      imgSrc: '/product/blueberry.png',
-      imgAlt: 'Blueberry Jam',
-    },
-  ]
+  const onChangeCart = (value) => {
+    if (parseInt(value) <= 20) {
+      setCart(value)
+    } else if (!value) {
+      setCart('')
+    }
+  }
+
+  const onCart = () => {
+    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
+    if (dataCheckout) {
+      shopifyClient.product.fetchByHandle(product.slug.current).then((product) => {
+        const lineItemsToAdd = [
+          {
+            variantId: product.variants[0].id,
+            quantity: cart,
+          },
+        ]
+        shopifyClient.checkout
+          .addLineItems(dataCheckout.id, lineItemsToAdd)
+          .then((checkout) => {
+            let jumlah = 0
+            checkout.lineItems.forEach((data) => {
+              jumlah += data.quantity
+            })
+            appContext.setQuantity(jumlah)
+          })
+      })
+    } else {
+      shopifyClient.checkout.create().then((checkout) => {
+        const data = {
+          id: checkout.id
+        }
+        localStorage.setItem('dataCheckout', JSON.stringify(data))
+
+        shopifyClient.product.fetchByHandle(product.slug.current).then((product) => {
+          // Do something with the product
+          const lineItemsToAdd = [
+            {
+              variantId: product.variants[0].id,
+              quantity: cart,
+            },
+          ]
+          shopifyClient.checkout
+            .addLineItems(checkout.id, lineItemsToAdd)
+            .then((checkout) => {
+              let jumlah = 0
+              checkout.lineItems.forEach((data) => {
+                jumlah += data.quantity
+              })
+              appContext.setQuantity(jumlah)
+            })
+        })
+      })
+    }
+  }
 
   return (
     <Layout>
@@ -105,25 +138,25 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             </div>
             <div className="flex w-full h-12 md:h-auto">
               <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
-                <FancyLink className="pb-1.5 md:pb-2">
+                <FancyLink onClick={() => setCart(cart - 1 < 1 ? 1 : cart - 1)} className="pb-1.5 md:pb-2">
                   <Minus />
                 </FancyLink>
-                <span className="font-medium text-default md:text-ctitleSmall">
-                  1
-                </span>
-                <FancyLink className="pb-0.5">
+                <input
+                  className="w-full text-center font-medium text-default md:text-ctitleSmall pointer-events-none"
+                  value={cart}
+                  onChange={(e) => onChangeCart(e.target.value)}
+                />
+                <FancyLink onClick={() => setCart(cart + 1)} className="pb-0.5">
                   <Plus />
                 </FancyLink>
               </div>
-              <FancyLink className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white">
+              <FancyLink onClick={onCart} className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white">
                 Add to Cart
               </FancyLink>
             </div>
             <div className="flex flex-col md:max-w-md">
               <p className="font-medium text-[12px] md:text-default">
-                {
-                  product.description_en
-                }
+                {product.description_en}
               </p>
               <MorinButton
                 color={colors.morinBlue}
