@@ -9,33 +9,37 @@ import { useEffect } from 'react'
 import { shopifyClient } from '@/helpers/shopify'
 import { useAppContext } from 'context/state'
 
-export default function Header({ home = true, product = null }) {
-  const tabData = [
-    {
-      id: 'tab-2',
-      title: 'Spreads',
-      value: 'spreads',
-      ariaText: 'Spreads',
-    },
-    {
-      id: 'tab-3',
-      title: 'Jams',
-      value: 'jams',
-      ariaText: 'Jams',
-    },
-    {
-      id: 'tab-4',
-      title: 'Toppings',
-      value: 'toppings',
-      ariaText: 'Toppings',
-    },
-    {
-      id: 'tab-5',
-      title: 'Fillings',
-      value: 'fillings',
-      ariaText: 'Fillings',
-    },
-  ]
+export default function Header({
+  home = true,
+  tabData = null,
+  loadCategory= null
+}) {
+  // const tabData = [
+  //   {
+  //     id: 'tab-2',
+  //     title: 'Spreads',
+  //     value: 'spreads',
+  //     ariaText: 'Spreads',
+  //   },
+  //   {
+  //     id: 'tab-3',
+  //     title: 'Jams',
+  //     value: 'jams',
+  //     ariaText: 'Jams',
+  //   },
+  //   {
+  //     id: 'tab-4',
+  //     title: 'Toppings',
+  //     value: 'toppings',
+  //     ariaText: 'Toppings',
+  //   },
+  //   {
+  //     id: 'tab-5',
+  //     title: 'Fillings',
+  //     value: 'fillings',
+  //     ariaText: 'Fillings',
+  //   },
+  // ]
   const appContext = useAppContext()
 
   const fetchCheckout = () => {
@@ -57,7 +61,7 @@ export default function Header({ home = true, product = null }) {
 
   return (
     <>
-      {home && product ? (
+      {home ? (
         <nav
           className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}
         >
@@ -97,9 +101,12 @@ export default function Header({ home = true, product = null }) {
                   My Cart
                 </MorinButton>
               </div>
-              {useMediaQuery('(min-width: 1024px)') && (
+              {tabData.length > 0 && useMediaQuery('(min-width: 1024px)') && (
                 <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-                  <MorinTabsHome tabData={tabData} product={product} />
+                  <MorinTabsHome
+                    tabData={tabData}
+                    loadCategory={loadCategory}
+                  />
                 </div>
               )}
             </Container>

@@ -28,8 +28,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
   const [product] = productAPI
   const [seo] = seoAPI
-  const [productCurrent, setProductCurrent] = useState(0
-  )
+  const [productCurrent, setProductCurrent] = useState(0)
   const [cart, setCart] = useState({
     index: '',
     qty: 1,
@@ -212,6 +211,7 @@ export async function getStaticPaths() {
   const paths = []
 
   res.map((data) => {
+    if (!data.slug) return
     return paths.push({
       params: {
         slug: data.slug.current,
