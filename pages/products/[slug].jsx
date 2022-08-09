@@ -34,19 +34,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
     qty: 1,
   })
   const appContext = useAppContext()
-
-  const onChangeCart = (value) => {
-    if (parseInt(value) <= 20) {
-      setCart(value)
-    } else if (!value) {
-      setCart('')
-    }
-  }
+  const [getIndex, setIndex] = useState(0)
 
   const onCart = () => {
-    {
-      console.log(cart)
-    }
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       shopifyClient.product
@@ -114,23 +104,25 @@ export default function ProductSlug({ productAPI, seoAPI }) {
         <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
-              <Image
-                src={urlFor(product.slider_image[0].image).url()}
-                layout="fill"
-                objectFit="contain"
-                objectPosition="center"
-              />
+              {product.slider_image[getIndex]?.image && (
+                <Image
+                  src={urlFor(product.slider_image[getIndex].image).url()}
+                  layout="fill"
+                  objectFit="contain"
+                  objectPosition="center"
+                />
+              )}
             </div>
             {useMediaQuery('(min-width: 768px)') ? (
-              <SliderDesktop data={product.slider_image} />
+              <SliderDesktop data={product.slider_image} setIndex={setIndex} />
             ) : (
-              <SliderMobile data={product.slider_image} />
+              <SliderMobile data={product.slider_image} setIndex={setIndex} />
             )}
           </div>
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
             <div className="w-full flex flex-col">
               <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
-                {product.title}
+                {product.shopifyProduct.title}
               </h2>
               <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
                 IDR {product.shopifyProduct.priceRange.maxVariantPrice}
@@ -211,7 +203,8 @@ export async function getStaticPaths() {
   const paths = []
 
   res.map((data) => {
-    if (!data.slug) return
+    if (!data.slug || data.shopifyProduct.variants[0].title === 'Default Title')
+      return
     return paths.push({
       params: {
         slug: data.slug.current,

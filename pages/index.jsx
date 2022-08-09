@@ -26,27 +26,55 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
   let displayData = 8
   const dataIncrease = 8
   const [showButton, setShowButton] = useState(
-    productAPI.length <= displayData ? false : true,
+    productAPI.filter(
+      (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+    ).length <= displayData
+      ? false
+      : true,
   )
   const [dataProduct, setDataProduct] = useState(
-    productAPI.slice(0, displayData),
+    productAPI
+      .filter(
+        (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+      )
+      .slice(0, displayData),
   )
 
   const loadMore = () => {
     if (ctx.category === 'all') {
       displayData += dataIncrease
-      setDataProduct(productAPI.slice(0, displayData))
+      setDataProduct(
+        productAPI
+          .filter(
+            (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+          )
+          .slice(0, displayData),
+      )
 
-      if (productAPI.length <= displayData) {
+      if (
+        productAPI.filter(
+          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        ).length <= displayData
+      ) {
         setShowButton(false)
       } else {
         setShowButton(true)
       }
     } else {
       displayData += dataIncrease
-      setDataProduct(dataProduct.slice(0, displayData))
+      setDataProduct(
+        dataProduct
+          .filter(
+            (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+          )
+          .slice(0, displayData),
+      )
 
-      if (dataProduct.length <= displayData) {
+      if (
+        dataProduct.filter(
+          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        ).length <= displayData
+      ) {
         setShowButton(false)
       } else {
         setShowButton(true)
@@ -57,20 +85,37 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
   const loadCategory = (category) => {
     displayData = 8
     if (category === 'all') {
-      setDataProduct(productAPI.slice(0, displayData))
+      setDataProduct(
+        productAPI
+          .filter(
+            (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+          )
+          .slice(0, displayData),
+      )
 
-      if (productAPI.length <= displayData) {
+      if (
+        productAPI.filter(
+          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        ).length <= displayData
+      ) {
         setShowButton(false)
       } else {
         setShowButton(true)
       }
     } else {
       let dataCategory = productAPI.filter(
-        (data) => data.type.slug.current === category,
+        (data) =>
+          data.type.slug.current === category &&
+          data.shopifyProduct.variants[0].title !== 'Default Title',
       )
 
-      setDataProduct(dataCategory.slice(0, displayData))
-      console.log(!showButton)
+      setDataProduct(
+        dataCategory
+          .filter(
+            (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+          )
+          .slice(0, displayData),
+      )
 
       if (dataCategory.length <= displayData) {
         setShowButton(false)

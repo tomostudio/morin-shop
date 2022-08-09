@@ -4,8 +4,9 @@ import Image from 'next/image'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import urlFor from '@/helpers/sanity/urlFor'
+import FancyLink from '../utils/fancyLink'
 
-const SliderDesktop = ({ data }) => {
+const SliderDesktop = ({ data, setIndex }) => {
   return (
     <>
       <div className="relative w-full">
@@ -22,7 +23,10 @@ const SliderDesktop = ({ data }) => {
         >
           {data.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-28 h-28 rounded-3xl overflow-hidden">
+              <FancyLink
+                onClick={() => setIndex(index)}
+                className="relative w-28 h-28 rounded-3xl overflow-hidden"
+              >
                 <Image
                   src={urlFor(item.image).url()}
                   alt={item.image.alt}
@@ -30,7 +34,7 @@ const SliderDesktop = ({ data }) => {
                   objectFit="cover"
                   objectPosition="center"
                 />
-              </div>
+              </FancyLink>
             </SwiperSlide>
           ))}
         </Swiper>

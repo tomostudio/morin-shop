@@ -40,7 +40,6 @@ export default function Cart() {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-        console.log(checkout)
         setCart(checkout.lineItems)
       })
     }
