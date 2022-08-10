@@ -60,9 +60,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
               onChange={(e) =>
                 handleTabChange(
                   e.target.value,
-                  data.indexOf({
-                    id: item.id,
-                  }),
+                  id,
                   item.idTab,
                 )
               }

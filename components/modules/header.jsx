@@ -72,6 +72,7 @@ export default function Header({
               <div className="w-full flex justify-between items-center pt-10">
                 <MorinButton
                   color={colors.white}
+                  href="https://morin.vercel.app/"
                   arrow="left"
                   border
                   className="text-white h-[33px]"
@@ -120,6 +121,7 @@ export default function Header({
             <Container className={`h-header relative pointer-events-auto`}>
               <div className="w-full flex justify-between items-center pt-10">
                 <MorinButton
+                  href="https://morin.vercel.app/"
                   color={colors.morinBlue}
                   arrow="left"
                   border

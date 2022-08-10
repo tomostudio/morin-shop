@@ -152,7 +152,7 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
                   data.slug?.current && (
                     <FancyLink
                       destination={`products/${data.slug.current}`}
-                      className="w-full h-80 lg:h-96 bg-white flex flex-col rounded-2xl"
+                      className="w-full h-72 lg:h-96 bg-white flex flex-col rounded-2xl"
                       key={index}
                     >
                       <div className="h-5/6 w-full px-10 pt-4 lg:pt-8">

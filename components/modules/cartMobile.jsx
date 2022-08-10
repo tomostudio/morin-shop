@@ -1,10 +1,23 @@
 import FancyLink from '../utils/fancyLink'
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
+import { useEffect } from 'react'
 
 const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
+  const subTotal = () => {
+    let sub = 0
+    data.forEach((item) => {
+      sub += item.quantity * item.variant.price
+    })
+    return sub
+  }
+
+  useEffect(() => {
+    subTotal()
+  }, [])
+
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full min-h-[60vh]">
       <div className="w-full border-y-2 border-morin-blue">
         {data.map((item, index) => (
           <div
@@ -30,7 +43,10 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
               <div className="flex w-full my-3">
                 <div className="flex justify-between items-center px-4 pt-1 pb-0.5 rounded-full border-2 border-morin-blue w-24">
                   <FancyLink
-                    onClick={() => decQuantity(item.id)}
+                    onClick={() => {
+                      decQuantity(item.id)
+                      subTotal()
+                    }}
                     className="pb-1"
                   >
                     <Minus width={10} />
@@ -40,12 +56,20 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
                     value={item.quantity}
                     readOnly
                   />
-                  <FancyLink onClick={() => increQuantity(item.id)}>
+                  <FancyLink
+                    onClick={() => {
+                      increQuantity(item.id)
+                      subTotal()
+                    }}
+                  >
                     <Plus width={13} height={13} />
                   </FancyLink>
                 </div>
                 <div className="w-fit ml-3 text-center">
-                  <FancyLink className="border-2 border-morin-blue p-1.5 rounded-full">
+                  <FancyLink
+                    onClick={() => removeItem(item.id)}
+                    className="border-2 border-morin-blue p-1.5 rounded-full"
+                  >
                     <Trash />
                   </FancyLink>
                 </div>
@@ -58,10 +82,9 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
         <div className="flex flex-col text-morin-blue">
           <span className="font-semibold text-[12px]">Sub-Total</span>
           <span className="text-[22px]">
-            IDR{' '}
-            {Intl.NumberFormat('en-US').format(
-              data[0].variant.price * data[0].quantity,
-            )}
+            IDR
+            {` `}
+            {Intl.NumberFormat('en-US').format(subTotal())}
             ,-
           </span>
         </div>

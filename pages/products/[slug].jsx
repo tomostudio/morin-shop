@@ -30,7 +30,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   const [seo] = seoAPI
   const [productCurrent, setProductCurrent] = useState(0)
   const [cart, setCart] = useState({
-    index: '',
+    index: 0,
     qty: 1,
   })
   const appContext = useAppContext()
@@ -132,7 +132,13 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               <span className="font-medium hidden md:block">select size</span>
               <MorinTabs
                 tabData={product.shopifyProduct.variants}
-                onChange={(e) => setProductCurrent(e)}
+                onChange={(e) => {
+                  setProductCurrent(e)
+                  setCart({
+                    index: e,
+                    qty: cart.qty,
+                  })
+                }}
                 className="md:mt-3"
               />
             </div>

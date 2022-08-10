@@ -12,28 +12,10 @@ import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import CartDesktop from '@/components/modules/cartDesktop'
 import CartMobile from '@/components/modules/cartMobile'
 import { shopifyClient } from '@/helpers/shopify'
+import { useAppContext } from 'context/state'
 
 export default function Cart() {
-  const cartData = [
-    {
-      title: 'Blueberry Jam',
-      weight: '170gr',
-      imgSrc: '/product/blueberry-product.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      title: 'Blueberry Jam',
-      weight: '170gr',
-      imgSrc: '/product/blueberry-product.png',
-      imgAlt: 'Blueberry Jam',
-    },
-    {
-      title: 'Blueberry Jam',
-      weight: '170gr',
-      imgSrc: '/product/blueberry-product.png',
-      imgAlt: 'Blueberry Jam',
-    },
-  ]
+  const appContext = useAppContext()
   const [dataCart, setCart] = useState(null)
 
   const fetchCart = () => {
@@ -67,7 +49,15 @@ export default function Cart() {
       const lineItemsToUpdate = [
         { id: id, quantity: parseInt(data.quantity - 1) },
       ]
-      shopifyClient.checkout.updateLineItems(dataCheckout.id, lineItemsToUpdate)
+      shopifyClient.checkout
+        .updateLineItems(dataCheckout.id, lineItemsToUpdate)
+        .then((checkout) => {
+          let jumlah = 0
+          checkout.lineItems.forEach((data) => {
+            jumlah += data.quantity
+          })
+          appContext.setQuantity(jumlah)
+        })
     }
   }
 
@@ -80,7 +70,15 @@ export default function Cart() {
     const lineItemsToUpdate = [
       { id: id, quantity: parseInt(data.quantity + 1) },
     ]
-    shopifyClient.checkout.updateLineItems(dataCheckout.id, lineItemsToUpdate)
+    shopifyClient.checkout
+      .updateLineItems(dataCheckout.id, lineItemsToUpdate)
+      .then((checkout) => {
+        let jumlah = 0
+        checkout.lineItems.forEach((data) => {
+          jumlah += data.quantity
+        })
+        appContext.setQuantity(jumlah)
+      })
   }
 
   const onCheckout = () => {
@@ -125,8 +123,7 @@ export default function Cart() {
             My Cart
           </h2>
           {useMediaQuery('(min-width: 1024px)')
-            ? dataCart &&
-              dataCart.length > 0 && (
+            ? dataCart?.length > 0 && (
                 <CartDesktop
                   data={dataCart}
                   decQuantity={decQuantity}
@@ -135,8 +132,7 @@ export default function Cart() {
                   removeItem={removeItem}
                 />
               )
-            : dataCart &&
-              dataCart.length > 0 && (
+            : dataCart?.length > 0 && (
                 <CartMobile
                   data={dataCart}
                   decQuantity={decQuantity}

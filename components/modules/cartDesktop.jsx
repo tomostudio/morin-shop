@@ -1,14 +1,27 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import FancyLink from '@/components/utils/fancyLink'
+import { useEffect, useState } from 'react'
+import { shopifyClient } from '@/helpers/shopify'
 
-const CartDesktop = ({ data, decQuantity, increQuantity, onCheckout, removeItem }) => {
-  Number.prototype.format = function(n, x, s, c) {
-    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
-        num = this.toFixed(Math.max(0, ~~n));
+const CartDesktop = ({
+  data,
+  decQuantity,
+  increQuantity,
+  onCheckout,
+  removeItem,
+}) => {
+  const subTotal = () => {
+    let sub = 0
+    data.forEach((item) => {
+      sub += item.quantity * item.variant.price
+    })
+    return sub
+  }
 
-    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
-};
+  useEffect(() => {
+    subTotal()
+  }, [])
 
   return (
     <>
@@ -46,7 +59,10 @@ const CartDesktop = ({ data, decQuantity, increQuantity, onCheckout, removeItem 
               <td className={`px-8 ${index > 0 ? 'pb-6' : ''}`}>
                 <div className="flex justify-between items-center mx-auto px-4 pt-2 pb-1 rounded-full border-2 border-morin-blue w-28">
                   <FancyLink
-                    onClick={() => decQuantity(item.id)}
+                    onClick={() => {
+                      decQuantity(item.id)
+                      subTotal()
+                    }}
                     className="pb-1"
                   >
                     <Minus width={15} />
@@ -56,18 +72,27 @@ const CartDesktop = ({ data, decQuantity, increQuantity, onCheckout, removeItem 
                     value={item.quantity}
                     readOnly
                   />
-                  <FancyLink onClick={() => increQuantity(item.id)}>
+                  <FancyLink
+                    onClick={() => {
+                      increQuantity(item.id)
+                      subTotal()
+                    }}
+                  >
                     <Plus width={18} height={18} />
                   </FancyLink>
                 </div>
               </td>
               <td className={`text-center w-36 ${index > 0 ? 'pb-6' : ''}`}>
                 <span className="font-medium text-morin-blue">
-                  IDR {Intl.NumberFormat('en-US').format(item.variant.price)},-
+                  IDR {Intl.NumberFormat('en-US').format(item.variant.price)}
+                  ,-
                 </span>
               </td>
               <td className={`w-20 text-center ${index > 0 ? 'pb-6' : ''}`}>
-                <FancyLink onClick={() => removeItem(item.id)} className="border-2 border-morin-blue p-1.5 rounded-full">
+                <FancyLink
+                  onClick={() => removeItem(item.id)}
+                  className="border-2 border-morin-blue p-1.5 rounded-full"
+                >
                   <Trash />
                 </FancyLink>
               </td>
@@ -80,8 +105,10 @@ const CartDesktop = ({ data, decQuantity, increQuantity, onCheckout, removeItem 
             </td>
             <td className="text-center pt-3">
               <span className="font-semibold">
-                IDR{' '}
-                {Intl.NumberFormat('en-US').format(data[0].variant.price * data[0].quantity)},-
+                IDR
+                {` `}
+                {Intl.NumberFormat('en-US').format(subTotal())}
+                ,-
               </span>
             </td>
           </tr>
