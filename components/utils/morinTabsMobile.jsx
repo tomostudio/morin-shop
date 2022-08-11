@@ -62,10 +62,10 @@ const MorinTabsMobile = ({ tabData, onChange = () => {}, className }) => {
               type='radio'
               name='desktop-nav'
               className='radio-switch__input sr-only'
-              id={`tab-${item.id+1}`}
+              id={`tab-${id+1}`}
               value={item.value}
               checked={`tab-${item.id+1}` === currentTab}
-              onChange={() => handleTabChange(`tab-${item.id+1}`)}
+              onChange={() => handleTabChange(`tab-${id+1}`)}
             />
             <label
               className='radio-switch__label relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 cursor-pointer transition-all duration-300 pt-[2px]'
