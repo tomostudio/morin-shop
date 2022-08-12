@@ -195,8 +195,8 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             </div>
           </div>
         </Container>
-        <Footer />
       </div>
+      <Footer className="w-full"/>
     </Layout>
   )
 }

@@ -142,8 +142,8 @@ export default function Cart() {
                 />
               )}
         </Container>
-        <Footer />
       </div>
+      <Footer className="w-full" />
     </Layout>
   )
 }
