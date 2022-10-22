@@ -14,32 +14,6 @@ export default function Header({
   tabData = null,
   loadCategory = null,
 }) {
-  // const tabData = [
-  //   {
-  //     id: 'tab-2',
-  //     title: 'Spreads',
-  //     value: 'spreads',
-  //     ariaText: 'Spreads',
-  //   },
-  //   {
-  //     id: 'tab-3',
-  //     title: 'Jams',
-  //     value: 'jams',
-  //     ariaText: 'Jams',
-  //   },
-  //   {
-  //     id: 'tab-4',
-  //     title: 'Toppings',
-  //     value: 'toppings',
-  //     ariaText: 'Toppings',
-  //   },
-  //   {
-  //     id: 'tab-5',
-  //     title: 'Fillings',
-  //     value: 'fillings',
-  //     ariaText: 'Fillings',
-  //   },
-  // ]
   const appContext = useAppContext()
 
   const fetchCheckout = () => {
@@ -61,104 +35,63 @@ export default function Header({
 
   return (
     <>
-      {home ? (
-        <nav
-          className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all bg-header rounded-b-3xl`}
-        >
-          <header className={`sticky top-0 left-0 right-0 w-full z-2`}>
-            <Container
-              className={`h-[105px] lg:h-header relative pointer-events-auto`}
+      <nav
+        className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all ${
+          home ? 'bg-header' : 'bg-white'
+        } rounded-b-3xl`}
+      >
+        <Container className={`relative h-[105px] lg:h-header`}>
+          <div className="w-full flex justify-around items-center pt-10">
+            <div className="w-full flex justify-start">
+              <MorinButton
+                color={home ? colors.white : colors.morinBlue}
+                destination="https://morin.id"
+                arrow="left"
+                border
+                className={`${
+                  home ? 'text-white' : 'text-morin-blue'
+                } h-[33px]`}
+              >
+                Morinfood
+              </MorinButton>
+            </div>
+            {/* Morin Logo */}
+            <FancyLink
+              destination="/"
+              a11yText="Navigate to the home page"
+              className="relative w-full h-14"
             >
-              <div className="w-full flex justify-around items-center pt-10">
-                <div className="w-full flex justify-start">
-                  <MorinButton
-                    color={colors.white}
-                    destination="https://morin.id"
-                    arrow="left"
-                    border
-                    className="text-white h-[33px]"
-                  >
-                    Morinfood
-                  </MorinButton>
-                </div>
-                {/* Morin Logo */}
-                <FancyLink
-                  destination="/"
-                  a11yText="Navigate to the home page"
-                  className="relative w-full h-14"
-                >
-                  <MorinLogo className="w-full h-full" />
-                </FancyLink>
-                <div className="w-full flex justify-end">
-                  <MorinButton
-                    destination="/cart"
-                    color={colors.white}
-                    border
-                    cart
-                    className="text-white h-[33px]"
-                  >
-                    {appContext.quantity > 0 && (
-                      <span className="rounded-full bg-red-500 px-2 mr-2.5">
-                        {appContext.quantity}
-                      </span>
-                    )}
-                    My Cart
-                  </MorinButton>
-                </div>
+              <MorinLogo className="w-full h-full" />
+            </FancyLink>
+            <div className="w-full flex justify-end">
+              <MorinButton
+                destination="/cart"
+                color={colors.white}
+                border
+                cart
+                className={`text-white ${home ? '' : 'bg-morin-blue'} h-[33px]`}
+              >
+                {appContext.quantity > 0 && (
+                  <span className="rounded-full bg-red-500 px-2 mr-2.5">
+                    {appContext.quantity}
+                  </span>
+                )}
+                My Cart
+              </MorinButton>
+            </div>
+          </div>
+          {home ? (
+            tabData.length > 0 &&
+            useMediaQuery('(min-width: 1024px)') && (
+              <div className="absolute w-full h-[45px] left-0 -bottom-[20px] flex justify-center">
+                <MorinTabsHome tabData={tabData} loadCategory={loadCategory} />
               </div>
-              {tabData.length > 0 && useMediaQuery('(min-width: 1024px)') && (
-                <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
-                  <MorinTabsHome
-                    tabData={tabData}
-                    loadCategory={loadCategory}
-                  />
-                </div>
-              )}
-            </Container>
-          </header>
-        </nav>
-      ) : (
-        <nav
-          className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all`}
-        >
-          <header className={`sticky top-0 left-0 right-0 w-full z-2`}>
-            <Container className={`h-header relative pointer-events-auto`}>
-              <div className="w-full flex justify-between items-center pt-10">
-                <MorinButton
-                  destination="/"
-                  color={colors.morinBlue}
-                  arrow="left"
-                  border
-                  className="h-[33px] text-morin-blue"
-                >
-                  Morinfood
-                </MorinButton>
-                {/* Morin Logo */}
-                <FancyLink
-                  destination="/"
-                  a11yText="Navigate to the home page"
-                  className="relative w-[105px] lg:w-[142px]"
-                >
-                  <MorinLogo className="w-full h-full" />
-                </FancyLink>
-                <MorinButton
-                  destination="/cart"
-                  color={colors.white}
-                  cart
-                  className="h-[33px] text-white bg-morin-blue"
-                >
-                  {appContext.quantity > 0 && (
-                    <span className="rounded-full bg-red-500 px-2 mr-2.5">
-                      {appContext.quantity}
-                    </span>
-                  )}
-                  My Cart
-                </MorinButton>
-              </div>
-            </Container>
-          </header>
-        </nav>
-      )}
+            )
+          ) : (
+            <></>
+          )}
+        </Container>
+      </nav>
       <FancyLink className="fixed z-10 bottom-0 right-0 w-[66px] h-fit m-6">
         <WaButton />
       </FancyLink>
