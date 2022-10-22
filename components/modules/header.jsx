@@ -36,9 +36,9 @@ export default function Header({
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 w-full z-50 flex flex-col no-select-all ${
-          home ? 'bg-header' : 'bg-white'
-        } rounded-b-3xl`}
+        className={`${
+          home ? 'bg-header fixed' : 'bg-white'
+        } top-0 left-0 right-0 w-full z-50 flex flex-col rounded-b-3xl`}
       >
         <Container className={`relative h-[105px] lg:h-header`}>
           <div className="w-full flex justify-around items-center pt-10">
