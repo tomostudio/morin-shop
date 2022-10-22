@@ -12,8 +12,6 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <DefaultSeo {...SEO} />
-
       <Head>
         {/* FAVICON  */}
         <link
