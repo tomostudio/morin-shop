@@ -92,7 +92,7 @@ export default function Header({
           )}
         </Container>
       </nav>
-      <FancyLink className="fixed z-10 bottom-0 right-0 w-[66px] h-fit m-6">
+      <FancyLink className="fixed z-10 bottom-0 right-0 w-[66px] h-fit mr-8 mb-8">
         <WaButton />
       </FancyLink>
     </>

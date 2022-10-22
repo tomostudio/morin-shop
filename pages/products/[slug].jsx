@@ -90,17 +90,16 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   }
 
   return (
-    <Layout>
-      <SEO
-        title={product.shopifyProduct.title}
-        pagelink={router.pathname}
-        inputSEO={product.seo_en}
-        defaultSEO={typeof seo !== 'undefined' && seo.seo_en}
-        webTitle={typeof seo !== 'undefined' && seo.webTitle}
-      />
+    <>
       <Header home={false} />
-      <div className="bg-white w-full">
-        <HeaderGap />
+      <Layout>
+        <SEO
+          title={product.shopifyProduct.title}
+          pagelink={router.pathname}
+          inputSEO={product.seo_en}
+          defaultSEO={typeof seo !== 'undefined' && seo.seo_en}
+          webTitle={typeof seo !== 'undefined' && seo.webTitle}
+        />
         <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
@@ -125,7 +124,8 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 {product.shopifyProduct.title}
               </h2>
               <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
-                IDR {product.shopifyProduct.priceRange.maxVariantPrice}
+                IDR{' '}
+                {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString('id')},-
               </h3>
             </div>
             <div>
@@ -184,6 +184,8 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 {product.description_en}
               </p>
               <MorinButton
+                destination={`https://morin.id/products/${product.type.slug.current}/${product.slug.current}`}
+                targetBlank
                 color={colors.morinBlue}
                 border
                 showText
@@ -195,9 +197,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             </div>
           </div>
         </Container>
-      </div>
-      <Footer className="w-full"/>
-    </Layout>
+        <Footer />
+      </Layout>
+    </>
   )
 }
 

@@ -12,6 +12,7 @@ const Footer = ({ className }) => {
       >
         {/* LEFT */}
         <MorinButton
+          destination="https://morin.id"
           color={colors.white}
           arrow="left"
           showText

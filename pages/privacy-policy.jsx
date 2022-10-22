@@ -11,7 +11,6 @@ export default function PrivacyPolicy() {
       <NextSeo title="Privacy Policy" />
       <Header home={false} />
       <div className="bg-white w-full">
-        <HeaderGap />
         <Container className="flex flex-col text-morin-blue my-10">
           <h2 className="text-mtitle lg:text-h2 leading-none font-nutmeg text-center">
             Privacy Policy

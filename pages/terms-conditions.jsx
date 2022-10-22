@@ -11,7 +11,6 @@ export default function TermsConditions() {
       <NextSeo title="Terms & Conditions" />
       <Header home={false} />
       <div className="bg-white w-full">
-        <HeaderGap />
         <Container className="flex flex-col text-morin-blue my-10">
           <h2 className="text-mtitle lg:text-h2 leading-none font-nutmeg text-center">
             Terms & Conditions

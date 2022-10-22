@@ -22,7 +22,7 @@ export default function Cart() {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-        if(checkout?.lineItems)  {
+        if (checkout?.lineItems) {
           setCart(checkout.lineItems)
         }
       })
@@ -110,42 +110,43 @@ export default function Cart() {
   }, [])
 
   return (
-    <Layout>
-      <NextSeo title="Cart" />
+    <>
       <Header home={false} />
-      <div className="bg-white w-full">
-        <HeaderGap />
-        <Container
-          className={`flex flex-col items-center w-full h-full mb-24 ${
-            !dataCart && 'h-[30vh]'
-          }
+      <Layout>
+        <NextSeo title="Cart" />
+        <div className="bg-white w-full">
+          <Container
+            className={`flex flex-col items-center w-full h-full mb-24 ${
+              !dataCart && 'h-[30vh]'
+            }
               ${dataCart && dataCart.length < 1 ? 'h-[30vh]' : ''}`}
-        >
-          <h2 className="text-ctitle lg:text-h2 text-morin-blue font-nutmeg">
-            My Cart
-          </h2>
-          {useMediaQuery('(min-width: 1024px)')
-            ? dataCart?.length > 0 && (
-                <CartDesktop
-                  data={dataCart}
-                  decQuantity={decQuantity}
-                  increQuantity={increQuantity}
-                  onCheckout={onCheckout}
-                  removeItem={removeItem}
-                />
-              )
-            : dataCart?.length > 0 && (
-                <CartMobile
-                  data={dataCart}
-                  decQuantity={decQuantity}
-                  increQuantity={increQuantity}
-                  onCheckout={onCheckout}
-                  removeItem={removeItem}
-                />
-              )}
-        </Container>
-      </div>
-      <Footer className="w-full" />
-    </Layout>
+          >
+            <h2 className="text-ctitle lg:text-h2 text-morin-blue font-nutmeg">
+              My Cart
+            </h2>
+            {useMediaQuery('(min-width: 1024px)')
+              ? dataCart?.length > 0 && (
+                  <CartDesktop
+                    data={dataCart}
+                    decQuantity={decQuantity}
+                    increQuantity={increQuantity}
+                    onCheckout={onCheckout}
+                    removeItem={removeItem}
+                  />
+                )
+              : dataCart?.length > 0 && (
+                  <CartMobile
+                    data={dataCart}
+                    decQuantity={decQuantity}
+                    increQuantity={increQuantity}
+                    onCheckout={onCheckout}
+                    removeItem={removeItem}
+                  />
+                )}
+          </Container>
+        </div>
+        <Footer/>
+      </Layout>
+    </>
   )
 }

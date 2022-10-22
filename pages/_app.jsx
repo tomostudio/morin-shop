@@ -52,7 +52,7 @@ export default function App({ Component, pageProps }) {
             <button
               className="py-1 px-2 text-lg bg-slate-400 bg-opacity-50 shadow-sm pointer-events-auto"
               onClick={() => {
-                var allBorder = document.querySelectorAll('main *')
+                var allBorder = document.querySelectorAll('body *')
                 for (let i = 0; i < allBorder.length; i++) {
                   if (allBorder[i].classList.contains('all-border')) {
                     allBorder[i].classList.remove('all-border')
