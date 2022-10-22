@@ -2,27 +2,29 @@ import Image from 'next/image'
 import React from 'react'
 import FancyLink from '../utils/fancyLink'
 
-const ProductCard = ({ title, imgSrc, imgAlt, link }) => {
+const ProductCard = ({ title, link, imgSrc, imgPlaceholder, imgAlt }) => {
   return (
     <FancyLink
       destination={link}
-      className="w-full h-full bg-white rounded-3xl overflow-hidden"
+      className="w-full h-full bg-white rounded-2xl overflow-hidden"
     >
-      <div className="relative w-full bg-white">
-        <div className="relative flex justify-center py-8 px-9 pb-0 -mt-5 translate-y-5 z-1 md:p-11 md:pb-0 md:-mt-7 md:translate-y-7 lg:pt-12 lg:px-20 lg:-mt-5 lg:translate-y-5">
+      <div
+        className={`relative w-full px-5 pt-10 md:px-10 md:pt-14 lg:px-20 lg:pt-20`}
+      >
+        <div className={`relative aspect-[4/5] z-2 flex justify-center`}>
           <Image
             src={imgSrc}
-            blurDataURL={imgSrc}
+            blurDataURL={imgPlaceholder}
             placeholder="blur"
             alt={imgAlt}
-            width={225}
-            height={410}
+            layout={'fill'}
+            objectFit={'contain'}
           />
         </div>
       </div>
 
-      <div className="relative text-morin-blue text-center px-4 lg:px-20 pt-8 pb-4 lg:pt-10 z-1 md:pt-12 lg:pb-5 xl:pb-8">
-        <div className="font-nutmeg text-[12px] lg:text-default md:text-[18px]">
+      <div className="relative text-morin-blue text-center px-3 pt-10 pb-8 z-2 md:pt-10 lg:px-4 lg:pb-8 xl:px-5 xl:pb-8">
+        <div className={`font-nutmeg leading-none text-ctitleSmall`}>
           {title}
         </div>
       </div>

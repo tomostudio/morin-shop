@@ -4,9 +4,9 @@ import Image from 'next/image'
 import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 
-const Footer = ({ padding = true, className }) => {
+const Footer = ({ className }) => {
   return (
-    <footer className={`${padding ? 'px-4 lg:px-8' : 'p-0'} ${className}`}>
+    <footer className={`w-full px-4 lg:px-8 max-w-screen-2xl ${className}`}>
       <Container
         className={`relative w-full h-auto flex flex-col lg:flex-row bg-morin-blue text-white rounded-t-3xl justify-between px-5 lg:px-10 py-7 lg:py-[60px] ${className}`}
       >

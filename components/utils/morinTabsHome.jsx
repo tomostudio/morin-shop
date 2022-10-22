@@ -124,7 +124,6 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
       </FancyLink>
       {tabData?.map((item, id) => (
         <FancyLink
-          a11yText={item.ariaText}
           key={`tab-${id+1}`}
           className=""
           onClick={(e) => navMouseClick(e, item.slug.current)}
@@ -132,7 +131,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
           onMouseLeave={navMouseLeave}
           data-id={id + 1}
         >
-          {item.title_en}
+          {item.title.en}
         </FancyLink>
       ))}
       <div

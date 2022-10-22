@@ -47,7 +47,7 @@ export default function Header({
     if (dataCheckout) {
       shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
         let jumlah = 0
-        checkout.lineItems.forEach((data) => {
+        checkout?.lineItems.forEach((data) => {
           jumlah += data.quantity
         })
         appContext.setQuantity(jumlah)
@@ -72,7 +72,7 @@ export default function Header({
               <div className="w-full flex justify-between items-center pt-10">
                 <MorinButton
                   color={colors.white}
-                  href="https://morin.vercel.app/"
+                  destination="https://morin.id"
                   arrow="left"
                   border
                   className="text-white h-[33px]"
@@ -121,7 +121,7 @@ export default function Header({
             <Container className={`h-header relative pointer-events-auto`}>
               <div className="w-full flex justify-between items-center pt-10">
                 <MorinButton
-                  href="https://morin.vercel.app/"
+                  destination="/"
                   color={colors.morinBlue}
                   arrow="left"
                   border
