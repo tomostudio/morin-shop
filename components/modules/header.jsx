@@ -12,7 +12,7 @@ import { useAppContext } from 'context/state'
 export default function Header({
   home = true,
   tabData = null,
-  loadCategory= null
+  loadCategory = null,
 }) {
   // const tabData = [
   //   {
@@ -69,38 +69,42 @@ export default function Header({
             <Container
               className={`h-[105px] lg:h-header relative pointer-events-auto`}
             >
-              <div className="w-full flex justify-between items-center pt-10">
-                <MorinButton
-                  color={colors.white}
-                  destination="https://morin.id"
-                  arrow="left"
-                  border
-                  className="text-white h-[33px]"
-                >
-                  Morinfood
-                </MorinButton>
+              <div className="w-full flex justify-around items-center pt-10">
+                <div className="w-full flex justify-start">
+                  <MorinButton
+                    color={colors.white}
+                    destination="https://morin.id"
+                    arrow="left"
+                    border
+                    className="text-white h-[33px]"
+                  >
+                    Morinfood
+                  </MorinButton>
+                </div>
                 {/* Morin Logo */}
                 <FancyLink
                   destination="/"
                   a11yText="Navigate to the home page"
-                  className="relative w-[105px] lg:w-[142px]"
+                  className="relative w-full h-14"
                 >
                   <MorinLogo className="w-full h-full" />
                 </FancyLink>
-                <MorinButton
-                  destination="/cart"
-                  color={colors.white}
-                  border
-                  cart
-                  className="text-white h-[33px]"
-                >
-                  {appContext.quantity > 0 && (
-                    <span className="rounded-full bg-red-500 px-2 mr-2.5">
-                      {appContext.quantity}
-                    </span>
-                  )}
-                  My Cart
-                </MorinButton>
+                <div className="w-full flex justify-end">
+                  <MorinButton
+                    destination="/cart"
+                    color={colors.white}
+                    border
+                    cart
+                    className="text-white h-[33px]"
+                  >
+                    {appContext.quantity > 0 && (
+                      <span className="rounded-full bg-red-500 px-2 mr-2.5">
+                        {appContext.quantity}
+                      </span>
+                    )}
+                    My Cart
+                  </MorinButton>
+                </div>
               </div>
               {tabData.length > 0 && useMediaQuery('(min-width: 1024px)') && (
                 <div className="absolute w-full h-[45px] -bottom-[20px] flex justify-center items-center">
