@@ -66,7 +66,7 @@ export default function Header({
             <div className="w-full flex justify-end">
               <MorinButton
                 destination="/cart"
-                color={colors.white}
+                color={home ? colors.white : colors.morinBlue}
                 border
                 cart
                 className={`text-white ${home ? '' : 'bg-morin-blue'} h-[33px]`}
