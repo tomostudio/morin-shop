@@ -66,7 +66,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
               }
             />
             <label
-              className="radio-switch__label relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 cursor-pointer transition-all duration-300 pt-[2px]"
+              className="radio-switch__label relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 font-medium cursor-pointer transition-all duration-300 pt-[2px]"
               htmlFor={item.idTab}
             >
               {item.title}

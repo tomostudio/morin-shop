@@ -107,12 +107,12 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
 
   return (
     <nav
-      className="header-nav w-full lg:w-fit pointer-events-auto relative rounded-full font-medium bg-white py-1.5 px-2 shadow-softer flex justify-around lg:justify-start"
+      className="header-nav w-full lg:w-fit pointer-events-auto relative rounded-full bg-white py-1.5 px-2 shadow-softer flex justify-around lg:justify-start"
       onSubmit={(e) => e.preventDefault()}
       ref={navRef}
     >
       <FancyLink
-        className="focus"
+        className="focus font-medium"
         onClick={(e) => navMouseClick(e, 'all')}
         onMouseEnter={navMouseEnter}
         onMouseLeave={navMouseLeave}
@@ -125,7 +125,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
       {tabData?.map((item, id) => (
         <FancyLink
           key={`tab-${id+1}`}
-          className=""
+          className="font-medium"
           onClick={(e) => navMouseClick(e, item.slug.current)}
           onMouseEnter={navMouseEnter}
           onMouseLeave={navMouseLeave}

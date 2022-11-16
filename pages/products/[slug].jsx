@@ -23,6 +23,7 @@ import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
 import { useAppContext } from 'context/state'
+import MorinButtonGradient from '@/components/utils/morinButtonGradient'
 
 export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
@@ -125,7 +126,10 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               </h2>
               <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
                 IDR{' '}
-                {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString('id')},-
+                {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString(
+                  'id',
+                )}
+                ,-
               </h3>
             </div>
             <div>
@@ -143,7 +147,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               />
             </div>
             <div className="flex w-full h-12 md:h-auto">
-              <div className="flex justify-between items-center mr-4 md:mr-6 px-5 pt-1 md:pt-3 md:pb-2 h-full md:h-auto rounded-full border-2 border-morin-blue w-32">
+              <div className="flex justify-between items-center mr-4 md:mr-6 px-5 py-2 h-full rounded-full border-2 border-morin-blue w-32">
                 <FancyLink
                   onClick={() =>
                     setCart({
@@ -151,7 +155,6 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                       qty: cart.qty - 1 < 1 ? 1 : cart.qty - 1,
                     })
                   }
-                  className="pb-1.5 md:pb-2"
                 >
                   <Minus />
                 </FancyLink>
@@ -167,17 +170,13 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                       qty: cart.qty + 1,
                     })
                   }
-                  className="pb-0.5"
                 >
                   <Plus />
                 </FancyLink>
               </div>
-              <FancyLink
-                onClick={onCart}
-                className="w-44 h-full md:h-auto md:w-40 lg:w-52 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-default md:text-[20px] lg:text-[26px] text-white"
-              >
+              <MorinButtonGradient onClick={onCart}>
                 Add to Cart
-              </FancyLink>
+              </MorinButtonGradient>
             </div>
             <div className="flex flex-col md:max-w-md">
               <p className="font-medium text-[12px] md:text-default">

@@ -72,7 +72,7 @@ module.exports = {
         content: '46rem',
       },
       height: {
-        header: '150px',
+        header: '173px',
       },
       colors: {
         'morin-blue': '#175BA7',

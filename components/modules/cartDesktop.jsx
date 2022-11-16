@@ -3,6 +3,7 @@ import { Minus, Plus, Trash } from '@/components/utils/svg'
 import FancyLink from '@/components/utils/fancyLink'
 import { useEffect, useState } from 'react'
 import { shopifyClient } from '@/helpers/shopify'
+import MorinButtonGradient from '../utils/morinButtonGradient'
 
 const CartDesktop = ({
   data,
@@ -25,19 +26,25 @@ const CartDesktop = ({
 
   return (
     <>
-      <table className="table-auto text-morin-blue max-w-3xl w-full mt-12">
+      <table className="table-auto text-morin-blue max-w-5xl w-full mt-3">
         <thead className="border-b-2 border-morin-blue">
           <tr>
-            <th className="font-medium pb-2">Product</th>
-            <th className="font-medium pb-2">Quantity</th>
-            <th className="font-medium pb-2">Price</th>
+            <th className='text-left pl-[calc(128px+3.5rem)]'>
+              <span className="font-medium">Product</span>
+            </th>
+            <th>
+              <span className="font-medium">Quantity</span>
+            </th>
+            <th>
+              <span className="font-medium">Price</span>
+            </th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
               <td
-                className={`flex items-center pl-4 ${
+                className={`flex items-center pl-4 space-x-10 ${
                   index > 0 ? 'pb-6' : 'py-6'
                 } w-full h-full`}
               >
@@ -49,7 +56,7 @@ const CartDesktop = ({
                     objectFit="contain"
                   />
                 </div>
-                <div className="flex flex-col w-full h-full ml-6">
+                <div className="flex flex-col h-full">
                   <span className="text-ctitleSmall font-nutmeg">
                     {item.title}
                   </span>
@@ -57,13 +64,12 @@ const CartDesktop = ({
                 </div>
               </td>
               <td className={`px-8 ${index > 0 ? 'pb-6' : ''}`}>
-                <div className="flex justify-between items-center mx-auto px-4 pt-2 pb-1 rounded-full border-2 border-morin-blue w-28">
+                <div className="flex justify-between items-center mx-auto px-4 py-2 rounded-full border-2 border-morin-blue w-28">
                   <FancyLink
                     onClick={() => {
                       decQuantity(item.id)
                       subTotal()
                     }}
-                    className="pb-1"
                   >
                     <Minus width={15} />
                   </FancyLink>
@@ -114,12 +120,9 @@ const CartDesktop = ({
           </tr>
         </tbody>
       </table>
-      <FancyLink
-        onClick={onCheckout}
-        className="w-52 p-2 mt-36 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-[26px] text-white"
-      >
+      <MorinButtonGradient className="mt-24" onClick={onCheckout}>
         Checkout
-      </FancyLink>
+      </MorinButtonGradient>
     </>
   )
 }

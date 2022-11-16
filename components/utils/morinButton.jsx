@@ -50,7 +50,7 @@ const MorinButton = ({
   }
 
   const defaultClass = `flex flex-wrap items-center w-fit min-h-[25px] font-semibold leading-none rounded-full border-2 border-solid md:min-h-[30px] ${
-    border || cart ? 'px-2 lg:px-3' : ''
+    cart ? 'px-1.5' : border ? 'px-2 lg:px-3' : ''
   }`
 
   return !destination ? (

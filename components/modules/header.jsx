@@ -41,7 +41,7 @@ export default function Header({
         } top-0 left-0 right-0 w-full z-50 flex flex-col rounded-b-3xl`}
       >
         <Container className={`relative h-[105px] lg:h-header`}>
-          <div className="w-full flex justify-around items-center pt-10">
+          <div className="w-full flex justify-around items-center pt-8">
             <div className="w-full flex justify-start">
               <MorinButton
                 color={home ? colors.white : colors.morinBlue}
@@ -59,9 +59,9 @@ export default function Header({
             <FancyLink
               destination="/"
               a11yText="Navigate to the home page"
-              className="relative w-full h-14"
+              className="relative w-full"
             >
-              <MorinLogo className="w-full h-full" />
+              <MorinLogo className="w-full h-[76px]" />
             </FancyLink>
             <div className="w-full flex justify-end">
               <MorinButton

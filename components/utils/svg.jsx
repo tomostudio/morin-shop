@@ -513,64 +513,18 @@ const Minus = ({ color = '#fff', width = 18, height = 2, ...options }) => (
 
 const Plus = ({ color = '#fff', width = 26, height = 26, ...options }) => (
   <svg
-    width={width}
-    height={height}
-    viewBox="0 0 26 26"
+    width={18}
+    height={18}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...options}
   >
-    <g filter="url(#filter0_d_2442_1060)">
-      <path
-        d="M13 1.5V16.5"
-        stroke="#175BA7"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M20.5 9L5.5 9"
-        stroke="#175BA7"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </g>
-    <defs>
-      <filter
-        id="filter0_d_2442_1060"
-        x="0.5"
-        y="0.5"
-        width="25"
-        height="25"
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset dy="4" />
-        <feGaussianBlur stdDeviation="2" />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_2442_1060"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_dropShadow_2442_1060"
-          result="shape"
-        />
-      </filter>
-    </defs>
+    <path
+      d="M9 1.5v15M16.5 9h-15"
+      stroke="#175BA7"
+      strokeWidth={2}
+      strokeLinecap="round"
+    />
   </svg>
 )
 
