@@ -69,7 +69,7 @@ export default function Header({
                 color={home ? colors.white : colors.morinBlue}
                 border
                 cart
-                className={`text-white ${home ? '' : 'bg-morin-blue'} h-[33px]`}
+                className={`text-white ${home ? '' : 'bg-morin-blue'} ${appContext.quantity > 0 ? 'pl-1.5 pr-3' : 'px-3'} h-[33px]`}
               >
                 {appContext.quantity > 0 && (
                   <span className="rounded-full bg-red-500 px-2 mr-2.5">
