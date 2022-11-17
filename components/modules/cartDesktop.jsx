@@ -48,20 +48,20 @@ const CartDesktop = ({
                   index > 0 ? 'pb-6' : 'py-6'
                 } w-full h-full`}
               >
-                <div className="relative w-[128px] h-[128px]">
+                <FancyLink destination="" className="relative w-[128px] h-[128px]">
                   <Image
                     src={item.variant.image.src}
                     alt={item.variant.image.altText}
                     layout="fill"
                     objectFit="contain"
                   />
-                </div>
-                <div className="flex flex-col h-full">
+                </FancyLink>
+                <FancyLink destination="" className="flex flex-col h-full">
                   <span className="text-ctitleSmall font-nutmeg">
                     {item.title}
                   </span>
                   <span className="font-medium mt-1">{item.variant.title}</span>
-                </div>
+                </FancyLink>
               </td>
               <td className={`px-8 ${index > 0 ? 'pb-6' : ''}`}>
                 <div className="flex justify-between items-center mx-auto px-4 py-2 rounded-full border-2 border-morin-blue w-28">

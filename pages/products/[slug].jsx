@@ -196,7 +196,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 border
                 showText
                 arrow="right"
-                className="mt-5 md:mt-8 h-[30px]"
+                className="mt-5 md:mt-8 h-[30px] inhover"
               >
                 View Products Details
               </MorinButton>
