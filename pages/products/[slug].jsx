@@ -114,9 +114,17 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               )}
             </div>
             {useMediaQuery('(min-width: 768px)') ? (
-              <SliderDesktop data={product.slider_image} setIndex={setIndex} />
+              <SliderDesktop
+                data={product.slider_image}
+                getIndex={getIndex}
+                setIndex={setIndex}
+              />
             ) : (
-              <SliderMobile data={product.slider_image} setIndex={setIndex} />
+              <SliderMobile
+                data={product.slider_image}
+                getIndex={getIndex}
+                setIndex={setIndex}
+              />
             )}
           </div>
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">

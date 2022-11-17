@@ -142,7 +142,7 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
             </div>
           )}
           <div
-            className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0 mb-14`}
+            className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0 mb-16`}
           >
             {dataProduct.map(
               (data, index) =>

@@ -24,6 +24,7 @@ export default function Header({
         checkout?.lineItems.forEach((data) => {
           jumlah += data.quantity
         })
+        console.log(checkout)
         appContext.setQuantity(jumlah)
       })
     }
