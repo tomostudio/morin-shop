@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import FancyLink from '@/components/utils/fancyLink'
-import { NextSeo } from 'next-seo'
 import Image from 'next/image'
-import HeaderGap from '@/components/modules/headerGap'
 import { Minus, Plus } from '@/components/utils/svg'
 import colors from '@/helpers/preset/colors'
 import MorinButton from '@/components/utils/morinButton'
 import Header from '@/components/modules/header'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper'
 import 'swiper/css/pagination'
 import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import SliderDesktop from '@/components/modules/sliderDesktop'
 import SliderMobile from '@/components/modules/sliderMobile'
-import { parseShopifyResponse, shopifyClient } from '@/helpers/shopify'
+import { shopifyClient } from '@/helpers/shopify'
 import client from '@/helpers/sanity/client'
 import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
@@ -36,8 +32,10 @@ export default function ProductSlug({ productAPI, seoAPI }) {
   })
   const appContext = useAppContext()
   const [getIndex, setIndex] = useState(0)
+  const [titleCart, setTitleCart] = useState('Add to Cart')
 
   const onCart = () => {
+    setTitleCart('Adding..')
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       shopifyClient.product
@@ -57,6 +55,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 jumlah += data.quantity
               })
               appContext.setQuantity(jumlah)
+              setTitleCart('Add to Cart')
             })
         })
     } else {
@@ -84,6 +83,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   jumlah += data.quantity
                 })
                 appContext.setQuantity(jumlah)
+                setTitleCart('Add to Cart')
               })
           })
       })
@@ -174,8 +174,15 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   <Plus />
                 </FancyLink>
               </div>
-              <MorinButtonGradient onClick={onCart}>
-                Add to Cart
+              <MorinButtonGradient
+                onClick={onCart}
+                className={
+                  titleCart === 'Add to Cart'
+                    ? 'pointer-events-auto'
+                    : '!pointer-events-none'
+                }
+              >
+                {titleCart}
               </MorinButtonGradient>
             </div>
             <div className="flex flex-col md:max-w-md">
