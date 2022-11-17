@@ -8,7 +8,6 @@ import axios from 'axios'
 
 export default function Confirmation() {
   const handleSubmit = (e) => {
-    e.preventDefault()
     const { order_id, nama_pengirim, nama_bank, nominal } = e.target
     axios
       .post('/api/sheet', {
@@ -29,7 +28,7 @@ export default function Confirmation() {
             Confirmation
           </h2>
           <div className="w-96 mt-3 mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form method="post" onSubmit={handleSubmit} className="space-y-4">
               <div className="relative w-full">
                 <label>Order ID</label>
                 <input
