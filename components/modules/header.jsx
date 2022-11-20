@@ -20,12 +20,15 @@ export default function Header({
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-        let jumlah = 0
-        checkout?.lineItems.forEach((data) => {
-          jumlah += data.quantity
-        })
-        console.log(checkout)
-        appContext.setQuantity(jumlah)
+        if(checkout?.completedAt) {
+          localStorage.removeItem('dataCheckout');
+        }else {
+          let jumlah = 0
+          checkout?.lineItems.forEach((data) => {
+            jumlah += data.quantity
+          })
+          appContext.setQuantity(jumlah)
+        }
       })
     }
   }
