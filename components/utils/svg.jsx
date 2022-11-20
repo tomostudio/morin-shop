@@ -528,7 +528,7 @@ const Plus = ({ color = '#fff', width = 26, height = 26, ...options }) => (
   </svg>
 )
 
-const Arrow = ({ color = '#fff', stroke = 2, ...options }) => (
+const ArrowRight = ({ color = '#fff', stroke = 2, ...options }) => (
   <svg
     width="19"
     height="13"
@@ -857,7 +857,7 @@ export {
   SunRay,
   Minus,
   Plus,
-  Arrow,
+  ArrowRight,
   ArrowLeft,
   ArrowLarge,
   HeartSmall,

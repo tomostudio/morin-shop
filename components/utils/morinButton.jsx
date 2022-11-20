@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Arrow, ArrowLeft, Cart } from './svg'
+import { Arrow, ArrowLeft, ArrowRight, Cart } from './svg'
 import colors from '@/helpers/preset/colors'
 
 const MorinButton = ({
@@ -41,7 +41,7 @@ const MorinButton = ({
         ) : arrow === 'left' ? (
           <ArrowLeft color={color} />
         ) : arrow === 'right' ? (
-          <Arrow color={color} />
+          <ArrowRight color={color} />
         ) : (
           <></>
         )}
