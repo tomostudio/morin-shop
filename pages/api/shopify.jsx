@@ -38,8 +38,6 @@ export default async function handler(req, res) {
 
   try {
     const transaction = sanityClient.transaction()
-    console.log(transaction)
-    console.log(body.products)
     switch (body.action) {
       case 'create':
       case 'update':

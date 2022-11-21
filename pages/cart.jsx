@@ -7,62 +7,53 @@ import Header from '@/components/modules/header'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import CartDesktop from '@/components/modules/cartDesktop'
 import CartMobile from '@/components/modules/cartMobile'
-import { fetchCheckout, removeItemCheckout, updateItemCheckout } from '@/helpers/shopify'
+import {
+  fetchCheckout,
+  removeItemCheckout,
+  updateItemCheckout,
+} from '@/helpers/shopify'
 import { useAppContext } from 'context/state'
 
 export default function Cart() {
   const appContext = useAppContext()
   const [dataCart, setCart] = useState(null)
 
-  const updateItem = (id, itemAttributes) => {
-    if (!dataCart) return
-    var index = dataCart.findIndex((x) => x.id === id)
-    if (index === -1) {
-      // handle error
-    } else {
-      setCart([
-        ...dataCart.slice(0, index),
-        Object.assign({}, dataCart[index], itemAttributes),
-        ...dataCart.slice(index + 1),
-      ])
-    }
-  }
-
   const decQuantity = (id) => {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     const data = dataCart.find((el) => el.id === id)
-    if (data.quantity > 1) {
-      updateItem(id, { quantity: data.quantity - 1 })
 
-      const lineItemsToUpdate = [
-        { id: id, quantity: parseInt(data.quantity - 1) },
-      ]
-      updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then(
-        (checkout) => {
-          let jumlah = 0
-          checkout.lineItems.forEach((data) => {
-            jumlah += data.quantity
-          })
-          appContext.setQuantity(jumlah)
-        },
-      )
-    }
+    const lineItemsToUpdate = [
+      { id: id, quantity: parseInt(data.quantity - 1) },
+    ]
+    updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then((checkout) => {
+      if (checkout && checkout.lineItems.length > 0) {
+        let jumlah = 0
+        checkout.lineItems.forEach((data) => {
+          jumlah += data.quantity
+        })
+        setCart(checkout.lineItems)
+        appContext.setQuantity(jumlah)
+      } else {
+        setCart(null)
+        appContext.setQuantity(0)
+      }
+    })
   }
 
   const increQuantity = (id) => {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     const data = dataCart.find((el) => el.id === id)
 
-    updateItem(id, { quantity: data.quantity + 1 })
-
     const lineItemsToUpdate = [
       { id: id, quantity: parseInt(data.quantity + 1) },
     ]
     updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then((checkout) => {
+      if (!checkout) return
       let jumlah = 0
       checkout.lineItems.forEach((data) => {
         jumlah += data.quantity
       })
+      setCart(checkout.lineItems)
       appContext.setQuantity(jumlah)
     })
   }
