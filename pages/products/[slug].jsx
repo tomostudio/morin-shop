@@ -13,7 +13,11 @@ import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import SliderDesktop from '@/components/modules/sliderDesktop'
 import SliderMobile from '@/components/modules/sliderMobile'
-import { shopifyClient } from '@/helpers/shopify'
+import {
+  addItemCheckout,
+  createCheckout,
+  getProductDetail,
+} from '@/helpers/shopify'
 import client from '@/helpers/sanity/client'
 import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
@@ -38,54 +42,46 @@ export default function ProductSlug({ productAPI, seoAPI }) {
     setTitleCart('Adding..')
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
-      shopifyClient.product
-        .fetchByHandle(product.slug.current)
-        .then((product) => {
+      getProductDetail(product.slug.current).then((product) => {
+        const lineItemsToAdd = [
+          {
+            variantId: product.variants[cart.index].id,
+            quantity: cart.qty,
+          },
+        ]
+        addItemCheckout(dataCheckout.id, lineItemsToAdd).then((checkout) => {
+          let jumlah = 0
+          checkout.lineItems.forEach((data) => {
+            jumlah += data.quantity
+          })
+          appContext.setQuantity(jumlah)
+          setTitleCart('Add to Cart')
+        })
+      })
+    } else {
+      createCheckout().then((checkout) => {
+        const data = {
+          id: checkout.id,
+        }
+        localStorage.setItem('dataCheckout', JSON.stringify(data))
+
+        getProductDetail(product.slug.current).then((product) => {
+          // Do something with the product
           const lineItemsToAdd = [
             {
               variantId: product.variants[cart.index].id,
               quantity: cart.qty,
             },
           ]
-          shopifyClient.checkout
-            .addLineItems(dataCheckout.id, lineItemsToAdd)
-            .then((checkout) => {
-              let jumlah = 0
-              checkout.lineItems.forEach((data) => {
-                jumlah += data.quantity
-              })
-              appContext.setQuantity(jumlah)
-              setTitleCart('Add to Cart')
+          addItemCheckout(checkout.id, lineItemsToAdd).then((checkout) => {
+            let jumlah = 0
+            checkout.lineItems.forEach((data) => {
+              jumlah += data.quantity
             })
-        })
-    } else {
-      shopifyClient.checkout.create().then((checkout) => {
-        const data = {
-          id: checkout.id,
-        }
-        localStorage.setItem('dataCheckout', JSON.stringify(data))
-
-        shopifyClient.product
-          .fetchByHandle(product.slug.current)
-          .then((product) => {
-            // Do something with the product
-            const lineItemsToAdd = [
-              {
-                variantId: product.variants[cart.index].id,
-                quantity: cart.qty,
-              },
-            ]
-            shopifyClient.checkout
-              .addLineItems(checkout.id, lineItemsToAdd)
-              .then((checkout) => {
-                let jumlah = 0
-                checkout.lineItems.forEach((data) => {
-                  jumlah += data.quantity
-                })
-                appContext.setQuantity(jumlah)
-                setTitleCart('Add to Cart')
-              })
+            appContext.setQuantity(jumlah)
+            setTitleCart('Add to Cart')
           })
+        })
       })
     }
   }

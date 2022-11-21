@@ -2,38 +2,20 @@ import { useEffect, useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
-import FancyLink from '@/components/utils/fancyLink'
 import { NextSeo } from 'next-seo'
-import Image from 'next/image'
-import HeaderGap from '@/components/modules/headerGap'
-import { Minus, Plus, Trash } from '@/components/utils/svg'
 import Header from '@/components/modules/header'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import CartDesktop from '@/components/modules/cartDesktop'
 import CartMobile from '@/components/modules/cartMobile'
-import { shopifyClient } from '@/helpers/shopify'
+import { fetchCheckout, removeItemCheckout, updateItemCheckout } from '@/helpers/shopify'
 import { useAppContext } from 'context/state'
 
 export default function Cart() {
   const appContext = useAppContext()
   const [dataCart, setCart] = useState(null)
 
-  const fetchCart = () => {
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    if (dataCheckout) {
-      shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-        if(checkout?.completedAt) {
-          localStorage.removeItem('dataCheckout');
-        }else {
-          if (checkout?.lineItems) {
-            setCart(checkout.lineItems)
-          }
-        }
-      })
-    }
-  }
-
   const updateItem = (id, itemAttributes) => {
+    if (!dataCart) return
     var index = dataCart.findIndex((x) => x.id === id)
     if (index === -1) {
       // handle error
@@ -55,15 +37,15 @@ export default function Cart() {
       const lineItemsToUpdate = [
         { id: id, quantity: parseInt(data.quantity - 1) },
       ]
-      shopifyClient.checkout
-        .updateLineItems(dataCheckout.id, lineItemsToUpdate)
-        .then((checkout) => {
+      updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then(
+        (checkout) => {
           let jumlah = 0
           checkout.lineItems.forEach((data) => {
             jumlah += data.quantity
           })
           appContext.setQuantity(jumlah)
-        })
+        },
+      )
     }
   }
 
@@ -76,41 +58,39 @@ export default function Cart() {
     const lineItemsToUpdate = [
       { id: id, quantity: parseInt(data.quantity + 1) },
     ]
-    shopifyClient.checkout
-      .updateLineItems(dataCheckout.id, lineItemsToUpdate)
-      .then((checkout) => {
-        let jumlah = 0
-        checkout.lineItems.forEach((data) => {
-          jumlah += data.quantity
-        })
-        appContext.setQuantity(jumlah)
+    updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then((checkout) => {
+      let jumlah = 0
+      checkout.lineItems.forEach((data) => {
+        jumlah += data.quantity
       })
+      appContext.setQuantity(jumlah)
+    })
   }
 
   const onCheckout = () => {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-      window.location.href = checkout.webUrl
+    fetchCheckout(dataCheckout.id).then((checkout) => {
+      if (checkout) window.location.href = checkout.webUrl
     })
   }
 
   const removeItem = (id) => {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    shopifyClient.checkout
-      .removeLineItems(dataCheckout.id, id)
-      .then((checkout) => {
-        // Do something with the updated checkout
-        setCart(checkout.lineItems)
-        let jumlah = 0
-        checkout.lineItems.forEach((data) => {
-          jumlah += data.quantity
-        })
-        appContext.setQuantity(jumlah)
+    removeItemCheckout(dataCheckout.id, id).then((checkout) => {
+      // Do something with the updated checkout
+      setCart(checkout.lineItems)
+      let jumlah = 0
+      checkout.lineItems.forEach((data) => {
+        jumlah += data.quantity
       })
+      appContext.setQuantity(jumlah)
+    })
   }
 
   useEffect(() => {
-    fetchCart()
+    fetchCheckout().then((response) => {
+      if (response) setCart(response.lineItems)
+    })
   }, [])
 
   return (
@@ -149,7 +129,7 @@ export default function Cart() {
                 )}
           </Container>
         </div>
-        <Footer/>
+        <Footer />
       </Layout>
     </>
   )

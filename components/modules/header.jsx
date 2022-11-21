@@ -5,8 +5,6 @@ import colors from '@/helpers/preset/colors'
 import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsHome from '../utils/morinTabsHome'
-import { useEffect } from 'react'
-import { shopifyClient } from '@/helpers/shopify'
 import { useAppContext } from 'context/state'
 
 export default function Header({
@@ -15,27 +13,6 @@ export default function Header({
   loadCategory = null,
 }) {
   const appContext = useAppContext()
-
-  const fetchCheckout = () => {
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    if (dataCheckout) {
-      shopifyClient.checkout.fetch(dataCheckout.id).then((checkout) => {
-        if(checkout?.completedAt) {
-          localStorage.removeItem('dataCheckout');
-        }else {
-          let jumlah = 0
-          checkout?.lineItems.forEach((data) => {
-            jumlah += data.quantity
-          })
-          appContext.setQuantity(jumlah)
-        }
-      })
-    }
-  }
-
-  useEffect(() => {
-    fetchCheckout()
-  }, [])
 
   return (
     <>

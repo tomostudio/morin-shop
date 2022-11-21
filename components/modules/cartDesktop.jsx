@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import FancyLink from '@/components/utils/fancyLink'
 import { useEffect, useState } from 'react'
-import { shopifyClient } from '@/helpers/shopify'
 import MorinButtonGradient from '../utils/morinButtonGradient'
 
 const CartDesktop = ({
