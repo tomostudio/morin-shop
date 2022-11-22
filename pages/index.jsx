@@ -9,15 +9,16 @@ import SEO from '@/components/utils/seo'
 import { useRouter } from 'next/router'
 import client from '@/helpers/sanity/client'
 import urlFor from '@/helpers/sanity/urlFor'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppContext } from 'context/state'
 import ProductCard from '@/components/modules/productCard'
 import { MoreButton } from '@/components/utils/buttons'
 
-export default function Home({ productAPI, seoAPI, productTypeAPI }) {
+export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
   const router = useRouter()
   const ctx = useAppContext()
+  const [productAPI, setProductAPI] = useState([])
 
   let displayData = 8
   const dataIncrease = 8
@@ -121,6 +122,30 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
     }
   }
 
+  useEffect(() => {
+    client
+      .fetch(
+        `
+    *[_type == "shopifyData"] {
+      ...,
+      type->
+    }
+    `,
+      )
+      .then((response) => {
+        setProductAPI(response)
+        setDataProduct(
+          response
+            .filter(
+              (data) =>
+                data.shopifyProduct.variants[0].title !== 'Default Title',
+            )
+            .slice(0, displayData),
+        )
+      })
+      .catch(console.error)
+  }, [])
+
   return (
     <>
       <Header tabData={productTypeAPI} loadCategory={loadCategory} />
@@ -147,6 +172,7 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
                 data.slug?.current && (
                   <ProductCard
                     key={index}
+                    variants={data.shopifyProduct.variants}
                     title={data.shopifyProduct.title}
                     link={`products/${data.slug.current}`}
                     imgSrc={urlFor(data.thumbnail).url()}
@@ -171,12 +197,6 @@ export default function Home({ productAPI, seoAPI, productTypeAPI }) {
 }
 
 export async function getStaticProps() {
-  const productAPI = await client.fetch(`
-  *[_type == "shopifyData"] {
-    ...,
-    type->
-  }
-  `)
   const productTypeAPI = await client.fetch(`
   *[_type == "productType"]
   `)
@@ -188,7 +208,6 @@ export async function getStaticProps() {
       `)
   return {
     props: {
-      productAPI,
       productTypeAPI,
       seoAPI,
       footerAPI,

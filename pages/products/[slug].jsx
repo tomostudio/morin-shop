@@ -21,7 +21,11 @@ import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
 import { useAppContext } from 'context/state'
-import { ArrowButton, DefaultButton, GradientButton } from '@/components/utils/buttons'
+import {
+  ArrowButton,
+  DefaultButton,
+  GradientButton,
+} from '@/components/utils/buttons'
 
 export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
@@ -126,12 +130,28 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
                 {product.shopifyProduct.title}
               </h2>
-              <h3 className="text-mtitleSmall md:text-ctitle font-normal m-0">
-                IDR{' '}
-                {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString(
-                  'id',
+              <h3
+                className={`text-mtitleSmall md:text-ctitle font-normal m-0 w-fit ${
+                  product.shopifyProduct.variants.every(
+                    (e) => e.inventoryQuantity === 0,
+                  )
+                    ? 'font-semibold border-2 px-4 pt-2 pb-1 leading-none border-morin-blue rounded-full'
+                    : ''
+                }`}
+              >
+                {product.shopifyProduct.variants.every(
+                  (e) => e.inventoryQuantity === 0,
+                ) ? (
+                  'SOLD OUT'
+                ) : (
+                  <>
+                    IDR{' '}
+                    {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString(
+                      'id',
+                    )}
+                    ,-
+                  </>
                 )}
-                ,-
               </h3>
             </div>
             <div>

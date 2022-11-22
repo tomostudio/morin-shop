@@ -2,11 +2,18 @@ import Image from 'next/image'
 import React from 'react'
 import { DefaultButton } from '../utils/buttons'
 
-const ProductCard = ({ title, link, imgSrc, imgPlaceholder, imgAlt }) => {
+const ProductCard = ({
+  variants,
+  title,
+  link,
+  imgSrc,
+  imgPlaceholder,
+  imgAlt,
+}) => {
   return (
     <DefaultButton
       destination={link}
-      className="w-full h-full bg-white rounded-2xl overflow-hidden"
+      className="relative w-full h-full bg-white rounded-2xl overflow-hidden"
     >
       <div className={`relative w-full px-5 pt-10 lg:px-12 lg:pt-12`}>
         <div className={`relative aspect-[4/5] z-2 flex justify-center`}>
@@ -20,6 +27,14 @@ const ProductCard = ({ title, link, imgSrc, imgPlaceholder, imgAlt }) => {
           />
         </div>
       </div>
+      {variants.every((e) => e.inventoryQuantity === 0) && (
+        <>
+          <div className="absolute z-10 top-0 left-0 h-full w-full bg-black opacity-25 flex justify-center items-center" />
+          <span className="absolute z-20 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-white p-2 rounded-full font-medium text-morin-blue">
+            SOLD OUT
+          </span>
+        </>
+      )}
 
       <div className="relative text-morin-blue text-center p-8">
         <div className={`font-nutmeg leading-none text-ctitleSmall`}>
