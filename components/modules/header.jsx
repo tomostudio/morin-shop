@@ -27,8 +27,9 @@ export default function Header({
                 color={home ? colors.white : colors.morinBlue}
                 destination="https://morin.id"
                 arrowLeft
-                border
+                borderColor={home ? colors.white : colors.morinBlue}
                 center={false}
+                hover={home ? "blue" : "white"}
                 className={`${
                   home ? 'text-white' : 'text-morin-blue'
                 } h-[33px]`}
@@ -47,14 +48,16 @@ export default function Header({
             <div className="w-full flex justify-end">
               <ArrowButton
                 destination="/cart"
-                color={home ? colors.white : colors.morinBlue}
-                border
+                color={colors.white}
+                hover="blue"
+                borderColor={home ? colors.white : colors.morinBlue}
+                bgColor={home ? 'bg-transparent' : `bg-morin-blue`}
                 cart
                 center={false}
-                className={`text-white ${home ? '' : 'bg-morin-blue'} ${appContext.quantity > 0 ? 'pl-1.5 pr-3' : 'px-3'} h-[33px]`}
+                className={`${appContext.quantity > 0 ? 'pl-1.5 pr-3' : 'px-3'} h-[33px]`}
               >
                 {appContext.quantity > 0 && (
-                  <span className="rounded-full bg-red-500 px-2 mr-2.5">
+                  <span className="rounded-full bg-red-500 px-2 mr-2.5 !text-white">
                     {appContext.quantity}
                   </span>
                 )}

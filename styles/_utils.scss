@@ -47,3 +47,45 @@ $offBlack: #181818;
     user-select: none !important;
   }
 }
+
+.hover-white {
+  &:hover {
+    & * {
+      color: white;
+    }
+    & svg:not(.fill-hover) * {
+      stroke: white !important;
+    }
+    & svg.fill-hover * {
+      fill: white !important;
+    }
+  }
+}
+
+.hover-black {
+  &:hover {
+    & * {
+      color: black;
+    }
+    & svg:not(.fill-hover) * {
+      stroke: black !important;
+    }
+    & svg.fill-hover * {
+      fill: black !important;
+    }
+  }
+}
+
+.hover-blue {
+  &:hover {
+    & * {
+      @apply text-morin-blue;
+    }
+    & svg:not(.fill-hover) * {
+      @apply stroke-morin-blue #{!important};
+    }
+    & svg.fill-hover * {
+      @apply fill-morin-blue #{!important};
+    }
+  }
+}

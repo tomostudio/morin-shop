@@ -18,7 +18,7 @@ const DefaultButton = forwardRef(
     return !destination ? (
       <button
         aria-label={a11yText}
-        className={`cursor-pointer ${className} pointer-events-auto`}
+        className={`cursor-pointer ${className} pointer-events-auto hover:opacity-50 transition-opacity`}
         onClick={onClick}
         ref={ref}
         {...others}
@@ -29,7 +29,7 @@ const DefaultButton = forwardRef(
       <Link href={destination} scroll={false}>
         <a
           aria-label={a11yText}
-          className={`${className} pointer-events-auto`}
+          className={`${className} pointer-events-auto hover:opacity-50 transition-opacity`}
           ref={ref}
           {...others}
         >
@@ -74,8 +74,9 @@ const ArrowButton = ({
   arrowLeft = false,
   arrowRight = false,
   center = true,
-  border = true,
+  borderColor = false,
   showText = true,
+  bgColor = 'bg-transparent',
   className,
   destination,
   targetBlank,
@@ -85,22 +86,28 @@ const ArrowButton = ({
   ...others
 }) => {
   const defaultClass = `stroke-button flex flex-wrap items-center w-fit min-h-[30px] font-semibold leading-none rounded-full ${
-    border ? 'border-2 border-solid' : ''
-  } px-5 hover:shadow-softer hover:bg-current duration-300 transition-all ${
-    center ? 'mx-auto' : ''
-  } `
+    borderColor ? 'border-2 border-solid' : ''
+  } px-5 ${
+    borderColor ? 'hover:shadow-softer hover:bg-current' : ''
+  } duration-300 transition-all ${center ? 'mx-auto' : ''} `
 
   return !destination ? (
     <button
       aria-label={ariaLabel}
       type="button"
       onClick={onClick}
-      className={`${defaultClass} bg-[${color.toLowerCase()}]  ${
+      className={`${defaultClass} ${bgColor} ${
         className ? className : ''
-      } ${hover === 'white' ? 'hover-black' : 'hover-white'}`}
+      } ${
+        hover === 'white'
+          ? 'hover-white'
+          : hover === 'blue'
+          ? 'hover-blue'
+          : 'hover:opacity-50 transition-opacity'
+      }`}
       style={
-        border
-          ? { color: color, borderColor: color }
+        borderColor
+          ? { color: color, borderColor: borderColor }
           : {
               color: color,
             }
@@ -112,7 +119,7 @@ const ArrowButton = ({
           <ArrowLeft color={color} />
         </div>
       )}
-      {showText && <div className="pt-[2px]">{children}</div>}
+      {showText && <span className="pt-[2px]">{children}</span>}
       {arrowRight && (
         <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
           <ArrowRight color={color} />
@@ -123,12 +130,18 @@ const ArrowButton = ({
     <Link href={destination}>
       <a
         aria-label={ariaLabel}
-        className={`${defaultClass} bg-[${color.toLowerCase()}] select-none ${
+        className={`${defaultClass} ${bgColor} select-none ${
           className ? className : ''
-        } ${hover === 'white' ? 'hover-black' : 'hover-white'}`}
+        } ${
+          hover === 'white'
+            ? 'hover-white'
+            : hover === 'blue'
+            ? 'hover-blue'
+            : 'hover:opacity-50 transition-opacity'
+        }`}
         style={
-          border
-            ? { color: color, borderColor: color }
+          borderColor
+            ? { color: color, borderColor: borderColor }
             : {
                 color: color,
               }
@@ -141,7 +154,7 @@ const ArrowButton = ({
             <ArrowLeft color={color} />
           </div>
         )}
-        {showText && <div className="pt-[2px]">{children}</div>}
+        {showText && <span className="pt-[2px]">{children}</span>}
         {arrowRight && (
           <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
             <ArrowRight color={color} />
@@ -158,10 +171,22 @@ const ArrowButton = ({
     <a
       href={destination}
       aria-label={ariaLabel}
-      className={`${defaultClass} bg-[${color.toLowerCase()}]  ${
+      className={`${defaultClass} bg-[${bgColor}] ${
         className ? className : ''
-      } ${hover === 'white' ? 'hover-black' : 'hover-white'}`}
-      style={{ color: color, borderColor: color }}
+      } ${
+        hover === 'white'
+          ? 'hover-white'
+          : hover === 'blue'
+          ? 'hover-blue'
+          : 'hover:opacity-50 transition-opacity'
+      }`}
+      style={
+        borderColor
+          ? { color: color, borderColor: borderColor }
+          : {
+              color: color,
+            }
+      }
       target="_blank"
       {...others}
     >
@@ -170,7 +195,7 @@ const ArrowButton = ({
           <ArrowLeft color={color} />
         </div>
       )}
-      {showText && <div className="pt-[2px]">{children}</div>}
+      {showText && <span className="pt-[2px]">{children}</span>}
       {arrowRight && (
         <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
           <ArrowRight color={color} />

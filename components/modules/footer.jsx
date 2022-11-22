@@ -14,7 +14,6 @@ const Footer = ({ className }) => {
           destination="https://morin.id"
           color={colors.white}
           arrowLeft
-          border={false}
           center={false}
           className="text-white h-[30px]"
         >

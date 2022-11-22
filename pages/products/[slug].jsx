@@ -195,6 +195,8 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 destination={`https://morin.id/products/${product.type.slug.current}/${product.slug.current}`}
                 targetBlank
                 color={colors.morinBlue}
+                borderColor={colors.morinBlue}
+                hover="white"
                 arrowRight
                 center={false}
                 className="mt-5 md:mt-8 h-[30px] inhover"
