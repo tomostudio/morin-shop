@@ -6,9 +6,10 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
     return data.push({
       ...item,
       idTab: `tab-${id + 1}`,
+      realIndex: id
     })
   })
-  const defaultTab = data[0]
+  const defaultTab = data.filter((data) => data.inventoryQuantity !== 0)[0]
 
   const [currentTab, setCurrentTab] = useState(defaultTab?.title)
   const [thisEl, setThisEl] = useState(null)
@@ -38,8 +39,10 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
   }
 
   useEffect(() => {
-    measureEl(defaultTab?.idTab)
-    document.querySelector('resize', resize)
+    if (!data.every((e) => e.inventoryQuantity === 0)) {
+      measureEl(defaultTab?.idTab)
+      document.querySelector('resize', resize)
+    }
   }, [])
 
   return (
@@ -49,7 +52,14 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
         onSubmit={(e) => e.preventDefault()}
       >
         {data?.map((item, id) => (
-          <div key={id} className="radio-switch__item relative block w-20 h-8 ">
+          <div
+            key={id}
+            className={`radio-switch__item relative block w-20 h-8 ${
+              item.inventoryQuantity <= 0
+                ? 'pointer-events-none text-black opacity-50 line-through'
+                : ''
+            }`}
+          >
             <input
               type="radio"
               name="desktop-nav"
@@ -57,13 +67,7 @@ const MorinTabs = ({ tabData, onChange = () => {}, className }) => {
               id={item.idTab}
               value={item.title}
               checked={item.title === currentTab}
-              onChange={(e) =>
-                handleTabChange(
-                  e.target.value,
-                  id,
-                  item.idTab,
-                )
-              }
+              onChange={(e) => handleTabChange(e.target.value, item.realIndex, item.idTab)}
             />
             <label
               className="radio-switch__label relative flex items-center justify-center h-full rounded-full leading-none select-none z-2 font-medium cursor-pointer transition-all duration-300 pt-[2px]"

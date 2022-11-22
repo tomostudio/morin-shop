@@ -26,16 +26,40 @@ import {
   DefaultButton,
   GradientButton,
 } from '@/components/utils/buttons'
+import { getProductSanityDetail } from '@/helpers/sanity/function'
 
-export default function ProductSlug({ productAPI, seoAPI }) {
+export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()
-  const [product] = productAPI
+  const [productDetail] = productAPI
+  const [product, setProduct] = useState(productDetail)
   const [seo] = seoAPI
-  const [productCurrent, setProductCurrent] = useState(0)
+  const [productCurrent, setProductCurrent] = useState(
+    product.shopifyProduct.variants.findIndex(
+      (e) =>
+        e.id ===
+        product.shopifyProduct.variants.filter(
+          (e) => e.inventoryQuantity !== 0,
+        )[0].id,
+    ),
+  )
   const [cart, setCart] = useState({
-    index: 0,
+    index: product.shopifyProduct.variants.findIndex(
+      (e) =>
+        e.id ===
+        product.shopifyProduct.variants.filter(
+          (e) => e.inventoryQuantity !== 0,
+        )[0].id,
+    ),
     qty: 1,
   })
+  const [maxQty, setMaxQty] = useState(
+    product.shopifyProduct.variants.filter((e) => e.inventoryQuantity !== 0)[0]
+      ?.inventoryQuantity,
+  )
+  let soldOut = product.shopifyProduct.variants.every(
+    (e) => e.inventoryQuantity === 0,
+  )
+
   const appContext = useAppContext()
   const [getIndex, setIndex] = useState(0)
   const [titleCart, setTitleCart] = useState('Add to Cart')
@@ -58,6 +82,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
           })
           appContext.setQuantity(jumlah)
           setTitleCart('Add to Cart')
+          getProductSanityDetail(slug).then((response) => {
+            setProduct(response)
+          })
         })
       })
     } else {
@@ -82,6 +109,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             })
             appContext.setQuantity(jumlah)
             setTitleCart('Add to Cart')
+            getProductSanityDetail(slug).then((response) => {
+              setProduct(response)
+            })
           })
         })
       })
@@ -132,16 +162,12 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               </h2>
               <h3
                 className={`text-mtitleSmall md:text-ctitle font-normal m-0 w-fit ${
-                  product.shopifyProduct.variants.every(
-                    (e) => e.inventoryQuantity === 0,
-                  )
+                  soldOut
                     ? 'font-semibold border-2 px-4 pt-2 pb-1 leading-none border-morin-blue rounded-full'
                     : ''
                 }`}
               >
-                {product.shopifyProduct.variants.every(
-                  (e) => e.inventoryQuantity === 0,
-                ) ? (
+                {soldOut ? (
                   'SOLD OUT'
                 ) : (
                   <>
@@ -162,8 +188,11 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   setProductCurrent(e)
                   setCart({
                     index: e,
-                    qty: cart.qty,
+                    qty: 1,
                   })
+                  setMaxQty(
+                    product.shopifyProduct.variants[e].inventoryQuantity,
+                  )
                 }}
                 className="md:mt-3"
               />
@@ -177,6 +206,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                       qty: cart.qty - 1 < 1 ? 1 : cart.qty - 1,
                     })
                   }
+                  className={`h-full ${soldOut ? '!pointer-events-none' : ''}`}
                 >
                   <Minus />
                 </DefaultButton>
@@ -186,12 +216,15 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   readOnly
                 />
                 <DefaultButton
-                  onClick={() =>
-                    setCart({
-                      index: productCurrent,
-                      qty: cart.qty + 1,
-                    })
-                  }
+                  onClick={() => {
+                    if (cart.qty < maxQty) {
+                      setCart({
+                        index: productCurrent,
+                        qty: cart.qty + 1,
+                      })
+                    }
+                  }}
+                  className={`h-full ${soldOut ? '!pointer-events-none' : ''}`}
                 >
                   <Plus />
                 </DefaultButton>
@@ -199,9 +232,11 @@ export default function ProductSlug({ productAPI, seoAPI }) {
               <GradientButton
                 onClick={onCart}
                 className={
-                  titleCart === 'Add to Cart'
-                    ? 'pointer-events-auto'
-                    : '!pointer-events-none'
+                  soldOut
+                    ? '!pointer-events-none'
+                    : !titleCart === 'Add to Cart'
+                    ? '!pointer-events-none'
+                    : ''
                 }
               >
                 {titleCart}
@@ -273,6 +308,7 @@ export async function getStaticProps({ params }) {
       productAPI,
       seoAPI,
       footerAPI,
+      slug: params.slug,
     },
   }
 }
