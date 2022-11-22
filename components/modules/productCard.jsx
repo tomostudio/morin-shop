@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
-import FancyLink from '../utils/fancyLink'
+import { DefaultButton } from '../utils/buttons'
 
 const ProductCard = ({ title, link, imgSrc, imgPlaceholder, imgAlt }) => {
   return (
-    <FancyLink
+    <DefaultButton
       destination={link}
       className="w-full h-full bg-white rounded-2xl overflow-hidden"
     >
@@ -26,7 +26,7 @@ const ProductCard = ({ title, link, imgSrc, imgPlaceholder, imgAlt }) => {
           {title}
         </div>
       </div>
-    </FancyLink>
+    </DefaultButton>
   )
 }
 

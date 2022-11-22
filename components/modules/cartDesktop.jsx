@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
-import FancyLink from '@/components/utils/fancyLink'
-import { useEffect, useState } from 'react'
-import MorinButtonGradient from '../utils/morinButtonGradient'
+import { useEffect } from 'react'
+import { DefaultButton, GradientButton } from '../utils/buttons'
 
 const CartDesktop = ({
   data,
@@ -47,44 +46,44 @@ const CartDesktop = ({
                   index > 0 ? 'pb-6' : 'py-6'
                 } w-full h-full`}
               >
-                <FancyLink destination="" className="relative w-[128px] h-[128px]">
+                <DefaultButton destination="" className="relative w-[128px] h-[128px]">
                   <Image
                     src={item.variant.image.src}
                     alt={item.variant.image.altText}
                     layout="fill"
                     objectFit="contain"
                   />
-                </FancyLink>
-                <FancyLink destination="" className="flex flex-col h-full">
+                </DefaultButton>
+                <DefaultButton destination="" className="flex flex-col h-full">
                   <span className="text-ctitleSmall font-nutmeg">
                     {item.title}
                   </span>
                   <span className="font-medium mt-1">{item.variant.title}</span>
-                </FancyLink>
+                </DefaultButton>
               </td>
               <td className={`px-8 ${index > 0 ? 'pb-6' : ''}`}>
                 <div className="flex justify-between items-center mx-auto px-4 py-2 rounded-full border-2 border-morin-blue w-28">
-                  <FancyLink
+                  <DefaultButton
                     onClick={() => {
                       decQuantity(item.id)
                       subTotal()
                     }}
                   >
                     <Minus width={15} />
-                  </FancyLink>
+                  </DefaultButton>
                   <input
                     className="w-full text-center font-medium pointer-events-none"
                     value={item.quantity}
                     readOnly
                   />
-                  <FancyLink
+                  <DefaultButton
                     onClick={() => {
                       increQuantity(item.id)
                       subTotal()
                     }}
                   >
                     <Plus width={18} height={18} />
-                  </FancyLink>
+                  </DefaultButton>
                 </div>
               </td>
               <td className={`text-center w-36 ${index > 0 ? 'pb-6' : ''}`}>
@@ -94,12 +93,12 @@ const CartDesktop = ({
                 </span>
               </td>
               <td className={`w-20 text-center ${index > 0 ? 'pb-6' : ''}`}>
-                <FancyLink
+                <DefaultButton
                   onClick={() => removeItem(item.id)}
                   className="border-2 border-morin-blue p-1.5 rounded-full"
                 >
                   <Trash />
-                </FancyLink>
+                </DefaultButton>
               </td>
             </tr>
           ))}
@@ -119,9 +118,9 @@ const CartDesktop = ({
           </tr>
         </tbody>
       </table>
-      <MorinButtonGradient className="mt-24" onClick={onCheckout}>
+      <GradientButton className="mt-24" onClick={onCheckout}>
         Checkout
-      </MorinButtonGradient>
+      </GradientButton>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { useAppContext } from 'context/state'
 import { useState, useRef, useEffect } from 'react'
-import FancyLink from './fancyLink'
+import { DefaultButton } from './buttons'
 
 const MorinTabsHome = ({ tabData, loadCategory }) => {
   // Market Variable
@@ -111,7 +111,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
       onSubmit={(e) => e.preventDefault()}
       ref={navRef}
     >
-      <FancyLink
+      <DefaultButton
         className="focus font-medium"
         onClick={(e) => navMouseClick(e, 'all')}
         onMouseEnter={navMouseEnter}
@@ -121,9 +121,9 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
         ref={defaultNavRef}
       >
         All
-      </FancyLink>
+      </DefaultButton>
       {tabData?.map((item, id) => (
-        <FancyLink
+        <DefaultButton
           key={`tab-${id+1}`}
           className="font-medium"
           onClick={(e) => navMouseClick(e, item.slug.current)}
@@ -132,7 +132,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
           data-id={id + 1}
         >
           {item.title.en}
-        </FancyLink>
+        </DefaultButton>
       ))}
       <div
         id="marker"

@@ -1,11 +1,10 @@
-import FancyLink from '@/components/utils/fancyLink'
 import Container from '@/components/modules/container'
-import MorinButton from '../utils/morinButton'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import MorinTabsHome from '../utils/morinTabsHome'
 import { useAppContext } from 'context/state'
+import { ArrowButton, DefaultButton } from '../utils/buttons'
 
 export default function Header({
   home = true,
@@ -24,32 +23,34 @@ export default function Header({
         <Container className={`relative h-[105px] lg:h-header`}>
           <div className="w-full flex justify-around items-center pt-8">
             <div className="w-full flex justify-start">
-              <MorinButton
+              <ArrowButton
                 color={home ? colors.white : colors.morinBlue}
                 destination="https://morin.id"
-                arrow="left"
+                arrowLeft
                 border
+                center={false}
                 className={`${
                   home ? 'text-white' : 'text-morin-blue'
                 } h-[33px]`}
               >
                 Morinfood
-              </MorinButton>
+              </ArrowButton>
             </div>
             {/* Morin Logo */}
-            <FancyLink
+            <DefaultButton
               destination="/"
               a11yText="Navigate to the home page"
               className="relative w-full"
             >
               <MorinLogo className="w-full h-[76px]" />
-            </FancyLink>
+            </DefaultButton>
             <div className="w-full flex justify-end">
-              <MorinButton
+              <ArrowButton
                 destination="/cart"
                 color={home ? colors.white : colors.morinBlue}
                 border
                 cart
+                center={false}
                 className={`text-white ${home ? '' : 'bg-morin-blue'} ${appContext.quantity > 0 ? 'pl-1.5 pr-3' : 'px-3'} h-[33px]`}
               >
                 {appContext.quantity > 0 && (
@@ -58,7 +59,7 @@ export default function Header({
                   </span>
                 )}
                 My Cart
-              </MorinButton>
+              </ArrowButton>
             </div>
           </div>
           {home ? (
@@ -73,9 +74,9 @@ export default function Header({
           )}
         </Container>
       </nav>
-      <FancyLink className="fixed z-10 bottom-0 right-0 w-[66px] h-fit mr-8 mb-8">
+      <DefaultButton className="fixed z-10 bottom-0 right-0 w-[66px] h-fit mr-8 mb-8">
         <WaButton />
-      </FancyLink>
+      </DefaultButton>
     </>
   )
 }

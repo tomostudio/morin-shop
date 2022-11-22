@@ -1,7 +1,7 @@
-import FancyLink from '../utils/fancyLink'
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import { useEffect } from 'react'
+import { DefaultButton } from '../utils/buttons'
 
 const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
   const subTotal = () => {
@@ -42,7 +42,7 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
               </span>
               <div className="flex w-full my-3">
                 <div className="flex justify-between items-center px-4 pt-1 pb-0.5 rounded-full border-2 border-morin-blue w-24">
-                  <FancyLink
+                  <DefaultButton
                     onClick={() => {
                       decQuantity(item.id)
                       subTotal()
@@ -50,28 +50,28 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
                     className="pb-1"
                   >
                     <Minus width={10} />
-                  </FancyLink>
+                  </DefaultButton>
                   <input
                     className="w-full text-center font-medium text-[12px] pointer-events-none"
                     value={item.quantity}
                     readOnly
                   />
-                  <FancyLink
+                  <DefaultButton
                     onClick={() => {
                       increQuantity(item.id)
                       subTotal()
                     }}
                   >
                     <Plus width={13} height={13} />
-                  </FancyLink>
+                  </DefaultButton>
                 </div>
                 <div className="w-fit ml-3 text-center">
-                  <FancyLink
+                  <DefaultButton
                     onClick={() => removeItem(item.id)}
                     className="border-2 border-morin-blue p-1.5 rounded-full"
                   >
                     <Trash />
-                  </FancyLink>
+                  </DefaultButton>
                 </div>
               </div>
             </div>
@@ -88,12 +88,12 @@ const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
             ,-
           </span>
         </div>
-        <FancyLink
+        <DefaultButton
           onClick={onCheckout}
           className="w-24 h-fit py-2.5 rounded-full bg-header shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)] font-semibold text-white"
         >
           Checkout
-        </FancyLink>
+        </DefaultButton>
       </div>
     </div>
   )

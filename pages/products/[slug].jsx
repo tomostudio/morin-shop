@@ -2,11 +2,9 @@ import { useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
-import FancyLink from '@/components/utils/fancyLink'
 import Image from 'next/image'
 import { Minus, Plus } from '@/components/utils/svg'
 import colors from '@/helpers/preset/colors'
-import MorinButton from '@/components/utils/morinButton'
 import Header from '@/components/modules/header'
 import 'swiper/css/pagination'
 import MorinTabs from '@/components/utils/morinTabs'
@@ -23,7 +21,7 @@ import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
 import { useAppContext } from 'context/state'
-import MorinButtonGradient from '@/components/utils/morinButtonGradient'
+import { ArrowButton, DefaultButton, GradientButton } from '@/components/utils/buttons'
 
 export default function ProductSlug({ productAPI, seoAPI }) {
   const router = useRouter()
@@ -152,7 +150,7 @@ export default function ProductSlug({ productAPI, seoAPI }) {
             </div>
             <div className="flex w-full h-12 md:h-auto">
               <div className="flex justify-between items-center mr-4 md:mr-6 px-5 py-2 h-full rounded-full border-2 border-morin-blue w-32">
-                <FancyLink
+                <DefaultButton
                   onClick={() =>
                     setCart({
                       index: productCurrent,
@@ -161,13 +159,13 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   }
                 >
                   <Minus />
-                </FancyLink>
+                </DefaultButton>
                 <input
                   className="w-full text-center font-medium text-default md:text-ctitleSmall pointer-events-none"
                   value={cart.qty}
                   readOnly
                 />
-                <FancyLink
+                <DefaultButton
                   onClick={() =>
                     setCart({
                       index: productCurrent,
@@ -176,9 +174,9 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                   }
                 >
                   <Plus />
-                </FancyLink>
+                </DefaultButton>
               </div>
-              <MorinButtonGradient
+              <GradientButton
                 onClick={onCart}
                 className={
                   titleCart === 'Add to Cart'
@@ -187,23 +185,22 @@ export default function ProductSlug({ productAPI, seoAPI }) {
                 }
               >
                 {titleCart}
-              </MorinButtonGradient>
+              </GradientButton>
             </div>
             <div className="flex flex-col md:max-w-md">
               <p className="font-medium text-[12px] md:text-default">
                 {product.description_en}
               </p>
-              <MorinButton
+              <ArrowButton
                 destination={`https://morin.id/products/${product.type.slug.current}/${product.slug.current}`}
                 targetBlank
                 color={colors.morinBlue}
-                border
-                showText
-                arrow="right"
+                arrowRight
+                center={false}
                 className="mt-5 md:mt-8 h-[30px] inhover"
               >
                 View Products Details
-              </MorinButton>
+              </ArrowButton>
             </div>
           </div>
         </Container>

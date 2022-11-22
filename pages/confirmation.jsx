@@ -20,12 +20,12 @@ export default function Confirmation() {
 
   return (
     <Layout>
-      <NextSeo title="Confirmation" />
+      <NextSeo title="Confirm Payment" />
       <Header home={false} />
       <div className="bg-white w-full">
         <Container className="flex flex-col text-morin-blue mb-16">
           <h2 className="text-mtitle lg:text-h2 leading-none font-nutmeg text-center">
-            Confirmation
+            Confirm Payment
           </h2>
           <div className="w-96 mt-3 mx-auto">
             <form method="post" onSubmit={handleSubmit} className="space-y-4">

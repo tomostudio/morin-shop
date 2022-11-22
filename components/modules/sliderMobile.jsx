@@ -3,7 +3,7 @@ import { Pagination } from 'swiper'
 import 'swiper/css/pagination'
 import Image from 'next/image'
 import urlFor from '@/helpers/sanity/urlFor'
-import FancyLink from '../utils/fancyLink'
+import { DefaultButton } from '../utils/buttons'
 
 const SliderMobile = ({ data, setIndex }) => {
   return (
@@ -16,7 +16,7 @@ const SliderMobile = ({ data, setIndex }) => {
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>
-          <FancyLink
+          <DefaultButton
             onClick={() => setIndex(index)}
             className="relative w-full h-96 rounded-3xl overflow-hidden"
           >
@@ -27,7 +27,7 @@ const SliderMobile = ({ data, setIndex }) => {
               objectFit="cover"
               objectPosition="center"
             />
-          </FancyLink>
+          </DefaultButton>
         </SwiperSlide>
       ))}
     </Swiper>
