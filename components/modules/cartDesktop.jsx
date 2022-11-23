@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { DefaultButton, GradientButton } from '../utils/buttons'
+import { getProductSanityDetail } from '@/helpers/sanity/function'
+import { getProductDetail } from '@/helpers/shopify'
 
 const CartDesktop = ({
   data,
@@ -27,7 +29,7 @@ const CartDesktop = ({
       <table className="table-auto text-morin-blue max-w-5xl w-full mt-3">
         <thead className="border-b-2 border-morin-blue">
           <tr>
-            <th className='text-left pl-[calc(128px+3.5rem)]'>
+            <th className="text-left pl-[calc(128px+3.5rem)]">
               <span className="font-medium">Product</span>
             </th>
             <th>
@@ -46,7 +48,10 @@ const CartDesktop = ({
                   index > 0 ? 'pb-6' : 'py-6'
                 } w-full h-full`}
               >
-                <DefaultButton destination="" className="relative w-[128px] h-[128px]">
+                <DefaultButton
+                  destination=""
+                  className="relative w-[128px] h-[128px]"
+                >
                   <Image
                     src={item.variant.image.src}
                     alt={item.variant.image.altText}
@@ -68,6 +73,9 @@ const CartDesktop = ({
                       decQuantity(item.id)
                       subTotal()
                     }}
+                    className={
+                      !item.variant.available ? '!pointer-events-none' : ''
+                    }
                   >
                     <Minus width={15} />
                   </DefaultButton>
@@ -81,10 +89,16 @@ const CartDesktop = ({
                       increQuantity(item.id)
                       subTotal()
                     }}
+                    className={
+                      !item.variant.available ? '!pointer-events-none' : ''
+                    }
                   >
                     <Plus width={18} height={18} />
                   </DefaultButton>
                 </div>
+                {!item.variant.available && (
+                  <span className="mt-1 block text-center font-medium text-defaultSmall text-morin-red">OUT OF STOCK</span>
+                )}
               </td>
               <td className={`text-center w-36 ${index > 0 ? 'pb-6' : ''}`}>
                 <span className="font-medium text-morin-blue">

@@ -33,31 +33,35 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const [productDetail] = productAPI
   const [product, setProduct] = useState(productDetail)
   const [seo] = seoAPI
+  let soldOut = product.shopifyProduct.variants.every(
+    (e) => e.inventoryQuantity === 0,
+  )
   const [productCurrent, setProductCurrent] = useState(
-    product.shopifyProduct.variants.findIndex(
-      (e) =>
-        e.id ===
-        product.shopifyProduct.variants.filter(
-          (e) => e.inventoryQuantity !== 0,
-        )[0].id,
-    ),
+    !soldOut
+      ? product.shopifyProduct.variants.findIndex(
+          (e) =>
+            e.id ===
+            product.shopifyProduct.variants.filter(
+              (e) => e.inventoryQuantity !== 0,
+            )[0].id,
+        )
+      : null,
   )
   const [cart, setCart] = useState({
-    index: product.shopifyProduct.variants.findIndex(
-      (e) =>
-        e.id ===
-        product.shopifyProduct.variants.filter(
-          (e) => e.inventoryQuantity !== 0,
-        )[0].id,
-    ),
+    index: !soldOut
+      ? product.shopifyProduct.variants.findIndex(
+          (e) =>
+            e.id ===
+            product.shopifyProduct.variants.filter(
+              (e) => e.inventoryQuantity !== 0,
+            )[0].id,
+        )
+      : null,
     qty: 1,
   })
   const [maxQty, setMaxQty] = useState(
     product.shopifyProduct.variants.filter((e) => e.inventoryQuantity !== 0)[0]
       ?.inventoryQuantity,
-  )
-  let soldOut = product.shopifyProduct.variants.every(
-    (e) => e.inventoryQuantity === 0,
   )
 
   const appContext = useAppContext()
@@ -68,7 +72,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
     setTitleCart('Adding..')
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
-      getProductDetail(product.slug.current).then((product) => {
+      getProductDetail(product.shopifyProduct.handle).then((product) => {
         const lineItemsToAdd = [
           {
             variantId: product.variants[cart.index].id,
@@ -94,7 +98,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
         }
         localStorage.setItem('dataCheckout', JSON.stringify(data))
 
-        getProductDetail(product.slug.current).then((product) => {
+        getProductDetail(product.shopifyProduct.handle).then((product) => {
           // Do something with the product
           const lineItemsToAdd = [
             {
