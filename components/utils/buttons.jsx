@@ -9,6 +9,7 @@ const DefaultButton = forwardRef(
       a11yText,
       className = '',
       children,
+      hover = true,
       blank = false,
       onClick = () => {},
       ...others
@@ -18,7 +19,9 @@ const DefaultButton = forwardRef(
     return !destination ? (
       <button
         aria-label={a11yText}
-        className={`cursor-pointer ${className} pointer-events-auto hover:opacity-50 transition-opacity`}
+        className={`cursor-pointer ${className} pointer-events-auto ${
+          hover ? 'hover:opacity-50 transition-opacity' : ''
+        }`}
         onClick={onClick}
         ref={ref}
         {...others}
@@ -29,7 +32,9 @@ const DefaultButton = forwardRef(
       <Link href={destination} scroll={false}>
         <a
           aria-label={a11yText}
-          className={`${className} pointer-events-auto hover:opacity-50 transition-opacity`}
+          className={`${className} pointer-events-auto ${
+            hover ? 'hover:opacity-50 transition-opacity' : ''
+          }`}
           ref={ref}
           {...others}
         >
@@ -41,7 +46,7 @@ const DefaultButton = forwardRef(
         aria-label={a11yText}
         className={`${
           destination ? 'pointer-events-auto' : 'pointer-events-none'
-        } ${className}`}
+        } ${hover ? 'hover:opacity-50 transition-opacity' : ''} ${className}`}
         target="_blank"
         href={destination}
         ref={ref}
@@ -96,9 +101,7 @@ const ArrowButton = ({
       aria-label={ariaLabel}
       type="button"
       onClick={onClick}
-      className={`${defaultClass} ${bgColor} ${
-        className ? className : ''
-      } ${
+      className={`${defaultClass} ${bgColor} ${className ? className : ''} ${
         hover === 'white'
           ? 'hover-white'
           : hover === 'blue'

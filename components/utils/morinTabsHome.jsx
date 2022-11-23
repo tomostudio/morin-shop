@@ -113,6 +113,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
     >
       <DefaultButton
         className="focus font-medium"
+        hover={false}
         onClick={(e) => navMouseClick(e, 'all')}
         onMouseEnter={navMouseEnter}
         onMouseLeave={navMouseLeave}
@@ -124,7 +125,8 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
       </DefaultButton>
       {tabData?.map((item, id) => (
         <DefaultButton
-          key={`tab-${id+1}`}
+          key={`tab-${id + 1}`}
+          hover={false}
           className="font-medium"
           onClick={(e) => navMouseClick(e, item.slug.current)}
           onMouseEnter={navMouseEnter}
