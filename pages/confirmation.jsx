@@ -9,6 +9,7 @@ const fs = require('fs')
 
 export default function Confirmation() {
   const handleSubmit = async (e) => {
+    e.preventDefault()
     const {
       order_id,
       nama_pengirim,
