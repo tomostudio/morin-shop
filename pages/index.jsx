@@ -19,6 +19,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
   const router = useRouter()
   const ctx = useAppContext()
   const [productAPI, setProductAPI] = useState([])
+  const [loading, setLoading] = useState(true)
 
   let displayData = 8
   const dataIncrease = 8
@@ -142,6 +143,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
             )
             .slice(0, displayData),
         )
+        setLoading(false)
       })
       .catch(console.error)
   }, [])
@@ -158,37 +160,53 @@ export default function Home({ seoAPI, productTypeAPI }) {
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
         <HeaderGap />
-        <Container className="relative lg:pt-20 flex-grow min-h-[60vh]">
+        <Container className="relative flex-grow">
           {useMediaQuery('(max-width: 1023px)') && (
             <div className="absolute w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
               <MorinTabsMobile tabData={productTypeAPI} />
             </div>
           )}
-          <div
-            className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-0 mb-16`}
-          >
-            {dataProduct.map(
-              (data, index) =>
-                data.slug?.current && (
-                  <ProductCard
-                    key={index}
-                    variants={data.shopifyProduct.variants}
-                    title={data.shopifyProduct.title}
-                    link={`products/${data.slug.current}`}
-                    imgSrc={urlFor(data.thumbnail).url()}
-                    imgPlaceholder={urlFor(data.thumbnail).url()}
-                    imgAlt={data.shopifyProduct.title}
-                  />
-                ),
-            )}
-            {showButton && (
-              <div className={`absolute left-0 bottom-0 w-full`}>
-                <div className="h-52 w-full flex justify-center pt-8 linearMore">
-                  <MoreButton onClick={loadMore}>See More Products</MoreButton>
+          {loading ? (
+            <div className="w-full h-[calc(100vh-360px)] flex justify-center items-center">
+              <span className="font-semibold text-morin-blue text-ctitleSmall">
+                Loading
+              </span>
+            </div>
+          ) : dataProduct.length > 0 ? (
+            <div
+              className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-20 mb-16`}
+            >
+              {dataProduct.map(
+                (data, index) =>
+                  data.slug?.current && (
+                    <ProductCard
+                      key={index}
+                      variants={data.shopifyProduct.variants}
+                      title={data.shopifyProduct.title}
+                      link={`products/${data.slug.current}`}
+                      imgSrc={urlFor(data.thumbnail).url()}
+                      imgPlaceholder={urlFor(data.thumbnail).url()}
+                      imgAlt={data.shopifyProduct.title}
+                    />
+                  ),
+              )}
+              {showButton && (
+                <div className={`absolute left-0 bottom-0 w-full`}>
+                  <div className="h-52 w-full flex justify-center pt-8 linearMore">
+                    <MoreButton onClick={loadMore}>
+                      See More Products
+                    </MoreButton>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          ) : (
+            <div className="w-full h-[calc(100vh-360px)] flex justify-center items-center">
+              <span className="font-semibold text-morin-blue text-ctitleSmall">
+                No Products Available
+              </span>
+            </div>
+          )}
         </Container>
         <Footer />
       </Layout>

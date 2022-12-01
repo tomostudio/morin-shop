@@ -16,7 +16,8 @@ import { useAppContext } from 'context/state'
 
 export default function Cart() {
   const appContext = useAppContext()
-  const [dataCart, setCart] = useState(null)
+  const [dataCart, setCart] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const decQuantity = (id) => {
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
@@ -81,6 +82,7 @@ export default function Cart() {
   useEffect(() => {
     fetchCheckout().then((response) => {
       if (response) setCart(response.lineItems)
+      setLoading(false)
     })
   }, [])
 
@@ -91,33 +93,38 @@ export default function Cart() {
         <NextSeo title="Cart" />
         <div className="bg-white w-full">
           <Container
-            className={`flex flex-col items-center w-full h-full mb-24 ${
-              !dataCart && 'h-[30vh]'
-            }
-              ${dataCart && dataCart.length < 1 ? 'h-[30vh]' : ''}`}
+            className={`flex flex-col items-center w-full h-full mb-24`}
           >
             <h2 className="text-ctitle lg:text-h2 text-morin-blue font-nutmeg">
               My Cart
             </h2>
-            {useMediaQuery('(min-width: 1024px)')
-              ? dataCart?.length > 0 && (
-                  <CartDesktop
-                    data={dataCart}
-                    decQuantity={decQuantity}
-                    increQuantity={increQuantity}
-                    onCheckout={onCheckout}
-                    removeItem={removeItem}
-                  />
-                )
-              : dataCart?.length > 0 && (
-                  <CartMobile
-                    data={dataCart}
-                    decQuantity={decQuantity}
-                    increQuantity={increQuantity}
-                    onCheckout={onCheckout}
-                    removeItem={removeItem}
-                  />
-                )}
+            {loading ? (
+              <div className="w-full h-[50vh] flex justify-center items-center">
+                <span className="font-semibold text-ctitleSmall">Loading</span>
+              </div>
+            ) : dataCart.length > 0 ? (
+              useMediaQuery('(min-width: 1024px)') ? (
+                <CartDesktop
+                  data={dataCart}
+                  decQuantity={decQuantity}
+                  increQuantity={increQuantity}
+                  onCheckout={onCheckout}
+                  removeItem={removeItem}
+                />
+              ) : (
+                <CartMobile
+                  data={dataCart}
+                  decQuantity={decQuantity}
+                  increQuantity={increQuantity}
+                  onCheckout={onCheckout}
+                  removeItem={removeItem}
+                />
+              )
+            ) : (
+              <div className="w-full h-[50vh] flex justify-center items-center">
+                <span className="font-semibold text-ctitleSmall">Cart is Empty</span>
+              </div>
+            )}
           </Container>
         </div>
         <Footer />
