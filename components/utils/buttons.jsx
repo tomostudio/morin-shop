@@ -91,10 +91,8 @@ const ArrowButton = ({
   ...others
 }) => {
   const defaultClass = `stroke-button flex flex-wrap items-center w-fit min-h-[30px] font-semibold leading-none rounded-full ${
-    borderColor ? 'border-2 border-solid' : ''
-  } px-5 ${
-    borderColor ? 'hover:shadow-softer hover:bg-current' : ''
-  } duration-300 transition-all ${center ? 'mx-auto' : ''} `
+    borderColor ? 'border-2 border-solid hover:shadow-softer hover:bg-current' : ''
+  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} `
 
   return !destination ? (
     <button

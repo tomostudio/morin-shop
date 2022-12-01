@@ -30,9 +30,6 @@ export default function Header({
                 borderColor={home ? colors.white : colors.morinBlue}
                 center={false}
                 hover={home ? "blue" : "white"}
-                className={`${
-                  home ? 'text-white' : 'text-morin-blue'
-                } h-[33px]`}
               >
                 Morinfood
               </ArrowButton>
@@ -54,7 +51,7 @@ export default function Header({
                 bgColor={home ? 'bg-transparent' : `bg-morin-blue`}
                 cart
                 center={false}
-                className={`${appContext.quantity > 0 ? 'pl-1.5 pr-3' : 'px-3'} h-[33px]`}
+                className={`${appContext.quantity > 0 ? 'pl-1.5' : ''}`}
               >
                 {appContext.quantity > 0 && (
                   <span className="rounded-full bg-red-500 px-2 mr-2.5 !text-white">

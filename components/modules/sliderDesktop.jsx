@@ -56,7 +56,7 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
           showText={false}
           hover="white"
           borderColor={colors.morinBlue}
-          className="h-[37px] swiper-button-prev"
+          className="h-9 swiper-button-prev"
         />
         <ArrowButton
           center={false}
@@ -65,7 +65,7 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
           showText={false}
           hover="white"
           borderColor={colors.morinBlue}
-          className="ml-4 h-[37px] swiper-button-next"
+          className="ml-4 h-9 swiper-button-next"
         />
       </div>
     </>

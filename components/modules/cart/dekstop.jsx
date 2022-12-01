@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
-import { useEffect, useState } from 'react'
-import { DefaultButton, GradientButton } from '../utils/buttons'
-import { getProductSanityDetail } from '@/helpers/sanity/function'
-import { getProductDetail } from '@/helpers/shopify'
+import { useEffect } from 'react'
+import { DefaultButton, GradientButton } from '@/components/utils/buttons'
 
 const CartDesktop = ({
   data,

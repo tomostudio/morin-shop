@@ -73,18 +73,3 @@ nav.header-nav {
 .all-border {
   border: solid thin blue;
 }
-
-.inhover {
-  @apply hover:bg-morin-blue hover:text-white hover:stroke-white;
-  svg > path {
-    &:hover {
-      stroke: white !important;
-    }
-  }
-}
-
-.inhover:hover {
-  svg > path {
-      stroke: white !important;
-  }
-}

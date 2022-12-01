@@ -15,7 +15,6 @@ const Footer = ({ className }) => {
           color={colors.white}
           arrowLeft
           center={false}
-          className="text-white h-[30px]"
         >
           Back to Morinfood
         </ArrowButton>

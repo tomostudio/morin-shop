@@ -258,7 +258,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
                 hover="white"
                 arrowRight
                 center={false}
-                className="mt-5 md:mt-8 h-[30px] inhover"
+                className="mt-5 md:mt-8"
               >
                 View Products Details
               </ArrowButton>

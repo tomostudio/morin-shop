@@ -129,7 +129,7 @@ export default function ConfirmPayment() {
                   bgColor={
                     response.status === 'error' ? 'bg-white' : `bg-morin-blue`
                   }
-                  className={`h-[33px]`}
+                  className={`py-2`}
                 >
                   {response.message}
                 </ArrowButton>

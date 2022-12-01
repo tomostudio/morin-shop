@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import { useEffect } from 'react'
-import { DefaultButton } from '../utils/buttons'
+import { DefaultButton } from '@/components/utils/buttons'
 
 const CartMobile = ({ data, decQuantity, increQuantity, onCheckout }) => {
   const subTotal = () => {

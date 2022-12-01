@@ -4,15 +4,13 @@ import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
-import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import CartDesktop from '@/components/modules/cartDesktop'
-import CartMobile from '@/components/modules/cartMobile'
 import {
   fetchCheckout,
   removeItemCheckout,
   updateItemCheckout,
 } from '@/helpers/shopify'
 import { useAppContext } from 'context/state'
+import CartComponent from '@/components/modules/cart'
 
 export default function Cart() {
   const appContext = useAppContext()
@@ -103,26 +101,18 @@ export default function Cart() {
                 <span className="font-semibold text-ctitleSmall">Loading</span>
               </div>
             ) : dataCart.length > 0 ? (
-              useMediaQuery('(min-width: 1024px)') ? (
-                <CartDesktop
-                  data={dataCart}
-                  decQuantity={decQuantity}
-                  increQuantity={increQuantity}
-                  onCheckout={onCheckout}
-                  removeItem={removeItem}
-                />
-              ) : (
-                <CartMobile
-                  data={dataCart}
-                  decQuantity={decQuantity}
-                  increQuantity={increQuantity}
-                  onCheckout={onCheckout}
-                  removeItem={removeItem}
-                />
-              )
+              <CartComponent
+                data={dataCart}
+                decQuantity={decQuantity}
+                increQuantity={increQuantity}
+                onCheckout={onCheckout}
+                removeItem={removeItem}
+              />
             ) : (
               <div className="w-full h-[50vh] flex justify-center items-center">
-                <span className="font-semibold text-ctitleSmall">Cart is Empty</span>
+                <span className="font-semibold text-ctitleSmall">
+                  Cart is Empty
+                </span>
               </div>
             )}
           </Container>
