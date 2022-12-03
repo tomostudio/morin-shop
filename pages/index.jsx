@@ -167,7 +167,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
             </div>
           )}
           {loading ? (
-            <div className="w-full h-[calc(100vh-360px)] flex justify-center items-center">
+            <div className="w-full h-screen flex justify-center items-center">
               <span className="font-semibold text-morin-blue text-ctitleSmall">
                 Loading
               </span>
@@ -201,7 +201,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
               )}
             </div>
           ) : (
-            <div className="w-full h-[calc(100vh-360px)] flex justify-center items-center">
+            <div className="w-full h-screen flex justify-center items-center">
               <span className="font-semibold text-morin-blue text-ctitleSmall">
                 No Products Available
               </span>

@@ -24,27 +24,20 @@ const CartDesktop = ({
 
   return (
     <>
-      <table className="table-auto text-morin-blue max-w-5xl w-full mt-3">
-        <thead className="border-b-2 border-morin-blue">
-          <tr>
-            <th className="text-left pl-[calc(128px+3.5rem)]">
-              <span className="font-medium">Product</span>
-            </th>
-            <th>
-              <span className="font-medium">Quantity</span>
-            </th>
-            <th>
-              <span className="font-medium">Price</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="w-full max-w-4xl mt-3 flex flex-col space-y-4">
+        <div className="w-full grid grid-cols-6 font-medium text-morin-blue">
+          <span className="col-span-3 text-center">Product</span>
+          <span>Quantity</span>
+          <span className="col-span-2">Price</span>
+        </div>
+        <div className="w-full flex flex-col space-y-3">
           {data.map((item, index) => (
-            <tr key={index}>
-              <td
-                className={`flex items-center pl-4 space-x-10 ${
-                  index > 0 ? 'pb-6' : 'py-6'
-                } w-full h-full`}
+            <div
+              key={index}
+              className="w-full grid grid-cols-6 rounded-2xl shadow-cart py-4"
+            >
+              <div
+                className={`col-span-3 flex items-center space-x-10 h-full pl-8`}
               >
                 <DefaultButton
                   destination=""
@@ -57,15 +50,18 @@ const CartDesktop = ({
                     objectFit="contain"
                   />
                 </DefaultButton>
-                <DefaultButton destination="" className="flex flex-col h-full">
+                <DefaultButton
+                  destination=""
+                  className="flex flex-col text-morin-blue"
+                >
                   <span className="text-ctitleSmall font-nutmeg">
                     {item.title}
                   </span>
                   <span className="font-medium mt-1">{item.variant.title}</span>
                 </DefaultButton>
-              </td>
-              <td className={`px-8 ${index > 0 ? 'pb-6' : ''}`}>
-                <div className="flex justify-between items-center mx-auto px-4 py-2 rounded-full border-2 border-morin-blue w-28">
+              </div>
+              <div className="flex items-center">
+                <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-28">
                   <DefaultButton
                     onClick={() => {
                       decQuantity(item.id)
@@ -95,41 +91,29 @@ const CartDesktop = ({
                   </DefaultButton>
                 </div>
                 {!item.variant.available && (
-                  <span className="mt-1 block text-center font-medium text-defaultSmall text-morin-red">OUT OF STOCK</span>
+                  <span className="mt-1 block text-center font-medium text-defaultSmall text-morin-red">
+                    OUT OF STOCK
+                  </span>
                 )}
-              </td>
-              <td className={`text-center w-36 ${index > 0 ? 'pb-6' : ''}`}>
+              </div>
+              <div className="flex items-center">
                 <span className="font-medium text-morin-blue">
                   IDR {Intl.NumberFormat('en-US').format(item.variant.price)}
                   ,-
                 </span>
-              </td>
-              <td className={`w-20 text-center ${index > 0 ? 'pb-6' : ''}`}>
+              </div>
+              <div className={`flex items-center justify-end pr-8`}>
                 <DefaultButton
                   onClick={() => removeItem(item.id)}
                   className="border-2 border-morin-blue p-1.5 rounded-full"
                 >
                   <Trash />
                 </DefaultButton>
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
-          <tr className="border-t-2 border-morin-blue">
-            <td></td>
-            <td className="text-center pt-3">
-              <span className="font-semibold">Sub-Total</span>
-            </td>
-            <td className="text-center pt-3">
-              <span className="font-semibold">
-                IDR
-                {` `}
-                {Intl.NumberFormat('en-US').format(subTotal())}
-                ,-
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </div>
+      </div>
       <GradientButton className="mt-24" onClick={onCheckout}>
         Checkout
       </GradientButton>

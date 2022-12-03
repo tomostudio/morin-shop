@@ -9,7 +9,7 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
   return (
     <>
       <div className="relative w-full">
-        <DefaultButton className="absolute linearProduct-90 w-32 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev" />
+        <DefaultButton hover={false} className="absolute linearProduct-90 w-32 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev" />
         <Swiper
           slidesPerView="auto"
           centeredSlides={true}
@@ -46,7 +46,7 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <DefaultButton className="absolute linearProduct-270 w-32 h-28 top-0 right-0 mt-7 z-2 swiper-button-next" />
+        <DefaultButton hover={false} className="absolute linearProduct-270 w-32 h-28 top-0 right-0 mt-7 z-2 swiper-button-next" />
       </div>
       <div className="mt-5 flex justify-end">
         <ArrowButton
