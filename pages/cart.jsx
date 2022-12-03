@@ -16,8 +16,16 @@ export default function Cart() {
   const appContext = useAppContext()
   const [dataCart, setCart] = useState([])
   const [loading, setLoading] = useState(true)
+  const [cartLoading, setCartLoading] = useState({
+    id: 0,
+    status: false,
+  })
 
   const decQuantity = (id) => {
+    setCartLoading({
+      id: id,
+      status: true,
+    })
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     const data = dataCart.find((el) => el.id === id)
 
@@ -32,14 +40,26 @@ export default function Cart() {
         })
         setCart(checkout.lineItems)
         appContext.setQuantity(jumlah)
+        setCartLoading({
+          id: id,
+          status: false,
+        })
       } else {
         setCart(null)
         appContext.setQuantity(0)
+        setCartLoading({
+          id: id,
+          status: false,
+        })
       }
     })
   }
 
   const increQuantity = (id) => {
+    setCartLoading({
+      id: id,
+      status: true,
+    })
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     const data = dataCart.find((el) => el.id === id)
 
@@ -54,6 +74,10 @@ export default function Cart() {
       })
       setCart(checkout.lineItems)
       appContext.setQuantity(jumlah)
+      setCartLoading({
+        id: id,
+        status: false,
+      })
     })
   }
 
@@ -96,25 +120,15 @@ export default function Cart() {
             <h2 className="text-ctitle lg:text-h2 text-morin-blue font-nutmeg">
               My Cart
             </h2>
-            {loading ? (
-              <div className="w-full h-[50vh] flex justify-center items-center">
-                <span className="font-semibold text-ctitleSmall">Loading</span>
-              </div>
-            ) : dataCart.length > 0 ? (
-              <CartComponent
-                data={dataCart}
-                decQuantity={decQuantity}
-                increQuantity={increQuantity}
-                onCheckout={onCheckout}
-                removeItem={removeItem}
-              />
-            ) : (
-              <div className="w-full h-[50vh] flex justify-center items-center">
-                <span className="font-semibold text-ctitleSmall">
-                  Cart is Empty
-                </span>
-              </div>
-            )}
+            <CartComponent
+              data={dataCart}
+              decQuantity={decQuantity}
+              increQuantity={increQuantity}
+              onCheckout={onCheckout}
+              removeItem={removeItem}
+              cartLoading={cartLoading}
+              loading={loading}
+            />
           </Container>
         </div>
         <Footer />

@@ -66,10 +66,10 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
 
   const appContext = useAppContext()
   const [getIndex, setIndex] = useState(0)
-  const [titleCart, setTitleCart] = useState('Add to Cart')
+  const [addToCart, setAddToCart] = useState(false)
 
   const onCart = () => {
-    setTitleCart('Adding..')
+    setAddToCart(true)
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     if (dataCheckout) {
       getProductDetail(product.shopifyProduct.handle).then((product) => {
@@ -85,7 +85,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
             jumlah += data.quantity
           })
           appContext.setQuantity(jumlah)
-          setTitleCart('Add to Cart')
+          setAddToCart(false)
           getProductSanityDetail(slug).then((response) => {
             setProduct(response)
           })
@@ -112,7 +112,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
               jumlah += data.quantity
             })
             appContext.setQuantity(jumlah)
-            setTitleCart('Add to Cart')
+            setAddToCart(false)
             getProductSanityDetail(slug).then((response) => {
               setProduct(response)
             })
@@ -238,12 +238,12 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
                 className={
                   soldOut
                     ? '!pointer-events-none'
-                    : !titleCart === 'Add to Cart'
+                    : addToCart
                     ? '!pointer-events-none'
                     : ''
                 }
               >
-                {titleCart}
+                {addToCart ? 'Adding..' : 'Add to Cart'}
               </GradientButton>
             </div>
             <div className="flex flex-col md:max-w-md">

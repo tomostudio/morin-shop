@@ -81,6 +81,7 @@ module.exports = {
         'morin-skyBlue': '#D1F1FF',
         'morin-red': '#E82128',
         'morin-peach': '#FFECD8',
+        'loading': '#F1F1F1'
       },
       backgroundImage: {
         header: 'linear-gradient(90deg, rgba(102,193,234,1) 0%, rgba(23,91,167,1) 100%)'
