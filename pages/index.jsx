@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from 'context/state'
 import ProductCard from '@/components/modules/productCard'
 import { MoreButton } from '@/components/utils/buttons'
+import ProductLoading from '@/components/modules/productLoading'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -167,11 +168,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
             </div>
           )}
           {loading ? (
-            <div className="w-full h-screen flex justify-center items-center">
-              <span className="font-semibold text-morin-blue text-ctitleSmall">
-                Loading
-              </span>
-            </div>
+            <ProductLoading />
           ) : dataProduct.length > 0 ? (
             <div
               className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-20 mb-16`}
