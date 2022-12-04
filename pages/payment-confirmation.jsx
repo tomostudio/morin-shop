@@ -5,8 +5,8 @@ import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
 import axios from 'axios'
 import { useState } from 'react'
-import { ArrowButton } from '@/components/utils/buttons'
 import colors from '@/helpers/preset/colors'
+import { ArrowButton } from '@/components/utils/buttons'
 
 export default function PaymentConfirmation() {
   const [loading, setLoading] = useState(false)

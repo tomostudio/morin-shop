@@ -21,12 +21,8 @@ import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
 import { useAppContext } from 'context/state'
-import {
-  ArrowButton,
-  DefaultButton,
-  GradientButton,
-} from '@/components/utils/buttons'
 import { getProductSanityDetail } from '@/helpers/sanity/function'
+import { ArrowButton, DefaultButton, GradientButton } from '@/components/utils/buttons'
 
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()

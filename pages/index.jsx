@@ -12,8 +12,8 @@ import urlFor from '@/helpers/sanity/urlFor'
 import { useEffect, useState } from 'react'
 import { useAppContext } from 'context/state'
 import ProductCard from '@/components/modules/productCard'
-import { MoreButton } from '@/components/utils/buttons'
 import ProductLoading from '@/components/modules/productLoading'
+import { MoreButton } from '@/components/utils/buttons'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
