@@ -50,7 +50,7 @@ const Footer = ({ className }) => {
           <div className="flex flex-wrap w-full lg:w-auto text-[12px] lg:space-x-2">
             <span className="w-full lg:w-auto">© Morin Food 2021</span>
             <span className="hidden lg:block">|</span>
-            <DefaultButton destination="/confirm-payment">
+            <DefaultButton destination="/payment-confirmation">
               Confirm Payment
             </DefaultButton>
             <span className="hidden lg:block">|</span>
