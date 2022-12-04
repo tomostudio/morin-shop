@@ -25,7 +25,9 @@ const CartDesktop = ({
     subTotal()
   }, [])
 
-  return data.length > 0 ? (
+  return loading ? (
+    <CartLoading />
+  ) : data.length > 0 ? (
     <>
       <div className="w-full max-w-4xl mt-3 flex flex-col space-y-4">
         <div className="w-full grid grid-cols-6 font-medium text-morin-blue">
@@ -33,14 +35,14 @@ const CartDesktop = ({
           <span>Quantity</span>
           <span className="col-span-2">Price</span>
         </div>
-        <div className="w-full flex flex-col space-y-3">
+        <div className="w-full flex flex-col">
           {loading ? (
             <CartLoading />
           ) : (
             data.map((item, index) => (
               <div
                 key={index}
-                className={`w-full grid grid-cols-6 rounded-2xl shadow-cart py-4 ${
+                className={`w-full first:mt-0 mt-3 grid grid-cols-6 rounded-2xl shadow-cart py-4 ${
                   cartLoading.id === item.id && cartLoading.status
                     ? 'opacity-50 pointer-events-none'
                     : ''
@@ -72,8 +74,8 @@ const CartDesktop = ({
                     </span>
                   </DefaultButton>
                 </div>
-                <div className="flex items-center">
-                  <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-28">
+                <div className="flex items-center pr-12">
+                  <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
                     <DefaultButton
                       onClick={() => {
                         decQuantity(item.id)
@@ -85,11 +87,9 @@ const CartDesktop = ({
                     >
                       <Minus width={15} />
                     </DefaultButton>
-                    <input
-                      className="w-full text-center font-medium pointer-events-none"
-                      value={item.quantity}
-                      readOnly
-                    />
+                    <span className="font-medium leading-none pt-1">
+                      {item.quantity}
+                    </span>
                     <DefaultButton
                       onClick={() => {
                         increQuantity(item.id)
@@ -125,6 +125,20 @@ const CartDesktop = ({
               </div>
             ))
           )}
+          <div className="w-full grid grid-cols-6 font-semibold text-morin-blue mt-6">
+            <div className="col-span-3" />
+            <div>
+              <span>Sub-Total</span>
+            </div>
+            <div className="col-span-2">
+              <span>
+                IDR
+                {` `}
+                {Intl.NumberFormat('en-US').format(subTotal())}
+                ,-
+              </span>
+            </div>
+          </div>
         </div>
       </div>
       <GradientButton className="mt-24" onClick={onCheckout}>

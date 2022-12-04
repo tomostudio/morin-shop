@@ -89,6 +89,10 @@ export default function Cart() {
   }
 
   const removeItem = (id) => {
+    setCartLoading({
+      id: id,
+      status: true,
+    })
     const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
     removeItemCheckout(dataCheckout.id, id).then((checkout) => {
       // Do something with the updated checkout
@@ -98,6 +102,10 @@ export default function Cart() {
         jumlah += data.quantity
       })
       appContext.setQuantity(jumlah)
+      setCartLoading({
+        id: id,
+        status: false,
+      })
     })
   }
 
