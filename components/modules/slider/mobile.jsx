@@ -3,7 +3,7 @@ import { Pagination } from 'swiper'
 import 'swiper/css/pagination'
 import Image from 'next/image'
 import urlFor from '@/helpers/sanity/urlFor'
-import { DefaultButton } from '../utils/buttons'
+import { DefaultButton } from '@/components/utils/buttons'
 
 const SliderMobile = ({ data, setIndex }) => {
   return (

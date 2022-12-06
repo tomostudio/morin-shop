@@ -9,8 +9,6 @@ import Header from '@/components/modules/header'
 import 'swiper/css/pagination'
 import MorinTabs from '@/components/utils/morinTabs'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import SliderDesktop from '@/components/modules/sliderDesktop'
-import SliderMobile from '@/components/modules/sliderMobile'
 import {
   addItemCheckout,
   createCheckout,
@@ -23,6 +21,7 @@ import SEO from '@/components/utils/seo'
 import { useAppContext } from 'context/state'
 import { getProductSanityDetail } from '@/helpers/sanity/function'
 import { ArrowButton, DefaultButton, GradientButton } from '@/components/utils/buttons'
+import { SliderDesktop, SliderMobile } from '@/components/modules/slider'
 
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()

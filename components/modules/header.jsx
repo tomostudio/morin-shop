@@ -54,7 +54,7 @@ export default function Header({
                 className={`${appContext.quantity > 0 ? 'pl-1.5' : ''}`}
               >
                 {appContext.quantity > 0 && (
-                  <span className="rounded-full bg-red-500 px-2 mr-2.5 !text-white">
+                  <span className="rounded-full min-w-[10px] bg-red-500 px-2.5 mr-2.5 !text-white">
                     {appContext.quantity}
                   </span>
                 )}

@@ -3,13 +3,16 @@ import { Navigation } from 'swiper'
 import Image from 'next/image'
 import colors from '@/helpers/preset/colors'
 import urlFor from '@/helpers/sanity/urlFor'
-import { ArrowButton, DefaultButton } from '../utils/buttons'
+import { ArrowButton, DefaultButton } from "@/components/utils/buttons"
 
-const SliderDesktop = ({ data, getIndex, setIndex }) => {
+const SliderDesktop = () => {
   return (
     <>
       <div className="relative w-full">
-        <DefaultButton hover={false} className="absolute linearProduct-90 w-32 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev" />
+        <DefaultButton
+          hover={false}
+          className="absolute linearProduct-90 w-32 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev"
+        />
         <Swiper
           slidesPerView="auto"
           centeredSlides={true}
@@ -46,7 +49,10 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <DefaultButton hover={false} className="absolute linearProduct-270 w-32 h-28 top-0 right-0 mt-7 z-2 swiper-button-next" />
+        <DefaultButton
+          hover={false}
+          className="absolute linearProduct-270 w-32 h-28 top-0 right-0 mt-7 z-2 swiper-button-next"
+        />
       </div>
       <div className="mt-5 flex justify-end">
         <ArrowButton
