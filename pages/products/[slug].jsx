@@ -2,120 +2,45 @@ import { useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
-import Image from 'next/image'
-import { Minus, Plus } from '@/components/utils/svg'
-import colors from '@/helpers/preset/colors'
 import Header from '@/components/modules/header'
 import 'swiper/css/pagination'
-import MorinTabs from '@/components/utils/morinTabs'
-import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import {
-  addItemCheckout,
-  createCheckout,
-  getProductDetail,
-} from '@/helpers/shopify'
 import client from '@/helpers/sanity/client'
-import urlFor from '@/helpers/sanity/urlFor'
 import { useRouter } from 'next/router'
 import SEO from '@/components/utils/seo'
+import { GradientButton } from '@/components/utils/buttons'
 import { useAppContext } from 'context/state'
-import { getProductSanityDetail } from '@/helpers/sanity/function'
-import { ArrowButton, DefaultButton, GradientButton } from '@/components/utils/buttons'
-import { SliderDesktop, SliderMobile } from '@/components/modules/slider'
+import { useProductDetail } from '@/helpers/functional/products'
+import {
+  PDDescription,
+  PDImage,
+  PDQuantity,
+  PDSize,
+  PDTitle,
+} from '@/components/modules/products'
 
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()
   const [productDetail] = productAPI
   const [product, setProduct] = useState(productDetail)
   const [seo] = seoAPI
-  let soldOut = product.shopifyProduct.variants.every(
-    (e) => e.inventoryQuantity === 0,
-  )
-  const [productCurrent, setProductCurrent] = useState(
-    !soldOut
-      ? product.shopifyProduct.variants.findIndex(
-          (e) =>
-            e.id ===
-            product.shopifyProduct.variants.filter(
-              (e) => e.inventoryQuantity !== 0,
-            )[0].id,
-        )
-      : null,
-  )
-  const [cart, setCart] = useState({
-    index: !soldOut
-      ? product.shopifyProduct.variants.findIndex(
-          (e) =>
-            e.id ===
-            product.shopifyProduct.variants.filter(
-              (e) => e.inventoryQuantity !== 0,
-            )[0].id,
-        )
-      : null,
-    qty: 1,
-  })
-  const [maxQty, setMaxQty] = useState(
-    product.shopifyProduct.variants.filter((e) => e.inventoryQuantity !== 0)[0]
-      ?.inventoryQuantity,
-  )
-
   const appContext = useAppContext()
-  const [getIndex, setIndex] = useState(0)
-  const [addToCart, setAddToCart] = useState(false)
-
-  const onCart = () => {
-    setAddToCart(true)
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    if (dataCheckout) {
-      getProductDetail(product.shopifyProduct.handle).then((product) => {
-        const lineItemsToAdd = [
-          {
-            variantId: product.variants[cart.index].id,
-            quantity: cart.qty,
-          },
-        ]
-        addItemCheckout(dataCheckout.id, lineItemsToAdd).then((checkout) => {
-          let jumlah = 0
-          checkout.lineItems.forEach((data) => {
-            jumlah += data.quantity
-          })
-          appContext.setQuantity(jumlah)
-          setAddToCart(false)
-          getProductSanityDetail(slug).then((response) => {
-            setProduct(response)
-          })
-        })
-      })
-    } else {
-      createCheckout().then((checkout) => {
-        const data = {
-          id: checkout.id,
-        }
-        localStorage.setItem('dataCheckout', JSON.stringify(data))
-
-        getProductDetail(product.shopifyProduct.handle).then((product) => {
-          // Do something with the product
-          const lineItemsToAdd = [
-            {
-              variantId: product.variants[cart.index].id,
-              quantity: cart.qty,
-            },
-          ]
-          addItemCheckout(checkout.id, lineItemsToAdd).then((checkout) => {
-            let jumlah = 0
-            checkout.lineItems.forEach((data) => {
-              jumlah += data.quantity
-            })
-            appContext.setQuantity(jumlah)
-            setAddToCart(false)
-            getProductSanityDetail(slug).then((response) => {
-              setProduct(response)
-            })
-          })
-        })
-      })
-    }
-  }
+  const [
+    soldOut,
+    addToCart,
+    onCart,
+    productCurrent,
+    setProductCurrent,
+    cart,
+    setCart,
+    maxQty,
+    setMaxQty,
+  ] = useProductDetail(
+    product.shopifyProduct.variants,
+    product.shopifyProduct.handle,
+    slug,
+    setProduct,
+    appContext.setQuantity,
+  )
 
   return (
     <>
@@ -129,105 +54,27 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
         <Container className="flex flex-col md:flex-row w-full md:gap-16 h-full mb-10 md:mb-24">
-          <div className="w-full md:w-1/2 flex flex-col">
-            <div className="relative hidden lg:block w-full h-full aspect-w-1 aspect-h-1 rounded-3xl overflow-hidden">
-              {product.slider_image[getIndex]?.image && (
-                <Image
-                  src={urlFor(product.slider_image[getIndex].image).url()}
-                  layout="fill"
-                  objectFit="contain"
-                  objectPosition="center"
-                />
-              )}
-            </div>
-            {useMediaQuery('(min-width: 768px)') ? (
-              <SliderDesktop
-                data={product.slider_image}
-                getIndex={getIndex}
-                setIndex={setIndex}
-              />
-            ) : (
-              <SliderMobile
-                data={product.slider_image}
-                getIndex={getIndex}
-                setIndex={setIndex}
-              />
-            )}
-          </div>
+          <PDImage sliderImage={product.slider_image} />
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
-            <div className="w-full flex flex-col">
-              <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">
-                {product.shopifyProduct.title}
-              </h2>
-              <h3
-                className={`text-mtitleSmall md:text-ctitle font-normal m-0 w-fit ${
-                  soldOut
-                    ? 'font-semibold border-2 px-4 pt-2 pb-1 leading-none border-morin-blue rounded-full'
-                    : ''
-                }`}
-              >
-                {soldOut ? (
-                  'SOLD OUT'
-                ) : (
-                  <>
-                    IDR{' '}
-                    {product.shopifyProduct.priceRange.maxVariantPrice.toLocaleString(
-                      'id',
-                    )}
-                    ,-
-                  </>
-                )}
-              </h3>
-            </div>
-            <div>
-              <span className="font-medium hidden md:block">select size</span>
-              <MorinTabs
-                tabData={product.shopifyProduct.variants}
-                onChange={(e) => {
-                  setProductCurrent(e)
-                  setCart({
-                    index: e,
-                    qty: 1,
-                  })
-                  setMaxQty(
-                    product.shopifyProduct.variants[e].inventoryQuantity,
-                  )
-                }}
-                className="md:mt-3"
-              />
-            </div>
+            <PDTitle
+              title={product.shopifyProduct.title}
+              price={product.shopifyProduct.priceRange.maxVariantPrice}
+              soldOut={soldOut}
+            />
+            <PDSize
+              variants={product.shopifyProduct.variants}
+              setProductCurrent={setProductCurrent}
+              setCart={setCart}
+              setMaxQty={setMaxQty}
+            />
             <div className="flex w-full h-12 md:h-auto">
-              <div className="flex justify-between items-center mr-4 md:mr-6 px-5 py-2 h-full rounded-full border-2 border-morin-blue w-32">
-                <DefaultButton
-                  onClick={() =>
-                    setCart({
-                      index: productCurrent,
-                      qty: cart.qty - 1 < 1 ? 1 : cart.qty - 1,
-                    })
-                  }
-                  className={`h-full ${soldOut ? '!pointer-events-none' : ''}`}
-                >
-                  <Minus />
-                </DefaultButton>
-                <input
-                  className="w-full text-center font-medium text-default md:text-ctitleSmall pointer-events-none"
-                  value={cart.qty}
-                  readOnly
-                />
-                <DefaultButton
-                  onClick={() => {
-                    if (cart.qty < maxQty) {
-                      setCart({
-                        index: productCurrent,
-                        qty: cart.qty + 1,
-                      })
-                    }
-                  }}
-                  className={`h-full ${soldOut ? '!pointer-events-none' : ''}`}
-                >
-                  <Plus />
-                </DefaultButton>
-              </div>
+              <PDQuantity
+                soldOut={soldOut}
+                qty={cart.qty}
+                maxQty={maxQty}
+                productCurrent={productCurrent}
+                setCart={setCart}
+              />
               <GradientButton
                 onClick={onCart}
                 className={
@@ -241,23 +88,10 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
                 {addToCart ? 'Adding..' : 'Add to Cart'}
               </GradientButton>
             </div>
-            <div className="flex flex-col md:max-w-md">
-              <p className="font-medium text-[12px] md:text-default">
-                {product.description_en}
-              </p>
-              <ArrowButton
-                destination={`https://morin.id/products/${product.type.slug.current}/${product.slug.current}`}
-                targetBlank
-                color={colors.morinBlue}
-                borderColor={colors.morinBlue}
-                hover="white"
-                arrowRight
-                center={false}
-                className="mt-5 md:mt-8"
-              >
-                View Products Details
-              </ArrowButton>
-            </div>
+            <PDDescription
+              typeSlug={product.type.slug.current}
+              productSlug={product.slug.current}
+            />
           </div>
         </Container>
         <Footer />

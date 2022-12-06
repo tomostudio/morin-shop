@@ -5,7 +5,7 @@ import colors from '@/helpers/preset/colors'
 import urlFor from '@/helpers/sanity/urlFor'
 import { ArrowButton, DefaultButton } from "@/components/utils/buttons"
 
-const SliderDesktop = () => {
+const SliderDesktop = ({data, getIndex, setIndex}) => {
   return (
     <>
       <div className="relative w-full">
