@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import { useEffect } from 'react'
-import CartLoading from './loading'
 import { DefaultButton, GradientButton } from '@/components/utils/buttons'
+import { CartLoading } from '@/components/utils/cart'
 
 const CartDesktop = ({
   data,
