@@ -7,13 +7,15 @@ import CartComponent from '@/components/modules/cart'
 import { useCart } from '@/helpers/functional/cart'
 
 export default function Cart() {
-  const [dataCart,
+  const [
+    dataCart,
     loading,
     cartLoading,
     onCheckout,
     onRemoveItem,
     onIncQuantity,
-    onDecQuantity] = useCart();
+    onDecQuantity,
+  ] = useCart()
   return (
     <>
       <Header home={false} />

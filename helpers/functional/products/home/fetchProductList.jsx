@@ -4,7 +4,7 @@ const fetchProductList = (displayData, setProductAPI, setDataProduct, setLoading
   client
     .fetch(
       `
-          *[_type == "shopifyData"][0..11] {
+          *[_type == "shopifyData"] {
             ...,
             type->
           }

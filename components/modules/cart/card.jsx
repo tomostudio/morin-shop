@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 const CartCard = ({
   title,
+  productSlug,
   variantTitle,
   imageSrc,
   imageAlt,
@@ -28,18 +29,18 @@ const CartCard = ({
       }`}
     >
       <div className={`col-span-3 flex items-center space-x-10 h-full pl-8`}>
-        <div className="relative w-[128px] h-[128px]">
+        <DefaultButton destination={`/products/${productSlug}`} className="relative w-[128px] h-[128px]">
           <Image
             src={imageSrc}
             alt={imageAlt}
             layout="fill"
             objectFit="contain"
           />
-        </div>
-        <div className="flex flex-col text-morin-blue">
+        </DefaultButton>
+        <DefaultButton destination={`/products/${productSlug}`} className="flex flex-col text-morin-blue">
           <span className="text-ctitleSmall font-nutmeg">{title}</span>
           <span className="font-medium mt-1">{variantTitle}</span>
-        </div>
+        </DefaultButton>
       </div>
       <div className="flex flex-col justify-center items-center pr-12">
         <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">

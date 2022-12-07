@@ -21,7 +21,6 @@ const PDQuantity = ({ soldOut, qty, maxQty, productCurrent, setCart }) => {
         value={isNaN(qty) || qty < 0 ? 0 : qty}
         onChange={(e) => {
           if (e.target.value <= maxQty) {
-            console.log(qty)
             setCart({
               index: productCurrent,
               qty: parseInt(e.target.value),

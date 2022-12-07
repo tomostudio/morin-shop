@@ -23,7 +23,6 @@ const CartDesktop = ({
 
   useEffect(() => {
     subTotal()
-    console.log(loading)
   }, [])
 
   return loading ? (
@@ -37,6 +36,7 @@ const CartDesktop = ({
             <CartCard
               key={index}
               title={item.title}
+              productSlug={item.productSlug}
               variantTitle={item.variant.title}
               imageSrc={item.variant.image.src}
               imageAlt={item.variant.image.altText}
