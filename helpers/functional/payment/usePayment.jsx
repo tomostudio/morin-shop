@@ -7,6 +7,7 @@ const usePayment = () => {
     status: 'info',
     message: 'Submit',
   })
+  const [getName, setName] = useState(null);
 
   const onPayment = async (e) => {
     setLoading(true)
@@ -33,6 +34,12 @@ const usePayment = () => {
           status: 'success',
           message: 'Submitted',
         })
+        setTimeout(() => {
+          setResponse({
+            status: 'info',
+            message: 'Submit',
+          })
+        }, 3000);
         setLoading(false)
       })
       .catch(() => {
@@ -44,7 +51,7 @@ const usePayment = () => {
       })
   }
 
-  return [loading, response, onPayment]
+  return [loading, response, onPayment, getName, setName]
 }
 
 export default usePayment

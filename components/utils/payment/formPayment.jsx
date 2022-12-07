@@ -1,9 +1,9 @@
-import { usePayment } from "@/helpers/functional/payment"
-import colors from "@/helpers/preset/colors"
-import { ArrowButton } from "../buttons"
+import { usePayment } from '@/helpers/functional/payment'
+import colors from '@/helpers/preset/colors'
+import { ArrowButton } from '../buttons'
 
 const FormPayment = () => {
-  const [loading, response, onPayment] = usePayment()
+  const [loading, response, onPayment, getName, setName] = usePayment()
   return (
     <div className="max-w-md w-full mt-3 mx-auto">
       <form method="post" onSubmit={onPayment} className="space-y-4">
@@ -45,14 +45,18 @@ const FormPayment = () => {
         </div>
         <div className="relative w-full">
           <label className="block border-2 border-morin-blue rounded-full text-morin-blue font-semibold px-5 py-2.5 w-full">
-            Proof of Transfer
+            {getName ? getName : 'Proof of Transfer'}
             <div className="absolute top-0 right-0 h-full border-2 cursor-pointer hover:bg-morin-blue hover:text-white hover:shadow-softer duration-300 transition-all border-morin-blue rounded-full px-5 py-2.5">
               Select File
             </div>
             <input
               name="foto_transfer"
               className="absolute top-0 right-0 px-5 py-2.5 opacity-0 w-full rounded-full pointer-events-none"
+              onChange={(e) => {
+                setName(e.target.files[0].name)
+              }}
               type="file"
+              accept="image/x-png,image/jpeg"
               required
             />
           </label>
@@ -68,7 +72,11 @@ const FormPayment = () => {
             }
             hover={'blue'}
             bgColor={response.status === 'error' ? 'bg-white' : `bg-morin-blue`}
-            className={`py-2 ${loading ? 'pointer-events-none' : ''}`}
+            className={`py-2 ${
+              loading || response.status === 'success'
+                ? 'pointer-events-none'
+                : ''
+            }`}
           >
             {loading ? 'Submitting..' : response.message}
           </ArrowButton>
