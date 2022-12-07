@@ -17,9 +17,17 @@ const PDQuantity = ({ soldOut, qty, maxQty, productCurrent, setCart }) => {
         <Minus />
       </DefaultButton>
       <input
-        className="w-full text-center font-medium text-default md:text-ctitleSmall pointer-events-none"
-        value={qty}
-        readOnly
+        className="w-full text-center font-medium text-default md:text-ctitleSmall"
+        value={isNaN(qty) || qty < 0 ? 0 : qty}
+        onChange={(e) => {
+          if (e.target.value <= maxQty) {
+            console.log(qty)
+            setCart({
+              index: productCurrent,
+              qty: parseInt(e.target.value),
+            })
+          }
+        }}
       />
       <DefaultButton
         onClick={() => {
