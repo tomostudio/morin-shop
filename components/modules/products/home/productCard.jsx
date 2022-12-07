@@ -1,6 +1,6 @@
+import { DefaultButton } from '@/components/utils/buttons'
 import Image from 'next/image'
 import React from 'react'
-import { DefaultButton } from '../utils/buttons'
 
 const ProductCard = ({
   variants,

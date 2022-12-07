@@ -1,3 +1,3 @@
-import ProductList from './home/productList'
+import PHLoading from "./home/loading"
 
-export { ProductList }
+export { PHLoading }

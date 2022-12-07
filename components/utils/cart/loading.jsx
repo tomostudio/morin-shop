@@ -1,12 +1,10 @@
+import CartTitle from '@/components/modules/cart/title'
+
 const CartLoading = () => {
   return (
     <>
       <div className="w-full max-w-4xl mt-3 flex flex-col space-y-4">
-        <div className="w-full grid grid-cols-6 font-medium text-morin-blue">
-          <span className="col-span-3 text-center">Product</span>
-          <span>Quantity</span>
-          <span className="col-span-2">Price</span>
-        </div>
+        <CartTitle />
         <div className="w-full flex flex-col">
           <div
             className={`w-full grid grid-cols-6 rounded-2xl shadow-cart py-4`}

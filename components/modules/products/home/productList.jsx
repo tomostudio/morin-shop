@@ -1,7 +1,7 @@
-import ProductCard from '@/components/modules/productCard'
+import { MoreButton } from '@/components/utils/buttons'
+import { PHLoading } from '@/components/utils/products'
 import urlFor from '@/helpers/sanity/urlFor'
-import { MoreButton } from '../../buttons'
-import PHLoading from './loading'
+import ProductCard from './productCard'
 
 const ProductList = ({ loading, dataProduct, showButton, loadMore }) => {
   return loading ? (

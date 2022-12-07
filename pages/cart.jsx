@@ -4,7 +4,7 @@ import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
 import CartComponent from '@/components/modules/cart'
-import { useCart } from '@/helpers/functional/products'
+import { useCart } from '@/helpers/functional/cart'
 
 export default function Cart() {
   const [dataCart,

@@ -8,7 +8,7 @@ import SEO from '@/components/utils/seo'
 import { useRouter } from 'next/router'
 import client from '@/helpers/sanity/client'
 import { useProductList } from '@/helpers/functional/products'
-import { ProductList } from '@/components/utils/products'
+import { ProductList } from '@/components/modules/products'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -35,7 +35,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
         <HeaderGap />
         <Container className="relative flex-grow">
           <MorinTabsMobile tabData={productTypeAPI} />
-          <ProductList
+          <ProductList 
             loading={loading}
             dataProduct={dataProduct}
             showButton={showButton}
