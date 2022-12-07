@@ -28,18 +28,18 @@ const CartCard = ({
       }`}
     >
       <div className={`col-span-3 flex items-center space-x-10 h-full pl-8`}>
-        <DefaultButton destination="" className="relative w-[128px] h-[128px]">
+        <div className="relative w-[128px] h-[128px]">
           <Image
             src={imageSrc}
             alt={imageAlt}
             layout="fill"
             objectFit="contain"
           />
-        </DefaultButton>
-        <DefaultButton destination="" className="flex flex-col text-morin-blue">
+        </div>
+        <div className="flex flex-col text-morin-blue">
           <span className="text-ctitleSmall font-nutmeg">{title}</span>
           <span className="font-medium mt-1">{variantTitle}</span>
-        </DefaultButton>
+        </div>
       </div>
       <div className="flex flex-col justify-center items-center pr-12">
         <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
