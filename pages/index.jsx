@@ -3,12 +3,12 @@ import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
-import MorinTabsMobile from '@/components/utils/morinTabsMobile'
 import SEO from '@/components/utils/seo'
 import { useRouter } from 'next/router'
 import client from '@/helpers/sanity/client'
 import { useProductList } from '@/helpers/functional/products'
 import { ProductList } from '@/components/modules/products'
+import { HomeTabsMobile } from '@/components/utils/tabs'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -34,7 +34,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
         />
         <HeaderGap />
         <Container className="relative flex-grow">
-          <MorinTabsMobile tabData={productTypeAPI} />
+          <HomeTabsMobile tabData={productTypeAPI} />
           <ProductList 
             loading={loading}
             dataProduct={dataProduct}

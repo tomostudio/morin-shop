@@ -2,9 +2,9 @@ import Container from '@/components/modules/container'
 import colors from '@/helpers/preset/colors'
 import { MorinLogo, WaButton } from '../utils/svg'
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import MorinTabsHome from '../utils/morinTabsHome'
 import { useAppContext } from 'context/state'
 import { ArrowButton, DefaultButton } from '../utils/buttons'
+import { HomeTabsDesktop } from '../utils/tabs'
 
 export default function Header({
   home = true,
@@ -66,7 +66,7 @@ export default function Header({
             tabData.length > 0 &&
             useMediaQuery('(min-width: 1024px)') && (
               <div className="absolute w-full h-[45px] left-0 -bottom-[20px] flex justify-center">
-                <MorinTabsHome tabData={tabData} onChangeCategory={onChangeCategory} />
+                <HomeTabsDesktop tabData={tabData} onChangeCategory={onChangeCategory} />
               </div>
             )
           ) : (

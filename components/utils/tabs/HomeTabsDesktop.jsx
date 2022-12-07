@@ -1,13 +1,11 @@
-import { useAppContext } from 'context/state'
-import { useState, useRef, useEffect } from 'react'
-import { DefaultButton } from './buttons'
+import { useState, useRef } from 'react'
+import { DefaultButton } from '../buttons'
 
-const MorinTabsHome = ({ tabData, onChangeCategory }) => {
+const HomeTabsDesktop = ({ tabData, onChangeCategory }) => {
   // Market Variable
   const [markerW, setMarkerW] = useState(58) // width of marker
   const [markerPos, setMarkerPos] = useState(0) // position of marker
   let widthData = [] // always collect width data.
-  const ctx = useAppContext()
 
   const defaultNavRef = useRef()
   const navRef = useRef()
@@ -16,15 +14,6 @@ const MorinTabsHome = ({ tabData, onChangeCategory }) => {
   const navMouseClick = (e, category) => {
     if (onChangeCategory) onChangeCategory(category)
 
-    // if (category === 'all') {
-    //   ctx.setListProduct(8)
-    // } else {
-    //   ctx.setListProduct(
-    //     product.filter((data) => data.type.slug.current === category).length < 8
-    //       ? product.filter((data) => data.type.slug.current === category).length
-    //       : 9,
-    //   )
-    // }
     // set marker width according to button yang di click
     setMarkerW(e.target.clientWidth)
     defaultNavRef.current = e.target
@@ -149,4 +138,4 @@ const MorinTabsHome = ({ tabData, onChangeCategory }) => {
   )
 }
 
-export default MorinTabsHome
+export default HomeTabsDesktop

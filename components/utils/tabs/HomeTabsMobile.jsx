@@ -1,7 +1,7 @@
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
 import { useState, useEffect, useRef } from 'react'
 
-const MorinTabsMobile = ({ tabData, onChange = () => {}, className }) => {
+const HomeTabsMobile = ({ tabData, onChange = () => {}, className }) => {
   const [currentTab, setCurrentTab] = useState('tab-1')
   const [thisEl, setThisEl] = useState(0)
   const [width, setWidth] = useState(null)
@@ -99,4 +99,4 @@ const MorinTabsMobile = ({ tabData, onChange = () => {}, className }) => {
   )
 }
 
-export default MorinTabsMobile
+export default HomeTabsMobile
