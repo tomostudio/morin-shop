@@ -1,7 +1,5 @@
-import Image from 'next/image'
-import { Minus, Plus, Trash } from '@/components/utils/svg'
 import { useEffect } from 'react'
-import { DefaultButton, GradientButton } from '@/components/utils/buttons'
+import {  GradientButton } from '@/components/utils/buttons'
 import { CartLoading } from '@/components/utils/cart'
 import CartCard from './card'
 import CartTitle from './title'
@@ -25,6 +23,7 @@ const CartDesktop = ({
 
   useEffect(() => {
     subTotal()
+    console.log(loading)
   }, [])
 
   return loading ? (

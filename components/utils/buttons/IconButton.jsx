@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const ArrowButton = ({
+const IconButton = ({
   color = '#fff',
   center = true,
   borderColor = false,
@@ -18,7 +18,7 @@ const ArrowButton = ({
     borderColor
       ? 'border-2 border-solid hover:shadow-softer hover:bg-current'
       : ''
-  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} `
+  } duration-300 transition-all ${center ? 'mx-auto' : ''} `
 
   return !destination ? (
     <button
@@ -97,4 +97,4 @@ const ArrowButton = ({
   )
 }
 
-export default ArrowButton
+export default IconButton

@@ -1,3 +1,8 @@
+import { DefaultButton, IconButton } from '@/components/utils/buttons'
+import { Minus, Plus, Trash } from '@/components/utils/svg'
+import colors from '@/helpers/preset/colors'
+import Image from 'next/image'
+
 const CartCard = ({
   title,
   variantTitle,
@@ -16,7 +21,6 @@ const CartCard = ({
 }) => {
   return (
     <div
-      key={index}
       className={`w-full first:mt-0 mt-3 grid grid-cols-6 rounded-2xl shadow-cart py-4 ${
         loadingId === itemId && loadingStatus
           ? 'opacity-50 pointer-events-none'
@@ -72,12 +76,15 @@ const CartCard = ({
         </span>
       </div>
       <div className={`flex items-center justify-end pr-8`}>
-        <DefaultButton
+        <IconButton
           onClick={() => removeItem(itemId)}
           className="border-2 border-morin-blue p-1.5 rounded-full"
-        >
-          <Trash />
-        </DefaultButton>
+          icon={<Trash />}
+          color={colors.morinBlue}
+          borderColor={colors.morinBlue}
+          center={false}
+          hover="white"
+        />
       </div>
     </div>
   )
