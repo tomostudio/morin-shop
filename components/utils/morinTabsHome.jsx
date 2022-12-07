@@ -2,7 +2,7 @@ import { useAppContext } from 'context/state'
 import { useState, useRef, useEffect } from 'react'
 import { DefaultButton } from './buttons'
 
-const MorinTabsHome = ({ tabData, loadCategory }) => {
+const MorinTabsHome = ({ tabData, onChangeCategory }) => {
   // Market Variable
   const [markerW, setMarkerW] = useState(58) // width of marker
   const [markerPos, setMarkerPos] = useState(0) // position of marker
@@ -14,7 +14,7 @@ const MorinTabsHome = ({ tabData, loadCategory }) => {
 
   // function when navigation on click
   const navMouseClick = (e, category) => {
-    if (loadCategory) loadCategory(category)
+    if (onChangeCategory) onChangeCategory(category)
 
     // if (category === 'all') {
     //   ctx.setListProduct(8)

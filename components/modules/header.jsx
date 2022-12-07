@@ -9,7 +9,7 @@ import { ArrowButton, DefaultButton } from '../utils/buttons'
 export default function Header({
   home = true,
   tabData = null,
-  loadCategory = null,
+  onChangeCategory = null,
 }) {
   const appContext = useAppContext()
 
@@ -66,7 +66,7 @@ export default function Header({
             tabData.length > 0 &&
             useMediaQuery('(min-width: 1024px)') && (
               <div className="absolute w-full h-[45px] left-0 -bottom-[20px] flex justify-center">
-                <MorinTabsHome tabData={tabData} loadCategory={loadCategory} />
+                <MorinTabsHome tabData={tabData} onChangeCategory={onChangeCategory} />
               </div>
             )
           ) : (

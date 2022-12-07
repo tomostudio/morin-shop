@@ -1,121 +1,19 @@
-import { useEffect, useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
-import {
-  fetchCheckout,
-  removeItemCheckout,
-  updateItemCheckout,
-} from '@/helpers/shopify'
-import { useAppContext } from 'context/state'
 import CartComponent from '@/components/modules/cart'
+import { useCart } from '@/helpers/functional/products'
 
 export default function Cart() {
-  const appContext = useAppContext()
-  const [dataCart, setCart] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [cartLoading, setCartLoading] = useState({
-    id: 0,
-    status: false,
-  })
-
-  const decQuantity = (id) => {
-    setCartLoading({
-      id: id,
-      status: true,
-    })
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    const data = dataCart.find((el) => el.id === id)
-
-    const lineItemsToUpdate = [
-      { id: id, quantity: parseInt(data.quantity - 1) },
-    ]
-    updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then((checkout) => {
-      if (checkout && checkout.lineItems.length > 0) {
-        let jumlah = 0
-        checkout.lineItems.forEach((data) => {
-          jumlah += data.quantity
-        })
-        setCart(checkout.lineItems)
-        appContext.setQuantity(jumlah)
-        setCartLoading({
-          id: id,
-          status: false,
-        })
-      } else {
-        setCart(null)
-        appContext.setQuantity(0)
-        setCartLoading({
-          id: id,
-          status: false,
-        })
-      }
-    })
-  }
-
-  const increQuantity = (id) => {
-    setCartLoading({
-      id: id,
-      status: true,
-    })
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    const data = dataCart.find((el) => el.id === id)
-
-    const lineItemsToUpdate = [
-      { id: id, quantity: parseInt(data.quantity + 1) },
-    ]
-    updateItemCheckout(dataCheckout.id, lineItemsToUpdate).then((checkout) => {
-      if (!checkout) return
-      let jumlah = 0
-      checkout.lineItems.forEach((data) => {
-        jumlah += data.quantity
-      })
-      setCart(checkout.lineItems)
-      appContext.setQuantity(jumlah)
-      setCartLoading({
-        id: id,
-        status: false,
-      })
-    })
-  }
-
-  const onCheckout = () => {
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    fetchCheckout(dataCheckout.id).then((checkout) => {
-      if (checkout) window.location.href = checkout.webUrl
-    })
-  }
-
-  const removeItem = (id) => {
-    setCartLoading({
-      id: id,
-      status: true,
-    })
-    const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
-    removeItemCheckout(dataCheckout.id, id).then((checkout) => {
-      // Do something with the updated checkout
-      setCart(checkout.lineItems)
-      let jumlah = 0
-      checkout.lineItems.forEach((data) => {
-        jumlah += data.quantity
-      })
-      appContext.setQuantity(jumlah)
-      setCartLoading({
-        id: id,
-        status: false,
-      })
-    })
-  }
-
-  useEffect(() => {
-    fetchCheckout().then((response) => {
-      if (response) setCart(response.lineItems)
-      setLoading(false)
-    })
-  }, [])
-
+  const [dataCart,
+    loading,
+    cartLoading,
+    onCheckout,
+    onRemoveItem,
+    onIncQuantity,
+    onDecQuantity] = useCart();
   return (
     <>
       <Header home={false} />
@@ -130,10 +28,10 @@ export default function Cart() {
             </h2>
             <CartComponent
               data={dataCart}
-              decQuantity={decQuantity}
-              increQuantity={increQuantity}
+              decQuantity={onDecQuantity}
+              increQuantity={onIncQuantity}
               onCheckout={onCheckout}
-              removeItem={removeItem}
+              removeItem={onRemoveItem}
               cartLoading={cartLoading}
               loading={loading}
             />

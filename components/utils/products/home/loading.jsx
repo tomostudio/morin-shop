@@ -1,4 +1,4 @@
-const ProductLoading = () => {
+const PHLoading = () => {
   return (
     <div
       className={`relative grid grid-cols-2 lg:grid-cols-4 gap-6 pt-[120px] lg:pt-20 mb-16`}
@@ -15,4 +15,4 @@ const ProductLoading = () => {
   )
 }
 
-export default ProductLoading
+export default PHLoading

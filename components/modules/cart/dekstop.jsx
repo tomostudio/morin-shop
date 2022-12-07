@@ -69,7 +69,7 @@ const CartDesktop = ({
                   <span className="font-medium mt-1">{item.variant.title}</span>
                 </DefaultButton>
               </div>
-              <div className="flex items-center pr-12">
+              <div className="flex flex-col justify-center items-center pr-12">
                 <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
                   <DefaultButton
                     onClick={() => {

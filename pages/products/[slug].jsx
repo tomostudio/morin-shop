@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
@@ -21,10 +20,10 @@ import {
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()
   const [productDetail] = productAPI
-  const [product, setProduct] = useState(productDetail)
   const [seo] = seoAPI
   const appContext = useAppContext()
   const [
+    product,
     soldOut,
     addToCart,
     onCart,
@@ -34,13 +33,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
     setCart,
     maxQty,
     setMaxQty,
-  ] = useProductDetail(
-    product.shopifyProduct.variants,
-    product.shopifyProduct.handle,
-    slug,
-    setProduct,
-    appContext.setQuantity,
-  )
+  ] = useProductDetail(productDetail, slug, appContext.setQuantity)
 
   return (
     <>
@@ -91,6 +84,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
             <PDDescription
               typeSlug={product.type.slug.current}
               productSlug={product.slug.current}
+              description={product.description_en}
             />
           </div>
         </Container>
