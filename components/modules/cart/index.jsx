@@ -1,9 +1,9 @@
 import { useMediaQuery } from '@/helpers/functional/checkMedia'
-import CartDesktop from './dekstop'
+import CartDesktop from './desktop'
 import CartMobile from './mobile'
 
 const CartComponent = ({ data, decQuantity, increQuantity, onCheckout, removeItem, cartLoading, loading }) => {
-  return useMediaQuery('(min-width: 1024px)') ? (
+  return useMediaQuery('(min-width: 640px)') ? (
     <CartDesktop
       data={data}
       decQuantity={decQuantity}
@@ -20,6 +20,8 @@ const CartComponent = ({ data, decQuantity, increQuantity, onCheckout, removeIte
       increQuantity={increQuantity}
       onCheckout={onCheckout}
       removeItem={removeItem}
+      cartLoading={cartLoading}
+      loading={loading}
     />
   )
 }

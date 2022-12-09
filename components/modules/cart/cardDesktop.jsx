@@ -3,7 +3,7 @@ import { Minus, Plus, Trash } from '@/components/utils/svg'
 import colors from '@/helpers/preset/colors'
 import Image from 'next/image'
 
-const CartCard = ({
+const CartCardDesktop = ({
   title,
   productSlug,
   variantTitle,
@@ -42,7 +42,7 @@ const CartCard = ({
           <span className="font-medium mt-1">{variantTitle}</span>
         </DefaultButton>
       </div>
-      <div className="flex flex-col justify-center items-center pr-12">
+      <div className="flex flex-col justify-center items-center pr-6 lg:pr-12">
         <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
           <DefaultButton
             onClick={() => {
@@ -91,4 +91,4 @@ const CartCard = ({
   )
 }
 
-export default CartCard
+export default CartCardDesktop

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import {  GradientButton } from '@/components/utils/buttons'
 import { CartLoading } from '@/components/utils/cart'
-import CartCard from './card'
+import CartCardDesktop from './cardDesktop'
 import CartTitle from './title'
 
 const CartDesktop = ({
@@ -29,11 +29,11 @@ const CartDesktop = ({
     <CartLoading />
   ) : data.length > 0 ? (
     <>
-      <div className="w-full max-w-4xl mt-3 flex flex-col space-y-4">
+      <div className="w-full max-w-4xl md:mt-3 flex flex-col md:space-y-4">
         <CartTitle />
         <div className="w-full flex flex-col">
           {data.map((item, index) => (
-            <CartCard
+            <CartCardDesktop
               key={index}
               title={item.title}
               productSlug={item.productSlug}
