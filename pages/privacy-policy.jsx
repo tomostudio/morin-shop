@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
       <Layout>
         <NextSeo title="Privacy Policy" />
         <div className="bg-white w-full">
-          <Container className="flex flex-col text-morin-blue mb-10 md:mb-16">
+          <Container className="flex flex-col text-morin-blue mt-4 md:mt-0 mb-10 md:mb-16">
             <h2 className="text-mtitle lg:text-h2 leading-none font-nutmeg text-center">
               Privacy Policy
             </h2>
