@@ -111,7 +111,7 @@ const PDTabs = ({ tabData, onChange }) => {
 
   return (
     <nav
-      className="header-nav w-full lg:w-fit pointer-events-auto relative rounded-full bg-white py-1.5 px-2 shadow-softer flex justify-around lg:justify-start"
+      className="header-nav w-fit lg:w-fit pointer-events-auto relative rounded-full bg-white py-1.5 px-2 shadow-softer flex"
       onSubmit={(e) => e.preventDefault()}
       ref={navRef}
     >

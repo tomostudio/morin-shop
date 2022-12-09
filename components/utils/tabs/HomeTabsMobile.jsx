@@ -49,7 +49,6 @@ const HomeTabsMobile = ({ tabData, onChange = () => {}, className }) => {
   }, [])
 
   return (
-    useMediaQuery('(max-width: 1023px)') && (
       <div className="absolute w-full h-[45px] left-0 top-[45px] flex justify-center items-center">
         <div
           className={`flex items-center ${className} justify-around w-full px-2`}
@@ -95,7 +94,6 @@ const HomeTabsMobile = ({ tabData, onChange = () => {}, className }) => {
           </form>
         </div>
       </div>
-    )
   )
 }
 

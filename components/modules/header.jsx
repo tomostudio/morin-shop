@@ -29,7 +29,8 @@ export default function Header({
                 arrowLeft
                 borderColor={home ? colors.white : colors.morinBlue}
                 center={false}
-                hover={home ? "blue" : "white"}
+                hover={home ? 'blue' : 'white'}
+                mobileText={false}
               >
                 Morinfood
               </ArrowButton>
@@ -40,7 +41,7 @@ export default function Header({
               a11yText="Navigate to the home page"
               className="relative w-full"
             >
-              <MorinLogo className="w-full h-[76px]" />
+              <MorinLogo className="w-full h-[56px] lg:h-[76px]" />
             </DefaultButton>
             <div className="w-full flex justify-end">
               <ArrowButton
@@ -51,13 +52,16 @@ export default function Header({
                 bgColor={home ? 'bg-transparent' : `bg-morin-blue`}
                 cart
                 center={false}
-                className={`${appContext.quantity > 0 ? 'pl-1.5' : ''}`}
+                mobileText={false}
+                className={`${appContext.quantity > 0 ? 'pl-1 md:pl-[2px]' : ''}`}
+                quantity={
+                  appContext.quantity > 0 && (
+                    <span className="h-full flex justify-center items-center pt-[2px] rounded-full min-w-[10px] bg-red-500 px-2.5 md: md:mr-2.5 !text-white">
+                      {appContext.quantity}
+                    </span>
+                  )
+                }
               >
-                {appContext.quantity > 0 && (
-                  <span className="rounded-full min-w-[10px] bg-red-500 px-2.5 mr-2.5 !text-white">
-                    {appContext.quantity}
-                  </span>
-                )}
                 My Cart
               </ArrowButton>
             </div>
@@ -66,7 +70,10 @@ export default function Header({
             tabData.length > 0 &&
             useMediaQuery('(min-width: 1024px)') && (
               <div className="absolute w-full h-[45px] left-0 -bottom-[20px] flex justify-center">
-                <HomeTabsDesktop tabData={tabData} onChangeCategory={onChangeCategory} />
+                <HomeTabsDesktop
+                  tabData={tabData}
+                  onChangeCategory={onChangeCategory}
+                />
               </div>
             )
           ) : (

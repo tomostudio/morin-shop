@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Cart } from '../svg'
 
 const ArrowButton = ({
   children,
+  quantity,
   color = '#fff',
   cart = false,
   arrowLeft = false,
@@ -10,6 +11,7 @@ const ArrowButton = ({
   center = true,
   borderColor = false,
   showText = true,
+  mobileText = true,
   bgColor = 'bg-transparent',
   className,
   destination,
@@ -51,7 +53,12 @@ const ArrowButton = ({
           <ArrowLeft color={color} />
         </div>
       )}
-      {showText && <span className="pt-[2px]">{children}</span>}
+      {quantity && <>{quantity}</>}
+      {showText && (
+        <span className={`pt-[2px] ${!mobileText ? 'hidden md:block' : ''}`}>
+          {children}
+        </span>
+      )}
       {arrowRight && (
         <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
           <ArrowRight color={color} />
@@ -70,7 +77,7 @@ const ArrowButton = ({
             : hover === 'blue'
             ? 'hover-blue'
             : 'hover:opacity-50 transition-opacity'
-        }`}
+        } ${quantity ? 'py-[2px] md:py-[0.5px]' : ''}`}
         style={
           borderColor
             ? { color: color, borderColor: borderColor }
@@ -86,7 +93,12 @@ const ArrowButton = ({
             <ArrowLeft color={color} />
           </div>
         )}
-        {showText && <span className="pt-[2px]">{children}</span>}
+        {quantity && <>{quantity}</>}
+        {showText && (
+          <span className={`pt-[2px] ${!mobileText ? 'hidden md:block' : ''}`}>
+            {children}
+          </span>
+        )}
         {arrowRight && (
           <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
             <ArrowRight color={color} />
@@ -127,7 +139,12 @@ const ArrowButton = ({
           <ArrowLeft color={color} />
         </div>
       )}
-      {showText && <span className="pt-[2px]">{children}</span>}
+      {quantity && <>{quantity}</>}
+      {showText && (
+        <span className={`pt-[2px] ${!mobileText ? 'hidden md:block' : ''}`}>
+          {children}
+        </span>
+      )}
       {arrowRight && (
         <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
           <ArrowRight color={color} />

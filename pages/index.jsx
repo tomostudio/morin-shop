@@ -9,6 +9,7 @@ import client from '@/helpers/sanity/client'
 import { useProductList } from '@/helpers/functional/products'
 import { ProductList } from '@/components/modules/products'
 import { HomeTabsMobile } from '@/components/utils/tabs'
+import { useMediaQuery } from '@/helpers/functional/checkMedia'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -34,8 +35,10 @@ export default function Home({ seoAPI, productTypeAPI }) {
         />
         <HeaderGap />
         <Container className="relative flex-grow">
-          <HomeTabsMobile tabData={productTypeAPI} />
-          <ProductList 
+          {useMediaQuery('(max-width: 1023px)') && (
+            <HomeTabsMobile tabData={productTypeAPI} />
+          )}
+          <ProductList
             loading={loading}
             dataProduct={dataProduct}
             showButton={showButton}

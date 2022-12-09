@@ -47,13 +47,13 @@ const Footer = ({ className }) => {
               />
             </DefaultButton>
           </div>
-          <div className="flex flex-wrap w-full lg:w-auto text-[12px] lg:space-x-2">
+          <div className="flex flex-wrap w-full lg:w-auto text-[10px] md:text-[12px] pr-3 md:pr-0 lg:space-x-2">
             <span className="w-full lg:w-auto">© Morin Food 2021</span>
             <span className="hidden lg:block">|</span>
             <DefaultButton destination="/payment-confirmation">
               Confirm Payment
             </DefaultButton>
-            <span className="hidden lg:block">|</span>
+            <span className="mx-1 lg:mx-0">|</span>
             <DefaultButton destination="/terms-conditions">
               Terms & Conditions
             </DefaultButton>
