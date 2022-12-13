@@ -51,7 +51,7 @@ const CartMobile = ({
               removeItem={removeItem}
             />
           ))}
-          <div className="w-full flex justify-between text-morin-blue mt-6">
+          <div className="w-full flex justify-between text-morin-blue mt-6 py-3 px-4 shadow-cart rounded-3xl">
             <div className="flex flex-col">
               <span className="font-semibold">Sub-Total</span>
               <span className="text-mtitleSmall">
@@ -61,7 +61,7 @@ const CartMobile = ({
                 ,-
               </span>
             </div>
-            <GradientButton className="w-auto px-6" onClick={onCheckout}>
+            <GradientButton className="!w-auto px-6" onClick={onCheckout}>
               Checkout
             </GradientButton>
           </div>

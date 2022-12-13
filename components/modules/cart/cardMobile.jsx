@@ -22,18 +22,16 @@ const CartCardMobile = ({
 }) => {
   return (
     <div
-      className={`w-full first:mt-0 mt-3 flex rounded-2xl shadow-cart py-4 ${
+      className={`w-full first:mt-0 mt-3 flex rounded-2xl shadow-cart py-6 ${
         loadingId === itemId && loadingStatus
           ? 'opacity-50 pointer-events-none'
           : ''
       }`}
     >
-      <div
-        className={`flex items-center space-x-4 h-full pl-4`}
-      >
+      <div className={`flex items-center space-x-4 h-full px-4`}>
         <DefaultButton
           destination={`/products/${productSlug}`}
-          className="relative w-[75px] min-h-[100px] h-full"
+          className="relative w-[95px] min-h-[120px] h-full"
         >
           <Image
             src={imageSrc}
@@ -42,23 +40,23 @@ const CartCardMobile = ({
             objectFit="contain"
           />
         </DefaultButton>
-        <div className="h-full flex flex-col space-y-2">
+        <div className="h-full min-h-[120px] flex flex-col justify-between">
           <DefaultButton
             destination={`/products/${productSlug}`}
             className="flex flex-col text-morin-blue space-y-1"
           >
-            <span className="text-default font-nutmeg">
-              {title}
-            </span>
-            <span className="text-defaultSmall font-medium">
-              {variantTitle}
-            </span>
-            <span className="font-semibold text-morin-blue">
-              IDR {Intl.NumberFormat('en-US').format(price)}
-              ,-
-            </span>
+            <span className="text-default font-nutmeg">{title}</span>
+            <div className="flex space-x-4">
+              <span className="text-defaultSmall font-medium min-w-[2em]">
+                {variantTitle}
+              </span>
+              <span className="font-semibold text-morin-blue">
+                IDR {Intl.NumberFormat('en-US').format(price)}
+                ,-
+              </span>
+            </div>
           </DefaultButton>
-          <div className="flex gap-x-4">
+          <div className="flex gap-x-3">
             <div className="w-max min-w-[110px] flex justify-between items-center px-4 py-1 rounded-full border-2 text-morin-blue border-morin-blue">
               <DefaultButton
                 onClick={() => {
