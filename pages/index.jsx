@@ -1,31 +1,34 @@
-import Layout from '@/components/modules/layout'
-import Footer from '@/components/modules/footer'
-import Container from '@/components/modules/container'
-import HeaderGap from '@/components/modules/headerGap'
-import Header from '@/components/modules/header'
-import SEO from '@/components/utils/seo'
-import { useRouter } from 'next/router'
-import client from '@/helpers/sanity/client'
-import { useProductList } from '@/helpers/functional/products'
-import { ProductList } from '@/components/modules/products'
-import { HomeTabsMobile } from '@/components/utils/tabs'
-import { useMediaQuery } from '@/helpers/functional/checkMedia'
+import Layout from '@/components/modules/layout';
+import Footer from '@/components/modules/footer';
+import Container from '@/components/modules/container';
+import HeaderGap from '@/components/modules/headerGap';
+import Header from '@/components/modules/header';
+import SEO from '@/components/utils/seo';
+import { useRouter } from 'next/router';
+import client from '@/helpers/sanity/client';
+import { useProductList } from '@/helpers/functional/products';
+import { ProductList } from '@/components/modules/products';
+import { HomeTabsDesktop } from '@/components/utils/tabs';
+import { useMediaQuery } from '@/helpers/functional/checkMedia';
 
 export default function Home({ seoAPI, productTypeAPI }) {
-  const [seo] = seoAPI
-  const router = useRouter()
-  const [
-    loading,
-    dataProduct,
-    showButton,
-    onLoadMore,
-    onChangeCategory,
-  ] = useProductList()
+  const [seo] = seoAPI;
+  const router = useRouter();
+  const [loading, dataProduct, showButton, onLoadMore, onChangeCategory] =
+    useProductList();
 
   return (
     <>
-      <Header tabData={productTypeAPI} onChangeCategory={onChangeCategory} />
-      <Layout className="bg-morin-skyBlue">
+      <Header tabData={productTypeAPI} />
+      <div className='fixed z-50 w-full flex items-center flex-col'>
+        <HeaderGap />
+        <HomeTabsDesktop
+          tabData={productTypeAPI}
+          onChangeCategory={onChangeCategory}
+          className='relative mt-6 lg:-translate-y-1/2'
+        />
+      </div>
+      <Layout className='bg-morin-skyBlue'>
         <SEO
           title={'Home'}
           pagelink={router.pathname}
@@ -34,10 +37,10 @@ export default function Home({ seoAPI, productTypeAPI }) {
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
         <HeaderGap />
-        <Container className="relative flex-grow">
-          {useMediaQuery('(max-width: 1023px)') && (
+        <Container className='relative flex-grow'>
+          {/* {useMediaQuery('(max-width: 1023px)') && (
             <HomeTabsMobile tabData={productTypeAPI} />
-          )}
+          )} */}
           <ProductList
             loading={loading}
             dataProduct={dataProduct}
@@ -48,24 +51,24 @@ export default function Home({ seoAPI, productTypeAPI }) {
         <Footer />
       </Layout>
     </>
-  )
+  );
 }
 
 export async function getStaticProps() {
   const productTypeAPI = await client.fetch(`
   *[_type == "productType"]
-  `)
+  `);
   const seoAPI = await client.fetch(`
     *[_type == "settings"]
-    `)
+    `);
   const footerAPI = await client.fetch(`
       *[_type == "footer"]
-      `)
+      `);
   return {
     props: {
       productTypeAPI,
       seoAPI,
       footerAPI,
     },
-  }
+  };
 }

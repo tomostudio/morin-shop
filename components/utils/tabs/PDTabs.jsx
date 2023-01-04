@@ -136,13 +136,9 @@ const PDTabs = ({ tabData, onChange }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      refreshMarker();
-    });
+    window.addEventListener('resize', refreshMarker);
     return () => {
-      window.removeEventListener('resize', () => {
-        refreshMarker();
-      });
+      window.removeEventListener('resize', refreshMarker);
     };
   }, []);
 
