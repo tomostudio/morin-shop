@@ -18,13 +18,13 @@ const SliderMobile = ({ data, setIndex }) => {
         <SwiperSlide key={index}>
           <DefaultButton
             onClick={() => setIndex(index)}
-            className="relative w-full h-[400px] md:h-96 rounded-3xl overflow-hidden"
+            className="relative w-full h-[65vh] min-h-[450px] md:h-96 rounded-3xl overflow-hidden"
           >
             <Image
               src={urlFor(item.image).url()}
               alt={item.image.alt}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               objectPosition="center"
             />
           </DefaultButton>

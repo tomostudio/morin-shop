@@ -53,11 +53,11 @@ body {
 }
 
 .swiper-pagination .swiper-pagination-bullet {
-  @apply bg-transparent w-[10px] h-[10px] opacity-100 border-2 border-white;
+  @apply bg-transparent w-[10px] h-[10px] opacity-100 border-2 border-morin-blue md:border-white;
 }
 
 .swiper-pagination .swiper-pagination-bullet-active {
-  @apply bg-white;
+  @apply bg-morin-blue md:bg-white  ;
 }
 
 nav.header-nav {

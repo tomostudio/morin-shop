@@ -11,7 +11,7 @@ const SliderDesktop = ({data, getIndex, setIndex}) => {
       <div className="relative w-full">
         <DefaultButton
           hover={false}
-          className="absolute linearProduct-90 w-32 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev"
+          className="absolute linearProduct-90 w-28 h-28 top-0 left-0 mt-7 z-2 swiper-button-prev"
         />
         <Swiper
           slidesPerView="auto"
@@ -51,7 +51,7 @@ const SliderDesktop = ({data, getIndex, setIndex}) => {
         </Swiper>
         <DefaultButton
           hover={false}
-          className="absolute linearProduct-270 w-32 h-28 top-0 right-0 mt-7 z-2 swiper-button-next"
+          className="absolute linearProduct-270 w-28 h-28 top-0 right-0 mt-7 z-2 swiper-button-next"
         />
       </div>
       <div className="mt-5 flex justify-end">
@@ -71,7 +71,7 @@ const SliderDesktop = ({data, getIndex, setIndex}) => {
           showText={false}
           hover="white"
           borderColor={colors.morinBlue}
-          className="ml-4 h-9 swiper-button-next"
+          className="ml-2 h-9 swiper-button-next"
         />
       </div>
     </>

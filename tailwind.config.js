@@ -39,8 +39,8 @@ module.exports = {
     },
     extend: {
       fontSize: {
-        defaultSmall: '12px',
-        default: '15px',
+        defaultSmall: '14px',
+        default: '16px',
         h1: '72px',
         h2: '52px',
         mtitle: '28px',

@@ -21,7 +21,7 @@ const ArrowButton = ({
   onClick = () => {},
   ...others
 }) => {
-  const defaultClass = `stroke-button flex flex-wrap items-center w-fit min-h-[30px] font-semibold leading-none rounded-full ${
+  const defaultClass = `stroke-button flex flex-wrap items-center w-fit min-h-[2rem] font-semibold leading-none rounded-full ${
     borderColor
       ? 'border-2 border-solid hover:shadow-softer hover:bg-current'
       : ''
