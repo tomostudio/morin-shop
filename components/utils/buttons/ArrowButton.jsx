@@ -13,7 +13,7 @@ const ArrowButton = ({
   showText = true,
   mobileText = true,
   bgColor = 'bg-transparent',
-  className,
+  className = '',
   destination,
   targetBlank,
   ariaLabel,
@@ -25,7 +25,7 @@ const ArrowButton = ({
     borderColor
       ? 'border-2 border-solid hover:shadow-softer hover:bg-current'
       : ''
-  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} `
+  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} ${className}`
 
   return !destination ? (
     <button
@@ -89,7 +89,7 @@ const ArrowButton = ({
         {...others}
       >
         {arrowLeft && (
-          <div className={`mr-2 ${!children ? 'last:mr-0' : ''}`}>
+          <div className={`${mobileText ? 'mr-2' : 'mr-0'} md:mr-2 ${!children ? 'last:mr-0' : ''}`}>
             <ArrowLeft color={color} />
           </div>
         )}
@@ -100,13 +100,13 @@ const ArrowButton = ({
           </span>
         )}
         {arrowRight && (
-          <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
+          <div className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${!children ? 'last:ml-0' : ''}`}>
             <ArrowRight color={color} />
           </div>
         )}
         {cart && (
-          <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
-            <Cart color={color} />
+          <div className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${!children ? 'last:ml-0' : ''}`}>
+            <Cart color={color} className={`w-5 h-auto`}/>
           </div>
         )}
       </a>

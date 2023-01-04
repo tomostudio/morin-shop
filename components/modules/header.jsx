@@ -31,6 +31,7 @@ export default function Header({
                 center={false}
                 hover={home ? 'blue' : 'white'}
                 mobileText={false}
+                className={'min-h-[2.25rem]'}
               >
                 Morinfood
               </ArrowButton>
@@ -53,7 +54,7 @@ export default function Header({
                 cart
                 center={false}
                 mobileText={false}
-                className={`${
+                className={`min-h-[2.25rem] ${
                   appContext.quantity > 0 ? 'pl-1 md:pl-[2px]' : ''
                 }`}
                 quantity={

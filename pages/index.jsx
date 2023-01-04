@@ -20,12 +20,12 @@ export default function Home({ seoAPI, productTypeAPI }) {
   return (
     <>
       <Header tabData={productTypeAPI} />
-      <div className='fixed z-50 w-full flex items-center flex-col'>
+      <div className='fixed z-50 w-full flex items-center flex-col pointer-events-none'>
         <HeaderGap />
         <HomeTabsDesktop
           tabData={productTypeAPI}
           onChangeCategory={onChangeCategory}
-          className='relative mt-6 lg:-translate-y-1/2'
+          className='relative mt-6 lg:-translate-y-1/2 pointer-events-auto'
         />
       </div>
       <Layout className='bg-morin-skyBlue'>
