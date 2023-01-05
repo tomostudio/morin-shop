@@ -2,6 +2,7 @@ import client from '@/helpers/sanity/client';
 import Layout from '@/components/modules/layout';
 import Footer from '@/components/modules/footer';
 import { NextSeo } from 'next-seo';
+import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header';
 
 const Error404 = ({ seoAPI }) => {

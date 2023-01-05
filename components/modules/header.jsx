@@ -62,7 +62,7 @@ export default function Header({
                 quantity={
                   appContext.quantity > 0 && (
                     <div className='h-full py-[2px] mr-1.5 md:mr-2'>
-                      <div className='h-full flex justify-center items-center pt-[2px] rounded-full min-w-[27px] bg-red-500 px-2.5 !text-white'>
+                      <div className='h-full flex justify-center items-center pt-[3px] rounded-full min-w-[27px] bg-red-500 px-2 !text-white'>
                         {appContext.quantity}
                       </div>
                     </div>

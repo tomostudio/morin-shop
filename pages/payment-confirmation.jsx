@@ -3,6 +3,7 @@ import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
+import HeaderGap from '@/components/modules/headerGap'
 import { FormPayment } from '@/components/utils/payment'
 
 export default function PaymentConfirmation() {

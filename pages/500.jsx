@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Header from '@/components/modules/header';
 import { NextSeo } from 'next-seo';
 import Footer from '@/components/modules/footer';
+import HeaderGap from '@/components/modules/headerGap'
 import Layout from '@/components/modules/layout';
 
 const Error500 = ({ seoAPI }) => {
