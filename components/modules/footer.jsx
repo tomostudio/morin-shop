@@ -50,7 +50,7 @@ const Footer = ({ className }) => {
           </DefaultButton>
         </div>
         {/* CREDITS */}
-        <div className='row-start-2 col-start-1 col-end-3 flex flex-col md:flex-row justify-start md:justify-end w-full md:w-auto text-[12px] pr-3 md:pr-0 md:space-x-2 mt-5 md:mt-10'>
+        <div className=' font-medium row-start-2 col-start-1 col-end-3 flex flex-col md:flex-row justify-start md:justify-end w-full md:w-auto text-[12px] pr-3 md:pr-0 md:space-x-2 mt-5 md:mt-10'>
           <span className='w-full md:w-auto text-center md:text-right'>© Morin Food 2021</span>
           <span className='hidden md:block'>|</span>
           <div className='flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-2'>

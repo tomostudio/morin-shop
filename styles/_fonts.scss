@@ -4,6 +4,7 @@
       url('/fonts/Gilroy-Extrabold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
+  line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -12,7 +13,7 @@
   src: url('/fonts/Gilroy-Bold.woff2') format('woff2'),
       url('/fonts/Gilroy-Bold.woff') format('woff');
   font-weight: bold;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -21,7 +22,7 @@
   src: url('/fonts/Gilroy-Black.woff2') format('woff2'),
       url('/fonts/Gilroy-Black.woff') format('woff');
   font-weight: 900;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -31,7 +32,7 @@
       url('/fonts/Gilroy-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: swap;line-gap-override: 90%;
 }
 
 @font-face {
@@ -40,7 +41,7 @@
       url('/fonts/Gilroy-RegularItalic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
-  font-display: swap;
+  font-display: swap;line-gap-override: 90%;
 }
 
 @font-face {
@@ -48,7 +49,7 @@
   src: url('/fonts/Gilroy-Regular.woff2') format('woff2'),
       url('/fonts/Gilroy-Regular.woff') format('woff');
   font-weight: normal;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -57,7 +58,7 @@
   src: url('/fonts/Gilroy-Semibold.woff2') format('woff2'),
       url('/fonts/Gilroy-Semibold.woff') format('woff');
   font-weight: 600;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -66,7 +67,7 @@
   src: url('/fonts/Nutmeg-Bold.woff2') format('woff2'),
       url('/fonts/Nutmeg-Bold.woff') format('woff');
   font-weight: bold;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 
@@ -75,7 +76,7 @@
   src: url('/fonts/Nutmeg-Regular.woff2') format('woff2'),
       url('/fonts/Nutmeg-Regular.woff') format('woff');
   font-weight: normal;
-  font-style: normal;
+  font-style: normal;line-gap-override: 90%;
   font-display: swap;
 }
 

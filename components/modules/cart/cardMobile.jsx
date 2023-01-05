@@ -45,13 +45,13 @@ const CartCardMobile = ({
             destination={`/products/${productSlug}`}
             className="flex flex-col text-morin-blue space-y-1"
           >
-            <span className="text-default font-nutmeg">{title}</span>
+            <span className="text-xl font-nutmeg">{title}</span>
             <div className="flex space-x-4">
               <span className="text-defaultSmall font-medium min-w-[2em]">
                 {variantTitle}
               </span>
               <span className="font-semibold text-morin-blue">
-                IDR {Intl.NumberFormat('en-US').format(price)}
+                IDR {Intl.NumberFormat('id-ID').format(price.amount)}
                 ,-
               </span>
             </div>

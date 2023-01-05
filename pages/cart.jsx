@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
 import CartComponent from '@/components/modules/cart'
 import { useCart } from '@/helpers/functional/cart'
+import HeaderGap from '@/components/modules/headerGap'
 
 export default function Cart() {
   const [

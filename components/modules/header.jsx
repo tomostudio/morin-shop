@@ -57,12 +57,12 @@ export default function Header({
                 center={false}
                 mobileText={false}
                 className={`min-h-[2.25rem] ${
-                  appContext.quantity > 0 ? 'pl-1' : ''
+                  appContext.quantity > 0 ? 'pl-1 md:pl-[3px]' : ''
                 }`}
                 quantity={
                   appContext.quantity > 0 && (
-                    <div className='h-full py-[2px] mr-1.5 md:mr-2'>
-                      <div className='h-full flex justify-center items-center pt-[3px] rounded-full min-w-[27px] bg-red-500 px-2 !text-white'>
+                    <div className='h-full py-[1px] md:py-[2px] mr-1.5 md:mr-2'>
+                      <div className='h-full flex justify-center items-center pt-[3px] rounded-full min-w-[22px] md:min-w-[25px] bg-red-500 px-1.5 md:px-1.5 !text-white'>
                         {appContext.quantity}
                       </div>
                     </div>

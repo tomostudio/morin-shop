@@ -53,7 +53,7 @@ const CartDesktop = ({
               removeItem={removeItem}
             />
           ))}
-          <div className="w-full grid grid-cols-6 font-semibold text-morin-blue mt-6">
+          <div className="w-full grid grid-cols-6 font-semibold text-morin-blue mt-6 text-default">
             <div className="col-span-3" />
             <div>
               <span>Sub-Total</span>

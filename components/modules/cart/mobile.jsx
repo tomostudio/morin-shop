@@ -16,7 +16,7 @@ const CartMobile = ({
   const subTotal = () => {
     let sub = 0
     data.forEach((item) => {
-      sub += item.quantity * item.variant.price
+      sub += item.quantity * item.variant.price.amount
     })
     return sub
   }
@@ -57,7 +57,7 @@ const CartMobile = ({
               <span className="text-mtitleSmall">
                 IDR
                 {` `}
-                {Intl.NumberFormat('en-US').format(subTotal())}
+                {Intl.NumberFormat('id-ID').format(subTotal())}
                 ,-
               </span>
             </div>

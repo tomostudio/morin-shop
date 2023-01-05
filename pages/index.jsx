@@ -9,7 +9,6 @@ import client from '@/helpers/sanity/client';
 import { useProductList } from '@/helpers/functional/products';
 import { ProductList } from '@/components/modules/products';
 import { HomeTabsDesktop } from '@/components/utils/tabs';
-import { useMediaQuery } from '@/helpers/functional/checkMedia';
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI;

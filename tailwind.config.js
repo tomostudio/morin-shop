@@ -67,7 +67,7 @@ module.exports = {
         normal: '2px 2px 4px 0px rgba(0,0,0,0.25)',
         product: '2px 2px 4px 0px rgba(0,0,0,0.1)',
         faqCard: '4px 5px 4px 0px rgba(0,0,0,0.25)',
-        cart: '3px 3px 4px rgba(0, 0, 0, 0.1)'
+        cart: '2px 2px 6px rgba(0, 0, 0, 0.15)'
       },
       width: {
         content: '46rem',
