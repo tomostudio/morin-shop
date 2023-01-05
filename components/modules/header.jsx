@@ -16,8 +16,8 @@ export default function Header({
   return (
     <>
       <nav
-        className={`${
-          home ? 'bg-header fixed' : 'bg-white'
+        className={`fixed ${
+          home ? 'bg-header ' : 'bg-transparent'
         } top-0 left-0 right-0 w-full z-50 flex flex-col rounded-b-3xl`}
       >
         <Container className={`relative h-[105px] lg:h-header`}>
@@ -73,18 +73,6 @@ export default function Header({
               </ArrowButton>
             </div>
           </div>
-          {/* {home ? (
-            tabData.length > 0 && (
-              <div className='absolute w-full h-[45px] left-0 -bottom-[20px] flex justify-center'>
-                <HomeTabsDesktop
-                  tabData={tabData}
-                  onChangeCategory={onChangeCategory}
-                />
-              </div>
-            )
-          ) : (
-            <></>
-          )} */}
         </Container>
       </nav>
       <DefaultButton className='fixed z-10 bottom-0 right-0 w-[66px] h-fit mr-8 mb-8'>

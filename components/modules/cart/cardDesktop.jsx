@@ -22,13 +22,13 @@ const CartCardDesktop = ({
 }) => {
   return (
     <div
-      className={`w-full first:mt-0 mt-3 grid grid-cols-6 rounded-2xl shadow-cart py-4 ${
+      className={`w-full first:mt-0 mt-3 grid grid-cols-6 rounded-2xl shadow-cart py-4 transition-opacity ${
         loadingId === itemId && loadingStatus
           ? 'opacity-50 pointer-events-none'
           : ''
       }`}
     >
-      <div className={`col-span-3 flex items-center space-x-10 h-full pl-8`}>
+      <div className={`col-span-3 flex items-center space-x-10 h-full pl-6 lg:pl-8`}>
         <DefaultButton destination={`/products/${productSlug}`} className="relative w-[128px] h-[128px]">
           <Image
             src={imageSrc}
@@ -42,8 +42,8 @@ const CartCardDesktop = ({
           <span className="font-medium mt-1">{variantTitle}</span>
         </DefaultButton>
       </div>
-      <div className="flex flex-col justify-center items-center pr-6 lg:pr-12">
-        <div className="flex justify-between items-center px-4 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
+      <div className="flex flex-col justify-center items-center pr-4 lg:pr-12 min-w-[90px]">
+        <div className="flex justify-between items-center px-3 py-2 rounded-full border-2 text-morin-blue border-morin-blue w-full">
           <DefaultButton
             onClick={() => {
               decQuantity(itemId)
@@ -72,14 +72,14 @@ const CartCardDesktop = ({
       </div>
       <div className="flex items-center">
         <span className="font-medium text-morin-blue">
-          IDR {Intl.NumberFormat('en-US').format(price)}
+          IDR {Intl.NumberFormat('id-ID').format(price.amount)}
           ,-
         </span>
       </div>
       <div className={`flex items-center justify-end pr-8`}>
         <IconButton
           onClick={() => removeItem(itemId)}
-          className="border-2 border-morin-blue p-1.5 rounded-full"
+          className="border-2 border-morin-blue flex justify-center items-center rounded-full aspect-1"
           icon={<Trash />}
           color={colors.morinBlue}
           borderColor={colors.morinBlue}

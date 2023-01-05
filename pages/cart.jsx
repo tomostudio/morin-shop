@@ -20,6 +20,7 @@ export default function Cart() {
     <>
       <Header home={false} />
       <Layout>
+        <HeaderGap />
         <NextSeo title="Cart" />
         <div className="bg-white w-full">
           <Container

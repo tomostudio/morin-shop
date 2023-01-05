@@ -9,6 +9,7 @@ const Error404 = ({ seoAPI }) => {
     <>
       <Header home={false} />
       <Layout>
+        <HeaderGap />
         <NextSeo title='404' />
         <div className='bg-white w-full h-full flex justify-center items-center grow'>
           <h2 className=' text-morin-blue text-mtitle lg:text-h2 leading-none font-nutmeg text-center'>

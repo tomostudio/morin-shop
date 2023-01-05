@@ -10,6 +10,7 @@ export default function PaymentConfirmation() {
     <>
       <Header home={false} />
       <Layout>
+        <HeaderGap />
         <NextSeo title="Payment Confirmation" />
         <div className="bg-white w-full">
           <Container className="flex flex-col text-morin-blue mt-4 md:mt-0 mb-10 md:mb-16">

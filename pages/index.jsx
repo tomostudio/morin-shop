@@ -20,7 +20,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
   return (
     <>
       <Header tabData={productTypeAPI} />
-      <div className='fixed z-50 w-full flex items-center flex-col pointer-events-none'>
+      <div className='fixed z-[51] w-full flex items-center flex-col pointer-events-none'>
         <HeaderGap />
         <HomeTabsDesktop
           tabData={productTypeAPI}
@@ -38,9 +38,6 @@ export default function Home({ seoAPI, productTypeAPI }) {
         />
         <HeaderGap />
         <Container className='relative flex-grow'>
-          {/* {useMediaQuery('(max-width: 1023px)') && (
-            <HomeTabsMobile tabData={productTypeAPI} />
-          )} */}
           <ProductList
             loading={loading}
             dataProduct={dataProduct}

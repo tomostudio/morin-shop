@@ -16,7 +16,7 @@ const CartDesktop = ({
   const subTotal = () => {
     let sub = 0
     data.forEach((item) => {
-      sub += item.quantity * item.variant.price
+      sub += item.quantity * item.variant.price.amount
     })
     return sub
   }
@@ -32,6 +32,7 @@ const CartDesktop = ({
       <div className="w-full max-w-4xl md:mt-3 flex flex-col md:space-y-4">
         <CartTitle />
         <div className="w-full flex flex-col">
+          {console.log(data)}
           {data.map((item, index) => (
             <CartCardDesktop
               key={index}
@@ -61,9 +62,10 @@ const CartDesktop = ({
               <span>
                 IDR
                 {` `}
-                {Intl.NumberFormat('en-US').format(subTotal())}
+                {Intl.NumberFormat('id-ID').format(subTotal())}
                 ,-
               </span>
+
             </div>
           </div>
         </div>
