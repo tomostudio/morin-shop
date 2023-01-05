@@ -15,7 +15,7 @@ export default function PaymentConfirmation() {
         <NextSeo title="Payment Confirmation" />
         <div className="bg-white w-full">
           <Container className="flex flex-col text-morin-blue mt-4 md:mt-0 mb-10 md:mb-16">
-            <h2 className="text-mtitle lg:text-h2 leading-none font-nutmeg text-center">
+            <h2 className="text-4xl lg:text-h2 leading-none font-nutmeg text-center">
               Payment Confirmation
             </h2>
             <FormPayment />
