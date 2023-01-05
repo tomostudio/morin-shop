@@ -2,7 +2,6 @@ import Layout from '@/components/modules/layout'
 import Footer from '@/components/modules/footer'
 import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
-import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
 
 export default function TermsConditions() {

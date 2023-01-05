@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Cart } from '../svg'
+import Link from 'next/link';
+import { ArrowLeft, ArrowRight, Cart } from '../svg';
 
 const ArrowButton = ({
   children,
@@ -23,21 +23,23 @@ const ArrowButton = ({
 }) => {
   const defaultClass = `stroke-button flex flex-wrap items-center w-fit min-h-[2rem] font-semibold leading-none rounded-full ${
     borderColor
-      ? 'border-2 border-solid hover:shadow-softer hover:bg-current'
+      ? `border-2 border-solid hover:bg-current ${
+          bgColor === 'bg-transparent' ? 'hover:shadow-softer' : ''
+        }`
       : ''
-  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} ${className}`
+  } px-3 duration-300 transition-all ${center ? 'mx-auto' : ''} ${className}`;
 
   return !destination ? (
     <button
       aria-label={ariaLabel}
-      type="button"
+      type='button'
       onClick={onClick}
-      className={`${defaultClass} ${bgColor} ${className ? className : ''} ${
+      className={`transition-all ${defaultClass} ${bgColor} ${className ? className : ''} ${
         hover === 'white'
           ? 'hover-white'
           : hover === 'blue'
           ? 'hover-blue'
-          : 'hover:opacity-50 transition-opacity'
+          : 'hover:opacity-50 '
       }`}
       style={
         borderColor
@@ -69,7 +71,7 @@ const ArrowButton = ({
     <Link href={destination}>
       <a
         aria-label={ariaLabel}
-        className={`${defaultClass} ${bgColor} select-none ${
+        className={`transition-all ${defaultClass} ${bgColor} select-none ${
           className ? className : ''
         } ${
           hover === 'white'
@@ -89,7 +91,11 @@ const ArrowButton = ({
         {...others}
       >
         {arrowLeft && (
-          <div className={`${mobileText ? 'mr-2' : 'mr-0'} md:mr-2 ${!children ? 'last:mr-0' : ''}`}>
+          <div
+            className={`${mobileText ? 'mr-2' : 'mr-0'} md:mr-2 ${
+              !children ? 'last:mr-0' : ''
+            }`}
+          >
             <ArrowLeft color={color} />
           </div>
         )}
@@ -100,13 +106,21 @@ const ArrowButton = ({
           </span>
         )}
         {arrowRight && (
-          <div className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${!children ? 'last:ml-0' : ''}`}>
+          <div
+            className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${
+              !children ? 'last:ml-0' : ''
+            }`}
+          >
             <ArrowRight color={color} />
           </div>
         )}
         {cart && (
-          <div className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${!children ? 'last:ml-0' : ''}`}>
-            <Cart color={color} className={`w-5 h-auto`}/>
+          <div
+            className={`${mobileText ? 'ml-2' : 'ml-0'} md:ml-2 ${
+              !children ? 'last:ml-0' : ''
+            }`}
+          >
+            <Cart color={color} className={`w-5 h-auto`} />
           </div>
         )}
       </a>
@@ -115,14 +129,14 @@ const ArrowButton = ({
     <a
       href={destination}
       aria-label={ariaLabel}
-      className={`${defaultClass} bg-[${bgColor}] ${
+      className={`transition-all ${defaultClass} bg-[${bgColor}] ${
         className ? className : ''
       } ${
         hover === 'white'
           ? 'hover-white'
           : hover === 'blue'
           ? 'hover-blue'
-          : 'hover:opacity-50 transition-opacity'
+          : 'hover:opacity-50'
       }`}
       style={
         borderColor
@@ -131,7 +145,7 @@ const ArrowButton = ({
               color: color,
             }
       }
-      target="_blank"
+      target='_blank'
       {...others}
     >
       {arrowLeft && (
@@ -151,7 +165,7 @@ const ArrowButton = ({
         </div>
       )}
     </a>
-  )
-}
+  );
+};
 
-export default ArrowButton
+export default ArrowButton;

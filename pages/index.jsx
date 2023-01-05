@@ -25,7 +25,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
         <HomeTabsDesktop
           tabData={productTypeAPI}
           onChangeCategory={onChangeCategory}
-          className='relative mt-6 lg:-translate-y-1/2 pointer-events-auto'
+          className='relative mt-6 lg:mt-0 lg:-translate-y-1/2 pointer-events-auto'
         />
       </div>
       <Layout className='bg-morin-skyBlue'>
