@@ -36,7 +36,7 @@ const removeItemCheckout = async (id, item) => {
 const fetchCheckout = async (id) => {
   const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
   if (dataCheckout) {
-    const response = await shopifyClient.checkout.fetch(dataCheckout.id)
+    let response = await shopifyClient.checkout.fetch(dataCheckout.id)
     response = parseShopifyResponse(response)
     if (response?.completedAt) {
       localStorage.removeItem('dataCheckout')

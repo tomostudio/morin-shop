@@ -7,9 +7,6 @@ function extractIdFromGid(gid) {
 
 const fetchDataCheckout = (setLoading, setCart) => {
   fetchCheckout().then((response) => {
-    const productId = response.lineItems.map(
-      (data) => `product-${extractIdFromGid(data.variant.product.id)}`,
-    )
     client
       .fetch(
         `

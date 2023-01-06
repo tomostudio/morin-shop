@@ -1,5 +1,5 @@
 import { DefaultButton } from '@/components/utils/buttons'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import React from 'react'
 
 const ProductCard = ({
@@ -22,8 +22,8 @@ const ProductCard = ({
             blurDataURL={imgPlaceholder}
             placeholder="blur"
             alt={imgAlt}
-            layout={'fill'}
-            objectFit={'contain'}
+            layout="fill"
+            objectFit="contain"
           />
         </div>
       </div>

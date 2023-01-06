@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import colors from '@/helpers/preset/colors'
 import urlFor from '@/helpers/sanity/urlFor'
 import { ArrowButton, DefaultButton } from "@/components/utils/buttons"

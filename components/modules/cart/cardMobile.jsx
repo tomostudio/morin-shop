@@ -1,7 +1,7 @@
 import { DefaultButton, IconButton } from '@/components/utils/buttons'
 import { Minus, Plus, Trash } from '@/components/utils/svg'
 import colors from '@/helpers/preset/colors'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 const CartCardMobile = ({
   title,

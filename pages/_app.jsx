@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }) {
         {/* FAVICON  */}
       </Head>
 
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <AppWrapper>
           <Component {...pageProps} key={router.asPath} />
           {/* BORDER TRIGGER */}

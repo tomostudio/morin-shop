@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { forwardRef } from "react"
+import Link from 'next/link'
+import { forwardRef } from 'react'
 
 const DefaultButton = forwardRef(
   (
@@ -28,17 +28,17 @@ const DefaultButton = forwardRef(
         {children}
       </button>
     ) : !blank ? (
-      <Link href={destination} scroll={false}>
-        <a
-          aria-label={a11yText}
-          className={`${className} pointer-events-auto ${
-            hover ? 'hover:opacity-50 transition-opacity' : ''
-          }`}
-          ref={ref}
-          {...others}
-        >
-          {children}
-        </a>
+      <Link
+        href={destination}
+        scroll={false}
+        aria-label={a11yText}
+        className={`${className} pointer-events-auto ${
+          hover ? 'hover:opacity-50 transition-opacity' : ''
+        }`}
+        ref={ref}
+        {...others}
+      >
+        {children}
       </Link>
     ) : (
       <a

@@ -1,5 +1,5 @@
 import Container from './container';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import colors from '@/helpers/preset/colors';
 import { ArrowButton, DefaultButton } from '../utils/buttons';
 
