@@ -24,6 +24,7 @@ const CartDesktop = ({
   useEffect(() => {
     subTotal()
   }, [])
+  console.log(data)
 
   return loading ? (
     <CartLoading />
@@ -32,7 +33,6 @@ const CartDesktop = ({
       <div className="w-full max-w-4xl md:mt-3 flex flex-col md:space-y-4">
         <CartTitle />
         <div className="w-full flex flex-col">
-          {console.log(data)}
           {data.map((item, index) => (
             <CartCardDesktop
               key={index}

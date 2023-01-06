@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import { createCheckout } from '@/helpers/shopify'
-import handleItemCheckout from './handleItemCheckout'
 import handleCart from './handleCart'
 import useProductDetailState from './useProductDetailState'
 

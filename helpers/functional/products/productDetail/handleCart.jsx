@@ -32,7 +32,7 @@ const handleCart = (
         slug,
         handle,
         cart,
-        dataCheckout,
+        data,
         setAddToCart,
         setProduct,
         setQuantity,

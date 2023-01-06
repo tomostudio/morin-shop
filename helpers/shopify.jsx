@@ -33,7 +33,7 @@ const removeItemCheckout = async (id, item) => {
   return parseShopifyResponse(response)
 }
 
-const fetchCheckout = async (id) => {
+const fetchCheckout = async () => {
   const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
   if (dataCheckout) {
     let response = await shopifyClient.checkout.fetch(dataCheckout.id)
@@ -52,6 +52,13 @@ const fetchCheckout = async (id) => {
         jumlah,
       }
     }
+  }else {
+    createCheckout().then((checkout) => {
+      const data = {
+        id: checkout.id,
+      }
+      localStorage.setItem('dataCheckout', JSON.stringify(data))
+    })
   }
 }
 

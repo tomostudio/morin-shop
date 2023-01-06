@@ -22,7 +22,7 @@ const decreaseQuantityCart = (id, dataCart, setCart, setQuantity, setCartLoading
         status: false,
       })
     } else {
-      setCart(null)
+      setCart([])
       setQuantity(0)
       setCartLoading({
         id: id,

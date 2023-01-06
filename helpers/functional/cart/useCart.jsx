@@ -2,7 +2,7 @@ import handleCheckout from './handleCheckout'
 import increaseQuantityCart from './increaseQuantityCart'
 import handleRemoveItem from './handleRemoveItem'
 import fetchDataCheckout from './fetchDataCheckout'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import decreaseQuantityCart from './decreaseQuantityCart'
 import useCartState from './useCartState'
 

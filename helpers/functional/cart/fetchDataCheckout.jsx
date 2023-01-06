@@ -17,7 +17,8 @@ const fetchDataCheckout = (setLoading, setCart) => {
             `,
       )
       .then((res) => {
-        if (response.lineItems) {
+        console.log(response)
+        if (response?.lineItems) {
           response = response.lineItems.map((data) => {
             return {
               ...data,
@@ -29,6 +30,8 @@ const fetchDataCheckout = (setLoading, setCart) => {
             }
           })
           setCart(response)
+        }else {
+          setCart([])
         }
         setLoading(false)
       })
