@@ -29,7 +29,7 @@ export default function Header({
                 arrowLeft
                 borderColor={home ? colors.white : colors.morinBlue}
                 center={false}
-                bgColor={'bg-white'}
+                bgColor={home ? 'bg-transparent' : `bg-white`}
                 hover={home ? 'blue' : 'white'}
                 mobileText={false}
                 className={'min-h-[2.25rem]'}
@@ -53,7 +53,7 @@ export default function Header({
                 color={colors.white}
                 hover='blue'
                 borderColor={home ? colors.white : colors.morinBlue}
-                bgColor={home ? 'bg-white' : `bg-morin-blue`}
+                bgColor={home ? 'bg-transparent' : `bg-morin-blue`}
                 cart
                 center={false}
                 mobileText={false}
