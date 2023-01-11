@@ -26,6 +26,8 @@ const SliderMobile = ({ data, setIndex }) => {
               layout="fill"
               objectFit="contain"
               objectPosition="center"
+              placeholder='blur'
+              blurDataURL={urlFor(item.image).width(50).blur(20).format('auto').url()}
             />
           </DefaultButton>
         </SwiperSlide>

@@ -23,7 +23,7 @@ const Footer = ({ className }) => {
         </ArrowButton>
 
         {/* RIGHT */}
-        <div className='row-start-1 col-start-2 flex justify-end self-end items-end space-x-3 '>
+        <div className='row-start-1 col-start-2 flex justify-end items-center space-x-3 '>
           <DefaultButton blank={true} className='flex'>
             <Image
               src={`/ig-white.svg`}

@@ -25,7 +25,7 @@ export default function Cart() {
         <NextSeo title="Cart" />
         <div className="bg-white w-full">
           <Container
-            className={`flex flex-col items-center w-full h-full mb-24`}
+            className={`flex flex-col items-center w-full h-full mb-12 md:mb-20`}
           >
             <h2 className="text-ctitle lg:text-h2 text-morin-blue font-nutmeg">
               My Cart

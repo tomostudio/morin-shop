@@ -47,7 +47,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
           defaultSEO={typeof seo !== 'undefined' && seo.seo_en}
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
-        <Container className='flex flex-col md:flex-row w-full md:gap-16 h-full mt-4 md:mt-0 mb-10 md:mb-16'>
+        <Container className='flex flex-col md:flex-row w-full md:gap-16 px-8 lg:px-16 h-full mt-4 md:mt-0 mb-10 md:mb-16'>
           <PDImage sliderImage={product.slider_image} />
           <div className='w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue'>
             <PDTitle

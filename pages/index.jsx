@@ -29,7 +29,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
       </div>
       <Layout className='bg-morin-skyBlue'>
         <SEO
-          title={'Home'}
+          title={''}
           pagelink={router.pathname}
           inputSEO={seo.seo}
           defaultSEO={typeof seo !== 'undefined' && seo.seo}

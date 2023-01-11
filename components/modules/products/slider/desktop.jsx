@@ -44,6 +44,8 @@ const SliderDesktop = ({data, getIndex, setIndex}) => {
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
+                  placeholder='blur'
+                  blurDataURL={urlFor(item.image).width(50).blur(20).format('auto').url()}
                 />
               </DefaultButton>
             </SwiperSlide>

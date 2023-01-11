@@ -30,7 +30,7 @@ const CartDesktop = ({
     <CartLoading />
   ) : data.length > 0 ? (
     <>
-      <div className="w-full max-w-4xl md:mt-3 flex flex-col md:space-y-4">
+      <div className="w-full max-w-4xl md:mt-3 flex flex-col space-y-4">
         <CartTitle />
         <div className="w-full flex flex-col">
           {data.map((item, index) => (
@@ -70,7 +70,7 @@ const CartDesktop = ({
           </div>
         </div>
       </div>
-      <GradientButton className="mt-24" onClick={onCheckout}>
+      <GradientButton className="mt-10" onClick={onCheckout}>
         Checkout
       </GradientButton>
     </>
