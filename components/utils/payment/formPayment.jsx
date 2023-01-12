@@ -1,17 +1,60 @@
+import { useEffect, useState, useRef } from 'react';
 import { usePayment } from '@/helpers/functional/payment';
 import colors from '@/helpers/preset/colors';
 import { ArrowButton } from '../buttons';
 
 const FormPayment = () => {
   const [loading, response, onPayment, getName, setName] = usePayment();
+  const [formStatus, setSubmission] = useState('idle');
+  const formRef = useRef();
+  const [resetStatus, setReset] = useState(false);
+  let reset = false;
+
+  useEffect(() => {
+    if (response.status == 'error') {
+      setSubmission('error');
+      setReset(true);
+    } else if (response.status == 'success') {
+      setSubmission('success');
+      setReset(true);
+    } else if (response.status == 'info') {
+      setSubmission('idle');
+      if (resetStatus) {
+        setName('');
+        setAmount('');
+        formRef.current.reset();
+        setReset(false);
+      }
+    }
+    if (loading) {
+      setSubmission('loading');
+    }
+  }, [response.status, loading]);
+
+  const [ammount, setAmount] = useState('');
+
+  const addCommas = (num) =>
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, '');
+
+  const handleChange = (event) =>
+    setAmount(`${addCommas(removeNonNumeric(event.target.value))}`);
+
   return (
     <div className='max-w-md w-full mt-3 mx-auto'>
-      <form method='post' onSubmit={onPayment} className='space-y-3'>
+      <form
+        method='post'
+        onSubmit={onPayment}
+        className={`space-y-3  ${
+          formStatus === 'idle' ? '' : 'pointer-events-none'
+        }`}
+        ref={formRef}
+      >
         <div className='relative w-full'>
           <input
             name='order_id'
             className='focus:outline-none border-2 border-morin-blue text-black rounded-full placeholder:text-morin-blue font-semibold px-5 pt-2.5 pb-2 w-full'
-            type='number'
+            type='text'
             placeholder='Order ID'
             required
           />
@@ -38,7 +81,9 @@ const FormPayment = () => {
           <input
             name='nominal'
             className='focus:outline-none border-2 border-morin-blue  text-black rounded-full placeholder:text-morin-blue font-semibold px-5 pt-2.5 pb-2 w-full'
-            type='number'
+            type='text'
+            onInput={handleChange}
+            value={ammount}
             placeholder='Amount'
             required
           />
@@ -69,20 +114,32 @@ const FormPayment = () => {
           <ArrowButton
             disabled={loading}
             type='submit'
-            color={response.status === 'error' ? colors.morinRed : colors.white}
-            arrowRight={response.status === 'error' ? false : true}
-            borderColor={
-              response.status === 'error' ? colors.morinRed : colors.morinBlue
+            color={
+              formStatus === 'error'
+                ? colors.morinRed
+                : formStatus === 'loading'
+                ? colors.morinBlue
+                : colors.white
             }
-            hover={response.status === 'error' ? 'white' : 'blue'}
-            bgColor={response.status === 'error' ? 'bg-white' : `bg-morin-blue`}
-            className={`pt-2.5 pb-2 px-6 ${
-              loading || response.status === 'success'
-                ? 'pointer-events-none'
-                : ''
-            }`}
+            arrowRight={formStatus === 'idle' ? true : false}
+            borderColor={
+              formStatus === 'error'
+                ? colors.morinRed
+                : formStatus === 'success'
+                ? colors.green
+                : colors.morinBlue
+            }
+            hover={'blue'}
+            bgColor={
+              formStatus === 'error' || formStatus === 'loading'
+                ? 'bg-white'
+                : formStatus === 'success'
+                ? 'bg-green-600'
+                : 'bg-morin-blue'
+            }
+            className={`pt-2.5 pb-2 px-6`}
           >
-            {loading ? 'Submitting..' : response.message}
+            {loading ? 'Submitting' : response.message}
           </ArrowButton>
         </div>
       </form>

@@ -47,6 +47,12 @@ const usePayment = () => {
           status: 'error',
           message: 'Submission Error',
         })
+        setTimeout(() => {
+          setResponse({
+            status: 'info',
+            message: 'Submit',
+          })
+        }, 3000);
         setLoading(false)
       })
   }

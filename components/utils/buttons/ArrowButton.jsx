@@ -53,18 +53,18 @@ const ArrowButton = ({
       {...others}
     >
       {arrowLeft && (
-        <div className={`mr-2 ${!children ? 'last:mr-0' : ''}`}>
+        <div className={` transition-allmr-2 ${!children ? 'last:mr-0' : ''}`}>
           <ArrowLeft color={color} />
         </div>
       )}
       {quantity && <>{quantity}</>}
       {showText && (
-        <span className={`pt-[2px] ${!mobileText ? 'hidden md:block' : ''}`}>
+        <span className={`transition-all pt-[2px] ${!mobileText ? 'hidden md:block' : ''}`}>
           {children}
         </span>
       )}
       {arrowRight && (
-        <div className={`ml-2 ${!children ? 'last:ml-0' : ''}`}>
+        <div className={`transition-all ml-2 ${!children ? 'last:ml-0' : ''}`}>
           <ArrowRight color={color} />
         </div>
       )}

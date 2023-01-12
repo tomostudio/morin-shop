@@ -6,4 +6,5 @@ export default {
   morinPeach: '#FFECD8',
   white: '#FFFFFF',
   offWhite: '#FFFEF9',
+  green: '#16A34A'
 }
