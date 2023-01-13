@@ -82,11 +82,13 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
                 {addToCart ? 'Adding..' : 'Add to Cart'}
               </GradientButton>
             </div>
-            <PDDescription
-              typeSlug={product.type.slug.current}
-              productSlug={product.slug.current}
-              description={product.description_en}
-            />
+            {product.description_en && (
+              <PDDescription
+                typeSlug={product.type.slug.current}
+                productSlug={product.slug.current}
+                description={product.description_en}
+              />
+            )}
           </div>
         </Container>
         <Footer />
