@@ -17,7 +17,6 @@ const fetchDataCheckout = (setLoading, setCart) => {
             `,
       )
       .then((res) => {
-        console.log(response)
         if (response?.lineItems) {
           response = response.lineItems.map((data) => {
             return {

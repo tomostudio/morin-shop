@@ -24,7 +24,6 @@ const CartDesktop = ({
   useEffect(() => {
     subTotal()
   }, [])
-  console.log(data)
 
   return loading ? (
     <CartLoading />
