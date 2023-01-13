@@ -5,7 +5,16 @@ const getProductSanityDetail = async (slug) => {
     `
           *[_type == "shopifyData" && slug.current == "${slug}"] {
             ...,
-            type->
+            type->,
+            getProduct {
+              custom_link,
+              linkStore-> {
+                slug,
+                type-> {
+                  slug,
+                }
+              }
+            }
           }
         `,
   )
