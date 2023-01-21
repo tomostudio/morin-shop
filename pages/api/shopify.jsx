@@ -138,7 +138,9 @@ function buildProductDocument(product) {
       options: options?.map((option, index) => ({
         _key: String(index),
         name: option.name,
-        values: option.values,
+        values: option.values.map((value) => ({
+          name: value,
+        })),
       })),
       priceRange,
       productType,
