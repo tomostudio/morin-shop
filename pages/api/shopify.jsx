@@ -134,11 +134,11 @@ function buildProductDocument(product) {
     _type: 'shopifyData',
     shopifyProduct: {
       id: productId,
-      gid: id,
       options: options?.map((option, index) => ({
         _key: String(index),
         name: option.name,
-        values: option.values.map((value) => ({
+        values: option.values.map((value, indexVal) => ({
+          _key: String(indexVal),
           name: value,
         })),
       })),
