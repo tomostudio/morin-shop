@@ -123,10 +123,9 @@ export async function getStaticProps({ params }) {
         getProduct {
           custom_link,
           linkStore-> {
+            _id,
             slug,
-            type-> {
-              slug,
-            }
+            "productType": *[_type == "productType" && products[]._ref match ^._id][0].slug.current
           }
         }
       }

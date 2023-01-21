@@ -7,6 +7,9 @@ const PDDescription = ({ getProduct, description }) => {
       {description && (
         <p className="font-medium text-[12px] md:text-default">{description}</p>
       )}
+      {
+        console.log(getProduct.linkStore)
+      }
       {getProduct.custom_link
         ? getProduct.linkProduct && (
             <ArrowButton
@@ -23,7 +26,7 @@ const PDDescription = ({ getProduct, description }) => {
           )
         : getProduct.linkStore && (
             <ArrowButton
-              destination={`https://morin.id/products/${getProduct.linkStore.type.slug.current}/${getProduct.linkStore.slug.current}`}
+              destination={`https://morin.id/products/${getProduct.linkStore.productType}/${getProduct.linkStore.slug.current}`}
               targetBlank
               color={colors.morinBlue}
               borderColor={colors.morinBlue}
