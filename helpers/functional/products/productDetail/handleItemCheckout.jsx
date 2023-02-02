@@ -3,14 +3,13 @@ import { addItemCheckout, getProductDetail } from '@/helpers/shopify'
 
 const handleItemCheckout = (
   slug,
-  handle,
   cart,
   dataCheckout,
   setAddToCart,
   setProduct,
   setQuantity,
 ) => {
-  getProductDetail(handle).then((product) => {
+  getProductDetail(slug).then((product) => {
     const lineItemsToAdd = [
       {
         variantId: product.variants[cart.index].id,

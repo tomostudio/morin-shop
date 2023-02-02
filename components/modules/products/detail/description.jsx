@@ -7,9 +7,6 @@ const PDDescription = ({ getProduct, description }) => {
       {description && (
         <p className="font-medium text-[12px] md:text-default">{description}</p>
       )}
-      {
-        console.log(getProduct.linkStore)
-      }
       {getProduct.custom_link
         ? getProduct.linkProduct && (
             <ArrowButton

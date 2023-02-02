@@ -19,7 +19,6 @@ const useProductDetail = (productDetail, slug, setQuantity) => {
   const onCart = () => {
     handleCart(
       slug,
-      product.shopifyProduct.handle,
       cart,
       setAddToCart,
       setProduct,

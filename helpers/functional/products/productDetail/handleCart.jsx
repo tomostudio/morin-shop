@@ -3,7 +3,6 @@ import handleItemCheckout from './handleItemCheckout'
 
 const handleCart = (
   slug,
-  handle,
   cart,
   setAddToCart,
   setProduct,
@@ -14,7 +13,6 @@ const handleCart = (
   if (dataCheckout) {
     handleItemCheckout(
       slug,
-      handle,
       cart,
       dataCheckout,
       setAddToCart,
@@ -30,7 +28,6 @@ const handleCart = (
 
       handleItemCheckout(
         slug,
-        handle,
         cart,
         data,
         setAddToCart,
