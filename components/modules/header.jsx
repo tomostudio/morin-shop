@@ -1,6 +1,6 @@
 import Container from '@/components/modules/container';
 import colors from '@/helpers/preset/colors';
-import { MorinLogo, WaButton } from '../utils/svg';
+import { MorinLogo } from '../utils/svg';
 import { useMediaQuery } from '@/helpers/functional/checkMedia';
 import { useAppContext } from 'context/state';
 import { ArrowButton, DefaultButton } from '../utils/buttons';
@@ -76,9 +76,6 @@ export default function Header({
           </div>
         </Container>
       </nav>
-      <DefaultButton className='fixed z-10 bottom-0 right-0 w-[66px] h-fit mr-8 mb-8'>
-        <WaButton />
-      </DefaultButton>
     </>
   );
 }

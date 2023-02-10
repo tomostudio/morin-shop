@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import Header from '@/components/modules/header'
 import HeaderGap from '@/components/modules/headerGap'
 import { FormPayment } from '@/components/utils/payment'
+import WaButton from '@/components/utils/buttons/WaButton'
 
 export default function PaymentConfirmation() {
   return (
@@ -19,6 +20,7 @@ export default function PaymentConfirmation() {
               Payment Confirmation
             </h2>
             <FormPayment />
+            <WaButton />
           </Container>
         </div>
         <Footer className="w-full" />

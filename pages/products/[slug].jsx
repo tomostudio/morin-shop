@@ -16,6 +16,7 @@ import {
   PDTitle,
 } from '@/components/modules/products'
 import HeaderGap from '@/components/modules/headerGap'
+import WaButton from '@/components/utils/buttons/WaButton'
 
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()
@@ -87,6 +88,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
               description={product.description_en}
             />
           </div>
+          <WaButton/>
         </Container>
         <Footer />
       </Layout>

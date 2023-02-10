@@ -4,6 +4,7 @@ import Container from '@/components/modules/container'
 import { NextSeo } from 'next-seo'
 import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
+import WaButton from '@/components/utils/buttons/WaButton'
 
 export default function PrivacyPolicy() {
   return (
@@ -44,6 +45,7 @@ export default function PrivacyPolicy() {
               netus amet in vel auctor amet. Scelerisque a sagittis ornare in
               sit.
             </p>
+            <WaButton />
           </Container>
         </div>
         <Footer/>

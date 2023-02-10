@@ -10,6 +10,7 @@ import { useProductList } from '@/helpers/functional/products'
 import { ProductList } from '@/components/modules/products'
 import { HomeTabsDesktop } from '@/components/utils/tabs'
 import { PHLoading } from '@/components/utils/products'
+import WaButton from '@/components/utils/buttons/WaButton'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -45,6 +46,7 @@ export default function Home({ seoAPI, productTypeAPI }) {
         {loading ? (
           <Container className="relative flex-grow">
             <PHLoading />
+            <WaButton />
           </Container>
         ) : dataProduct.length > 0 ? (
           <Container className="relative flex-grow">
@@ -53,12 +55,14 @@ export default function Home({ seoAPI, productTypeAPI }) {
               showButton={showButton}
               loadMore={onLoadMore}
             />
+            <WaButton />
           </Container>
         ) : (
           <Container className="flex justify-center items-center">
             <span className="font-semibold text-morin-blue text-ctitleSmall">
               No Products Available
             </span>
+            <WaButton />
           </Container>
         )}
         <Footer />

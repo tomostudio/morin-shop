@@ -6,6 +6,7 @@ import Header from '@/components/modules/header'
 import CartComponent from '@/components/modules/cart'
 import { useCart } from '@/helpers/functional/cart'
 import HeaderGap from '@/components/modules/headerGap'
+import WaButton from '@/components/utils/buttons/WaButton'
 
 export default function Cart() {
   const [
@@ -39,6 +40,7 @@ export default function Cart() {
               cartLoading={cartLoading}
               loading={loading}
             />
+            <WaButton />
           </Container>
         </div>
         <Footer />

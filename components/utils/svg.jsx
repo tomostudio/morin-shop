@@ -780,7 +780,7 @@ const Trash = ({ color = '#fff', ...options }) => (
   </svg>
 )
 
-const WaButton = ({ ...options }) => (
+const WhatsApp = ({ ...options }) => (
   <svg
     viewBox="0 0 66 66"
     fill="none"
@@ -870,5 +870,5 @@ export {
   Filter,
   Check,
   Trash,
-  WaButton,
+  WhatsApp,
 }
