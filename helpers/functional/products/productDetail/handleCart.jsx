@@ -2,6 +2,7 @@ import { createCheckout } from '@/helpers/shopify'
 import handleItemCheckout from './handleItemCheckout'
 
 const handleCart = (
+  id,
   slug,
   cart,
   setAddToCart,
@@ -12,6 +13,7 @@ const handleCart = (
   const dataCheckout = JSON.parse(localStorage.getItem('dataCheckout'))
   if (dataCheckout) {
     handleItemCheckout(
+      id,
       slug,
       cart,
       dataCheckout,
@@ -27,6 +29,7 @@ const handleCart = (
       localStorage.setItem('dataCheckout', JSON.stringify(data))
 
       handleItemCheckout(
+        id,
         slug,
         cart,
         data,

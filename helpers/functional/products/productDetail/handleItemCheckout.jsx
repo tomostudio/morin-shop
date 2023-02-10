@@ -2,6 +2,7 @@ import { getProductSanityDetail } from '@/helpers/sanity/function'
 import { addItemCheckout, getProductDetail } from '@/helpers/shopify'
 
 const handleItemCheckout = (
+  id,
   slug,
   cart,
   dataCheckout,
@@ -9,7 +10,7 @@ const handleItemCheckout = (
   setProduct,
   setQuantity,
 ) => {
-  getProductDetail(slug).then((product) => {
+  getProductDetail(id).then((product) => {
     const lineItemsToAdd = [
       {
         variantId: product.variants[cart.index].id,

@@ -8,8 +8,8 @@ const shopifyClient = Client.buildClient({
 
 const parseShopifyResponse = (response) => JSON.parse(JSON.stringify(response))
 
-const getProductDetail = async (slug) => {
-  const response = await shopifyClient.product.fetchByHandle(slug)
+const getProductDetail = async (id) => {
+  const response = await shopifyClient.product.fetch(id)
   return parseShopifyResponse(response)
 }
 
