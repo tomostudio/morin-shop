@@ -133,7 +133,7 @@ function buildProductDocument(product) {
     _id: getDocumentProductId(productId),
     _type: 'shopifyData',
     shopifyProduct: {
-      id: productId,
+      id: id,
       options: options?.map((option, index) => ({
         _key: String(index),
         name: option.name,

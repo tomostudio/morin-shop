@@ -79,7 +79,7 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
                     : ''
                 }
               >
-                {addToCart ? 'Adding..' : 'Add to Cart'}
+                {addToCart ? 'Adding' : 'Add to Cart'}
               </GradientButton>
             </div>
             <PDDescription

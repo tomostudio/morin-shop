@@ -45,24 +45,6 @@ export default function App({ Component, pageProps }) {
       <AnimatePresence mode="wait">
         <AppWrapper>
           <Component {...pageProps} key={router.asPath} />
-          {/* BORDER TRIGGER */}
-          <div className="fixed bottom-[40px] left-[40px] z-50 space-x-4 pointer-events-none">
-            <button
-              className="py-1 px-2 text-lg bg-slate-400 bg-opacity-50 shadow-sm pointer-events-auto"
-              onClick={() => {
-                var allBorder = document.querySelectorAll('body *')
-                for (let i = 0; i < allBorder.length; i++) {
-                  if (allBorder[i].classList.contains('all-border')) {
-                    allBorder[i].classList.remove('all-border')
-                  } else {
-                    allBorder[i].classList.add('all-border')
-                  }
-                }
-              }}
-            >
-              All Border
-            </button>
-          </div>
         </AppWrapper>
       </AnimatePresence>
     </>

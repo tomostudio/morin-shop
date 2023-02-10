@@ -3,10 +3,8 @@ import { PHLoading } from '@/components/utils/products'
 import urlFor from '@/helpers/sanity/urlFor'
 import ProductCard from './productCard'
 
-const ProductList = ({ loading, dataProduct, showButton, loadMore }) => {
-  return loading ? (
-    <PHLoading />
-  ) : dataProduct.length > 0 ? (
+const ProductList = ({ dataProduct, showButton, loadMore }) => {
+  return (
     <div
       className={`relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 pt-24 lg:pt-20 mb-10 md:mb-16`}
     >
@@ -31,12 +29,6 @@ const ProductList = ({ loading, dataProduct, showButton, loadMore }) => {
           </div>
         </div>
       )}
-    </div>
-  ) : (
-    <div className="w-full h-screen flex justify-center items-center">
-      <span className="font-semibold text-morin-blue text-ctitleSmall">
-        No Products Available
-      </span>
     </div>
   )
 }
