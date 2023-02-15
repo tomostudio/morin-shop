@@ -43,28 +43,28 @@ export default function Home({ seoAPI, productTypeAPI }) {
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
         <HeaderGap />
-        {loading ? (
-          <Container className="relative flex-grow">
-            <PHLoading />
-            <WaButton />
-          </Container>
-        ) : dataProduct.length > 0 ? (
-          <Container className="relative flex-grow">
-            <ProductList
-              dataProduct={dataProduct}
-              showButton={showButton}
-              loadMore={onLoadMore}
-            />
-            <WaButton />
-          </Container>
-        ) : (
-          <Container className="flex justify-center items-center">
-            <span className="font-semibold text-morin-blue text-ctitleSmall">
-              No Products Available
-            </span>
-            <WaButton />
-          </Container>
-        )}
+        <Container className="relative">
+          {loading ? (
+            <>
+              <PHLoading />
+            </>
+          ) : dataProduct.length > 0 ? (
+            <>
+              <ProductList
+                dataProduct={dataProduct}
+                showButton={showButton}
+                loadMore={onLoadMore}
+              />
+            </>
+          ) : (
+            <div className="flex justify-center items-center h-[50vh] min-h-[500px]">
+              <span className="font-semibold text-morin-blue text-ctitleSmall">
+                No Products Available
+              </span>
+            </div>
+          )}
+          <WaButton className="pb-10 md:pb-16" />
+        </Container>
         <Footer />
       </Layout>
     </>

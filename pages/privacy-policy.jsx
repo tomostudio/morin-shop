@@ -5,8 +5,9 @@ import { NextSeo } from 'next-seo'
 import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
 import WaButton from '@/components/utils/buttons/WaButton'
+import axios from 'axios'
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicy({ privacy }) {
   return (
     <>
       <Header home={false} />
@@ -18,38 +19,34 @@ export default function PrivacyPolicy() {
             <h2 className="text-4xl lg:text-h2 leading-none font-nutmeg text-center">
               Privacy Policy
             </h2>
-            <p className="max-w-2xl mt-3 mx-auto font-medium px-5 max-w">
-              Updated November 17th, 2021 <br /> <br /> Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Bibendum turpis aliquam,
-              viverra netus amet in vel auctor amet. Scelerisque a sagittis
-              ornare in sit. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Bibendum turpis aliquam, viverra netus amet in vel auctor
-              amet. Scelerisque a sagittis ornare in sit. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Bibendum turpis aliquam,
-              viverra netus amet in vel auctor amet. Scelerisque a sagittis
-              ornare in sit. <br /> <br /> Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Bibendum turpis aliquam, viverra
-              netus amet in vel auctor amet. Scelerisque a sagittis ornare in
-              sit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Bibendum turpis aliquam, viverra netus amet in vel auctor amet.
-              Scelerisque a sagittis ornare in sit. <br /> <br /> Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Bibendum turpis
-              aliquam, viverra netus amet in vel auctor amet. Scelerisque a
-              sagittis ornare in sit. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Bibendum turpis aliquam, viverra netus amet in
-              vel auctor amet. Scelerisque a sagittis ornare in sit. <br />{' '}
-              <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Bibendum turpis aliquam, viverra netus amet in vel auctor amet.
-              Scelerisque a sagittis ornare in sit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Bibendum turpis aliquam, viverra
-              netus amet in vel auctor amet. Scelerisque a sagittis ornare in
-              sit.
-            </p>
+            <p
+              className="max-w-2xl mt-3 mx-auto font-medium px-5"
+              dangerouslySetInnerHTML={{ __html: privacy.body }}
+            ></p>
             <WaButton />
           </Container>
         </div>
-        <Footer/>
+        <Footer />
       </Layout>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const getData = await axios.get(
+    'https://morin-jams.myshopify.com/admin/api/2022-04/policies.json',
+    {
+      headers: {
+        'X-Shopify-Access-Token': process.env.STOREFRONT_KEY,
+      },
+    },
+  )
+  const privacy = getData.data.policies.find(
+    (data) => data.handle === 'privacy-policy',
+  )
+  return {
+    props: {
+      privacy,
+    },
+  }
 }

@@ -1,4 +1,6 @@
-const PDTitle = ({ title, price, soldOut }) => {
+const PDTitle = ({ title, product, productCurrent }) => {
+  let soldOut = product[productCurrent].inventoryQuantity <= 0
+  let price = product[productCurrent].price
   return (
     <div className="w-full flex flex-col">
       <h2 className="text-ctitle md:text-h2 font-nutmeg font-normal m-0">

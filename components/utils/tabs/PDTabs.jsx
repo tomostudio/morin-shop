@@ -10,7 +10,7 @@ const PDTabs = ({ tabData, onChange }) => {
     });
   });
 
-  const defaultTab = data.filter((data) => data.inventoryQuantity !== 0)[0];
+  const defaultTab = data[0];
   // Market Variable
   const [markerW, setMarkerW] = useState(0); // width of marker
   const [markerPos, setMarkerPos] = useState(0); // position of marker

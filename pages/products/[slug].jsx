@@ -53,42 +53,51 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
           <div className="w-full md:w-1/2 flex flex-col mt-5 md:mt-0 space-y-5 md:space-y-8 text-morin-blue">
             <PDTitle
               title={product.shopifyProduct.title}
-              price={product.shopifyProduct.priceRange.maxVariantPrice}
-              soldOut={soldOut}
+              product={product.shopifyProduct.variants}
+              productCurrent={productCurrent}
             />
-            <PDSize
-              variants={product.shopifyProduct.variants}
-              setProductCurrent={setProductCurrent}
-              setCart={setCart}
-              setMaxQty={setMaxQty}
-            />
-            <div className="flex w-full h-12 md:h-auto">
-              <PDQuantity
-                soldOut={soldOut}
-                qty={cart.qty}
-                maxQty={maxQty}
-                productCurrent={productCurrent}
-                setCart={setCart}
-              />
-              <GradientButton
-                onClick={onCart}
-                className={
-                  soldOut
-                    ? '!pointer-events-none'
-                    : addToCart
-                    ? '!pointer-events-none'
-                    : ''
-                }
-              >
-                {addToCart ? 'Adding' : 'Add to Cart'}
-              </GradientButton>
-            </div>
+            {!product.shopifyProduct.variants.every(
+              (e) => e.inventoryQuantity <= 0,
+            ) && (
+              <>
+                <PDSize
+                  variants={product.shopifyProduct.variants}
+                  setProductCurrent={setProductCurrent}
+                  setCart={setCart}
+                  setMaxQty={setMaxQty}
+                />
+                {product.shopifyProduct.variants[productCurrent]
+                  .inventoryQuantity > 0 && (
+                  <div className="flex w-full h-12 md:h-auto">
+                    <PDQuantity
+                      soldOut={soldOut}
+                      qty={cart.qty}
+                      maxQty={maxQty}
+                      productCurrent={productCurrent}
+                      setCart={setCart}
+                    />
+                    <GradientButton
+                      onClick={onCart}
+                      className={
+                        soldOut
+                          ? '!pointer-events-none'
+                          : addToCart
+                          ? '!pointer-events-none'
+                          : ''
+                      }
+                    >
+                      {addToCart ? 'Adding' : 'Add to Cart'}
+                    </GradientButton>
+                  </div>
+                )}
+              </>
+            )}
             <PDDescription
               getProduct={product.getProduct}
               description={product.description_en}
             />
           </div>
-          <WaButton/>
+          <WaButton />
         </Container>
         <Footer />
       </Layout>
@@ -104,8 +113,7 @@ export async function getStaticPaths() {
   const paths = []
 
   res.map((data) => {
-    if (!data.slug || data.shopifyProduct.variants[0].title === 'Default Title')
-      return
+    if (!data.slug) return
     return paths.push({
       params: {
         slug: data.slug.current,

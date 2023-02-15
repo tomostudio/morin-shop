@@ -1,6 +1,11 @@
 import client from '@/helpers/sanity/client'
 
-const fetchProductList = (displayData, setProductAPI, setDataProduct, setLoading) => {
+const fetchProductList = (
+  displayData,
+  setProductAPI,
+  setDataProduct,
+  setLoading,
+) => {
   client
     .fetch(
       `
@@ -15,7 +20,7 @@ const fetchProductList = (displayData, setProductAPI, setDataProduct, setLoading
       setDataProduct(
         response
           .filter(
-            (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+            (data) => data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
           )
           .slice(0, displayData),
       )
