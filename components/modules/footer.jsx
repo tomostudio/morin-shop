@@ -1,7 +1,7 @@
-import Container from './container';
-import Image from 'next/legacy/image';
-import colors from '@/helpers/preset/colors';
-import { ArrowButton, DefaultButton } from '../utils/buttons';
+import Container from './container'
+import Image from 'next/legacy/image'
+import colors from '@/helpers/preset/colors'
+import { ArrowButton, DefaultButton } from '../utils/buttons'
 
 const Footer = ({ className }) => {
   return (
@@ -13,7 +13,7 @@ const Footer = ({ className }) => {
       >
         {/* LEFT */}
         <ArrowButton
-          destination='https://morin.id'
+          destination="https://morin.id"
           color={colors.white}
           arrowLeft
           center={false}
@@ -23,8 +23,8 @@ const Footer = ({ className }) => {
         </ArrowButton>
 
         {/* RIGHT */}
-        <div className='row-start-1 col-start-2 flex justify-end items-center space-x-3 '>
-          <DefaultButton blank={true} className='flex'>
+        <div className="row-start-1 col-start-2 flex justify-end items-center space-x-3 ">
+          <DefaultButton blank={true} className="flex">
             <Image
               src={`/ig-white.svg`}
               alt={'Instagram'}
@@ -32,7 +32,7 @@ const Footer = ({ className }) => {
               height={36}
             />
           </DefaultButton>
-          <DefaultButton blank={true} className='flex'>
+          <DefaultButton blank={true} className="flex">
             <Image
               src={`/tw-white.svg`}
               alt={'Twitter'}
@@ -40,7 +40,7 @@ const Footer = ({ className }) => {
               height={36}
             />
           </DefaultButton>
-          <DefaultButton blank={true} className='flex'>
+          <DefaultButton blank={true} className="flex">
             <Image
               src={`/fb-white.svg`}
               alt={'Facebook'}
@@ -50,26 +50,28 @@ const Footer = ({ className }) => {
           </DefaultButton>
         </div>
         {/* CREDITS */}
-        <div className=' font-medium row-start-2 col-start-1 col-end-3 flex flex-col md:flex-row justify-start md:justify-end w-full md:w-auto text-[12px] pr-3 md:pr-0 md:space-x-2 mt-5 md:mt-10'>
-          <span className='w-full md:w-auto text-center md:text-right'>© Morin Food 2021</span>
-          <span className='hidden md:block'>|</span>
-          <div className='flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-2'>
-            <DefaultButton destination='/payment-confirmation'>
+        <div className=" font-medium row-start-2 col-start-1 col-end-3 flex flex-col md:flex-row justify-start md:justify-end w-full md:w-auto text-[12px] pr-3 md:pr-0 md:space-x-2 mt-5 md:mt-10">
+          <span className="w-full md:w-auto text-center md:text-right">
+            © Morin Food 2021
+          </span>
+          <span className="hidden md:block">|</span>
+          <div className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-2">
+            <DefaultButton destination="/payment-confirmation">
               Confirm Payment
             </DefaultButton>
-            <span className='hidden md:block'>|</span>
-            <DefaultButton destination='/terms-conditions'>
-              Terms & Conditions
+            <span className="hidden md:block">|</span>
+            <DefaultButton destination="/terms-of-service">
+              Terms Of Service
             </DefaultButton>
-            <span className='hidden md:block'>|</span>
-            <DefaultButton destination='/privacy-policy'>
+            <span className="hidden md:block">|</span>
+            <DefaultButton destination="/privacy-policy">
               Privacy Policy
             </DefaultButton>
           </div>
         </div>
       </Container>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

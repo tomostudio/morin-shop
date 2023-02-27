@@ -7,20 +7,20 @@ import Header from '@/components/modules/header'
 import WaButton from '@/components/utils/buttons/WaButton'
 import axios from 'axios'
 
-export default function TermsConditions({ terms }) {
+export default function TermsOfService({ terms }) {
   return (
     <>
       <Header home={false} />
       <Layout>
         <HeaderGap />
-        <NextSeo title="Terms & Conditions" />
+        <NextSeo title="Terms Of Service" />
         <div className="bg-white w-full">
           <Container className="flex flex-col text-morin-blue mt-4 md:mt-0 mb-10 md:mb-16">
             <h2 className=" text-4xl lg:text-h2 leading-none font-nutmeg text-center">
-              Terms & Conditions
+            Terms Of Service
             </h2>
             <p
-              className="max-w-2xl mt-3 mx-auto font-medium px-5"
+              className="max-w-2xl w-full mt-3 mx-auto font-medium px-5"
               dangerouslySetInnerHTML={{ __html: terms.body }}
             ></p>
             <WaButton />

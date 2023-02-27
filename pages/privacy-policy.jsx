@@ -20,7 +20,7 @@ export default function PrivacyPolicy({ privacy }) {
               Privacy Policy
             </h2>
             <p
-              className="max-w-2xl mt-3 mx-auto font-medium px-5"
+              className="max-w-2xl w-full mt-3 mx-auto font-medium px-5"
               dangerouslySetInnerHTML={{ __html: privacy.body }}
             ></p>
             <WaButton />
