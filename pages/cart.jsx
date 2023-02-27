@@ -7,6 +7,7 @@ import CartComponent from '@/components/modules/cart'
 import { useCart } from '@/helpers/functional/cart'
 import HeaderGap from '@/components/modules/headerGap'
 import WaButton from '@/components/utils/buttons/WaButton'
+import client from '@/helpers/sanity/client'
 
 export default function Cart() {
   const [
@@ -47,4 +48,19 @@ export default function Cart() {
       </Layout>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const seoAPI = await client.fetch(`
+    *[_type == "settings"]
+    `);
+  const footerAPI = await client.fetch(`
+      *[_type == "footer"]
+      `);
+  return {
+    props: {
+      seoAPI,
+      footerAPI,
+    },
+  };
 }

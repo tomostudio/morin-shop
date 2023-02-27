@@ -6,6 +6,7 @@ import Header from '@/components/modules/header'
 import HeaderGap from '@/components/modules/headerGap'
 import { FormPayment } from '@/components/utils/payment'
 import WaButton from '@/components/utils/buttons/WaButton'
+import client from '@/helpers/sanity/client'
 
 export default function PaymentConfirmation() {
   return (
@@ -27,4 +28,19 @@ export default function PaymentConfirmation() {
       </Layout>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const seoAPI = await client.fetch(`
+    *[_type == "settings"]
+    `)
+  const footerAPI = await client.fetch(`
+      *[_type == "footer"]
+      `)
+  return {
+    props: {
+      seoAPI,
+      footerAPI,
+    },
+  }
 }

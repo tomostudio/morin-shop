@@ -6,6 +6,7 @@ import HeaderGap from '@/components/modules/headerGap'
 import Header from '@/components/modules/header'
 import WaButton from '@/components/utils/buttons/WaButton'
 import axios from 'axios'
+import client from '@/helpers/sanity/client'
 
 export default function PrivacyPolicy({ privacy }) {
   return (
@@ -44,9 +45,17 @@ export async function getStaticProps() {
   const privacy = getData.data.policies.find(
     (data) => data.handle === 'privacy-policy',
   )
+  const seoAPI = await client.fetch(`
+    *[_type == "settings"]
+    `)
+  const footerAPI = await client.fetch(`
+      *[_type == "footer"]
+      `)
   return {
     props: {
       privacy,
+      seoAPI,
+      footerAPI,
     },
   }
 }
