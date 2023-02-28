@@ -8,6 +8,7 @@ import { useCart } from '@/helpers/functional/cart'
 import HeaderGap from '@/components/modules/headerGap'
 import WaButton from '@/components/utils/buttons/WaButton'
 import client from '@/helpers/sanity/client'
+import { useEffect } from 'react'
 
 export default function Cart() {
   const [
@@ -19,6 +20,11 @@ export default function Cart() {
     onIncQuantity,
     onDecQuantity,
   ] = useCart()
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
+
   return (
     <>
       <Header home={false} />
@@ -53,14 +59,14 @@ export default function Cart() {
 export async function getStaticProps() {
   const seoAPI = await client.fetch(`
     *[_type == "settings"]
-    `);
+    `)
   const footerAPI = await client.fetch(`
       *[_type == "footer"]
-      `);
+      `)
   return {
     props: {
       seoAPI,
       footerAPI,
     },
-  };
+  }
 }

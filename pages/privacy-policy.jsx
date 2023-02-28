@@ -7,8 +7,13 @@ import Header from '@/components/modules/header'
 import WaButton from '@/components/utils/buttons/WaButton'
 import axios from 'axios'
 import client from '@/helpers/sanity/client'
+import { useEffect } from 'react'
 
 export default function PrivacyPolicy({ privacy }) {
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
+
   return (
     <>
       <Header home={false} />

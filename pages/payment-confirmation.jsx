@@ -7,8 +7,13 @@ import HeaderGap from '@/components/modules/headerGap'
 import { FormPayment } from '@/components/utils/payment'
 import WaButton from '@/components/utils/buttons/WaButton'
 import client from '@/helpers/sanity/client'
+import { useEffect } from 'react'
 
 export default function PaymentConfirmation() {
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
+
   return (
     <>
       <Header home={false} />

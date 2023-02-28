@@ -11,6 +11,7 @@ import { ProductList } from '@/components/modules/products'
 import { HomeTabsDesktop } from '@/components/utils/tabs'
 import { PHLoading } from '@/components/utils/products'
 import WaButton from '@/components/utils/buttons/WaButton'
+import { useEffect } from 'react'
 
 export default function Home({ seoAPI, productTypeAPI }) {
   const [seo] = seoAPI
@@ -22,6 +23,10 @@ export default function Home({ seoAPI, productTypeAPI }) {
     onLoadMore,
     onChangeCategory,
   ] = useProductList()
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
 
   return (
     <>

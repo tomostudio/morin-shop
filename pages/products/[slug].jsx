@@ -17,6 +17,7 @@ import {
 } from '@/components/modules/products'
 import HeaderGap from '@/components/modules/headerGap'
 import WaButton from '@/components/utils/buttons/WaButton'
+import { useEffect } from 'react'
 
 export default function ProductSlug({ productAPI, seoAPI, slug }) {
   const router = useRouter()
@@ -35,6 +36,10 @@ export default function ProductSlug({ productAPI, seoAPI, slug }) {
     maxQty,
     setMaxQty,
   ] = useProductDetail(productDetail, slug, appContext.setQuantity)
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
 
   return (
     <>
