@@ -8,16 +8,16 @@ const useProductListState = () => {
 
   let displayData = 8
   const [showButton, setShowButton] = useState(
-    productAPI.filter(
-      (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+    productAPI.filter((data) =>
+      data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
     ).length <= displayData
       ? false
       : true,
   )
   const [dataProduct, setDataProduct] = useState(
     productAPI
-      .filter(
-        (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+      .filter((data) =>
+        data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
       )
       .slice(0, displayData),
   )

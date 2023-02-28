@@ -1,6 +1,4 @@
 import { MoreButton } from '@/components/utils/buttons'
-import WaButton from '@/components/utils/buttons/WaButton'
-import { PHLoading } from '@/components/utils/products'
 import urlFor from '@/helpers/sanity/urlFor'
 import ProductCard from './productCard'
 

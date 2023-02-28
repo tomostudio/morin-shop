@@ -10,15 +10,15 @@ const loadMore = (
     displayData += dataIncrease
     setDataProduct(
       productAPI
-        .filter(
-          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        .filter((data) =>
+          data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
         )
         .slice(0, displayData),
     )
 
     if (
-      productAPI.filter(
-        (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+      productAPI.filter((data) =>
+        data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
       ).length <= displayData
     ) {
       setShowButton(false)
@@ -29,15 +29,15 @@ const loadMore = (
     displayData += dataIncrease
     setDataProduct(
       dataProduct
-        .filter(
-          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        .filter((data) =>
+          data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
         )
         .slice(0, displayData),
     )
 
     if (
-      dataProduct.filter(
-        (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+      dataProduct.filter((data) =>
+        data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
       ).length <= displayData
     ) {
       setShowButton(false)

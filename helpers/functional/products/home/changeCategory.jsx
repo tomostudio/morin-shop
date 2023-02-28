@@ -9,15 +9,15 @@ const changeCategory = (
   if (category === 'all') {
     setDataProduct(
       productAPI
-        .filter(
-          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        .filter((data) =>
+          data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
         )
         .slice(0, displayData),
     )
 
     if (
-      productAPI.filter(
-        (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+      productAPI.filter((data) =>
+        data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
       ).length <= displayData
     ) {
       setShowButton(false)
@@ -28,13 +28,13 @@ const changeCategory = (
     let dataCategory = productAPI.filter(
       (data) =>
         data.type?.slug.current === category &&
-        data.shopifyProduct.variants[0].title !== 'Default Title',
+        data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
     )
 
     setDataProduct(
       dataCategory
-        .filter(
-          (data) => data.shopifyProduct.variants[0].title !== 'Default Title',
+        .filter((data) =>
+          data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
         )
         .slice(0, displayData),
     )

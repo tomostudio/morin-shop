@@ -16,11 +16,15 @@ const fetchProductList = (
           `,
     )
     .then((response) => {
-      setProductAPI(response)
+      setProductAPI(
+        response.filter((data) =>
+          data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
+        ),
+      )
       setDataProduct(
         response
-          .filter(
-            (data) => data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
+          .filter((data) =>
+            data.shopifyProduct.variants.every((e) => e.inventoryQuantity > 0),
           )
           .slice(0, displayData),
       )
