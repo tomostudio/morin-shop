@@ -41,35 +41,31 @@ export default function Home({ seoAPI, productTypeAPI }) {
       </div>
       <Layout className="bg-morin-skyBlue">
         <SEO
-          title={''}
+          title={'Home'}
           pagelink={router.pathname}
           inputSEO={seo.seo}
           defaultSEO={typeof seo !== 'undefined' && seo.seo}
           webTitle={typeof seo !== 'undefined' && seo.webTitle}
         />
         <HeaderGap />
-        <Container className="relative">
-          {loading ? (
-            <>
-              <PHLoading />
-            </>
-          ) : dataProduct.length > 0 ? (
-            <>
-              <ProductList
-                dataProduct={dataProduct}
-                showButton={showButton}
-                loadMore={onLoadMore}
-              />
-            </>
-          ) : (
-            <div className="flex justify-center items-center h-[50vh] min-h-[500px]">
+        {loading ? (
+          <PHLoading />
+        ) : dataProduct.length > 0 ? (
+          <ProductList
+            dataProduct={dataProduct}
+            showButton={showButton}
+            loadMore={onLoadMore}
+          />
+        ) : (
+          <Container className="relative flex justify-center items-center grow">
+            <div className="flex justify-center items-center h-full">
               <span className="font-semibold text-morin-blue text-ctitleSmall">
                 No Products Available
               </span>
             </div>
-          )}
-          <WaButton className="pb-10 md:pb-16" />
-        </Container>
+            <WaButton className="pb-10 md:pb-16" />
+          </Container>
+        )}
         <Footer />
       </Layout>
     </>
