@@ -19,8 +19,21 @@ const createCheckout = async () => {
 }
 
 const addItemCheckout = async (id, item) => {
-  const response = await shopifyClient.checkout.addLineItems(id, item)
-  return parseShopifyResponse(response)
+  try {
+    const response = await shopifyClient.checkout.addLineItems(id, item)
+    return parseShopifyResponse(response)
+  } catch (_) {
+    const checkout = await createCheckout()
+    const data = {
+      id: checkout.id,
+    }
+    localStorage.setItem('dataCheckout', JSON.stringify(data))
+    const response = await shopifyClient.checkout.addLineItems(
+      checkout.id,
+      item,
+    )
+    return parseShopifyResponse(response)
+  }
 }
 
 const updateItemCheckout = async (id, item) => {
@@ -52,7 +65,7 @@ const fetchCheckout = async () => {
         jumlah,
       }
     }
-  }else {
+  } else {
     createCheckout().then((checkout) => {
       const data = {
         id: checkout.id,
@@ -68,5 +81,5 @@ export {
   createCheckout,
   addItemCheckout,
   updateItemCheckout,
-  removeItemCheckout
+  removeItemCheckout,
 }
