@@ -34,7 +34,7 @@ const SliderDesktop = ({ data, getIndex, setIndex }) => {
             <SwiperSlide key={index}>
               <DefaultButton
                 onClick={() => setIndex(index)}
-                className={`relative w-28 h-28 border-2 border-white p-2 rounded-3xl bg-white ${index} overflow-hidden ${
+                className={`relative w-28 h-28 border-2 border-white p-2 rounded-3xl bg-white overflow-hidden ${
                   getIndex === index ? '!border-morin-blue' : ''
                 }`}
               >
