@@ -27,7 +27,7 @@ const PDImage = ({ sliderImage }) => {
         )}
       </div>
       {useMediaQuery('(min-width: 768px)') ? (
-        sliderImage.legth > 3 ? (
+        sliderImage.length > 3 ? (
           <SliderDesktop
             data={sliderImage}
             getIndex={getIndex}
