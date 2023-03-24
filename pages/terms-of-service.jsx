@@ -32,8 +32,8 @@ export default function TermsOfService({ terms }) {
             <WaButton />
           </Container>
         </div>
-        <Footer />
       </Layout>
+        <Footer />
     </>
   )
 }

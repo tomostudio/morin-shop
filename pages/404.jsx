@@ -17,8 +17,8 @@ const Error404 = ({ seoAPI }) => {
             404 ERROR
           </h2>
         </div>
-        <Footer />
       </Layout>
+        <Footer />
     </>
   );
 };

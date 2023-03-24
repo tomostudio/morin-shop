@@ -32,8 +32,8 @@ export default function PrivacyPolicy({ privacy }) {
             <WaButton />
           </Container>
         </div>
-        <Footer />
       </Layout>
+        <Footer />
     </>
   )
 }

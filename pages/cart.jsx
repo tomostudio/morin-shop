@@ -50,8 +50,8 @@ export default function Cart() {
             <WaButton />
           </Container>
         </div>
-        <Footer />
       </Layout>
+        <Footer />
     </>
   )
 }
