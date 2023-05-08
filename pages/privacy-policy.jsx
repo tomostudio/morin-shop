@@ -21,19 +21,19 @@ export default function PrivacyPolicy({ privacy }) {
         <HeaderGap />
         <NextSeo title="Privacy Policy" />
         <div className="bg-white w-full">
-          <Container className="flex flex-col text-morin-blue mt-4 md:mt-0 mb-10 md:mb-16">
-            <h2 className="text-4xl lg:text-h2 leading-none font-nutmeg text-center">
+          <div className="max-w-2xl w-full mx-auto px-5 text-morin-blue">
+            <h2 className="text-4xl lg:text-h2 leading-none font-nutmeg text-left">
               Privacy Policy
             </h2>
             <p
-              className="max-w-2xl w-full mt-3 mx-auto font-medium px-5"
+              className="mt-3 font-medium"
               dangerouslySetInnerHTML={{ __html: privacy.body }}
             ></p>
             <WaButton />
-          </Container>
+          </div>
         </div>
       </Layout>
-        <Footer />
+      <Footer />
     </>
   )
 }
